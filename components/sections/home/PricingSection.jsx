@@ -126,7 +126,7 @@ export default function PricingSection() {
                   >
                     {plan.name}
                   </h3>
-                  <p className="text-xs" style={{ color: '#555' }}>{plan.target}</p>
+                  {/* <p className="text-xs" style={{ color: '#555' }}>{plan.target}</p> */}
                 </div>
 
                 {/* Price */}

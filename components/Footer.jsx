@@ -5,11 +5,11 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 const services = [
-  'Meta Ads & Facebook Ads',
-  'Google Ads & SEA',
+  'Meta Ads',
+  'Google Ads',
   'Création de Sites Web',
   'Landing Pages optimisées',
-  'SEO & Référencement',
+  'SEO & GEO',
   'UGC par Intelligence Artificielle',
   'CRM & Marketing Automation',
   'Community Management',
