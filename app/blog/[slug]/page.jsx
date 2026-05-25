@@ -24,10 +24,12 @@ export async function generateMetadata({ params }) {
   console.log("blog is :", post)
   if (!post) return { title: 'Article introuvable' }
 
-  const title       = post.meta_title || post.title
+  // Strip trailing " | WePushX" or " — WePushX" so the layout template doesn't duplicate it
+  const rawTitle    = post.meta_title || post.title
+  const title       = rawTitle.replace(/\s*[|—–]\s*WePushX\s*$/i, '').trim()
   const description = post.meta_description
-  const ogImage     = post.og_image || post.cover_image || 'https://wepushx.com/og-image.jpg'
-  const url         = `https://wepushx.com/blog/${post.slug}`
+  const ogImage     = post.og_image || post.cover_image || 'https://www.wepushx.com/og-image.jpg'
+  const url         = `https://www.wepushx.com/blog/${post.slug}`
 
   return {
     title,
@@ -61,6 +63,42 @@ const CATEGORY_COLORS = {
   'Contenu IA':        '#f59e0b',
 }
 
+// ── External sources per category (GEO / AI citation signal) ────────────────
+const CATEGORY_SOURCES = {
+  'Publicité Digitale': [
+    { label: 'Meta Business Help Center',   url: 'https://www.facebook.com/business/help' },
+    { label: 'Google Ads — Centre d\'aide', url: 'https://support.google.com/google-ads' },
+    { label: 'Think with Google',           url: 'https://www.thinkwithgoogle.com/' },
+    { label: 'DataReportal — Maroc 2024',   url: 'https://datareportal.com/reports/digital-2024-morocco' },
+  ],
+  'SEO': [
+    { label: 'Google Search Central',       url: 'https://developers.google.com/search/docs' },
+    { label: 'Search Engine Land',          url: 'https://searchengineland.com/' },
+    { label: 'Moz — Guide du SEO',          url: 'https://moz.com/beginners-guide-to-seo' },
+    { label: 'DataReportal — Maroc 2024',   url: 'https://datareportal.com/reports/digital-2024-morocco' },
+  ],
+  'Automation CRM': [
+    { label: 'WhatsApp Business API',       url: 'https://business.whatsapp.com/' },
+    { label: 'HubSpot — CRM & Automation', url: 'https://blog.hubspot.com/crm' },
+    { label: 'Salesforce — Resources',     url: 'https://www.salesforce.com/resources/' },
+    { label: 'DataReportal — Maroc 2024',   url: 'https://datareportal.com/reports/digital-2024-morocco' },
+  ],
+  'Contenu IA': [
+    { label: 'Meta AI — Business Tools',   url: 'https://ai.meta.com/business/' },
+    { label: 'Think with Google — Vidéo',  url: 'https://www.thinkwithgoogle.com/marketing-strategies/video/' },
+    { label: 'HubSpot — AI Marketing',     url: 'https://blog.hubspot.com/marketing/ai-marketing' },
+    { label: 'DataReportal — Maroc 2024',   url: 'https://datareportal.com/reports/digital-2024-morocco' },
+  ],
+}
+
+// fallback sources for uncategorised posts
+const DEFAULT_SOURCES = [
+  { label: 'Google Search Central',       url: 'https://developers.google.com/search/docs' },
+  { label: 'Think with Google',           url: 'https://www.thinkwithgoogle.com/' },
+  { label: 'Meta Business Help Center',   url: 'https://www.facebook.com/business/help' },
+  { label: 'DataReportal — Maroc 2024',   url: 'https://datareportal.com/reports/digital-2024-morocco' },
+]
+
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('fr-FR', {
     day: 'numeric', month: 'long', year: 'numeric',
@@ -77,15 +115,20 @@ export default async function BlogPostPage({ params }) {
   const related = await getRelatedPosts(post.slug, post.category, 3)
   const color   = CATEGORY_COLORS[post.category] || '#00F5FF'
 
+  // Demote any <h1> tags in AI-generated content to <h2> to avoid duplicate H1
+  const sanitizedContent = (post.content || '')
+    .replace(/<h1(\s[^>]*)?>/gi, '<h2$1>')
+    .replace(/<\/h1>/gi, '</h2>')
+
   // JSON-LD — Article schema
   const jsonLd = [
    {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://wepushx.com' },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://wepushx.com/blog' },
-      { '@type': 'ListItem', position: 3, name: post.title, item: `https://wepushx.com/blog/${post.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://www.wepushx.com' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.wepushx.com/blog' },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `https://www.wepushx.com/blog/${post.slug}` },
     ],
    },
    {
@@ -93,23 +136,23 @@ export default async function BlogPostPage({ params }) {
     '@type': 'Article',
     headline: post.title,
     description: post.meta_description,
-    image: post.og_image || post.cover_image || 'https://wepushx.com/og-image.jpg',
+    image: post.og_image || post.cover_image || 'https://www.wepushx.com/og-image.jpg',
     datePublished: post.published_at,
     dateModified: post.updated_at || post.published_at,
     author: {
       '@type': 'Organization',
       name: post.author_name || 'WePushX',
-      url: 'https://wepushx.com',
+      url: 'https://www.wepushx.com',
     },
     publisher: {
       '@type': 'Organization',
       name: 'WePushX',
-      url: 'https://wepushx.com',
-      logo: { '@type': 'ImageObject', url: 'https://wepushx.com/logo.png' },
+      url: 'https://www.wepushx.com',
+      logo: { '@type': 'ImageObject', url: 'https://www.wepushx.com/logo.png' },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://wepushx.com/blog/${post.slug}`,
+      '@id': `https://www.wepushx.com/blog/${post.slug}`,
     },
     keywords: (post.tags || []).join(', '),
     articleSection: post.category,
@@ -236,7 +279,7 @@ export default async function BlogPostPage({ params }) {
             {/* Article body */}
             <article
               className="prose-wpx"
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
             />
 
             {/* ── Mid-article CTA ──────────────────────────────────────── */}
@@ -263,6 +306,37 @@ export default async function BlogPostPage({ params }) {
                 Réserver mon Audit Gratuit <ArrowRight size={16} />
               </Link>
             </div>
+
+            {/* ── Sources & références externes ───────────────────────────── */}
+            {(() => {
+              const sources = CATEGORY_SOURCES[post.category] || DEFAULT_SOURCES
+              return (
+                <div
+                  className="mt-12 rounded-2xl p-6"
+                  style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}
+                >
+                  <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: '#555' }}>
+                    Sources &amp; références
+                  </p>
+                  <ul className="flex flex-col gap-2">
+                    {sources.map((src) => (
+                      <li key={src.url} className="flex items-center gap-2">
+                        <span style={{ color: '#00F5FF', fontSize: '0.55rem' }}>✦</span>
+                        <a
+                          href={src.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm transition-colors hover:text-white"
+                          style={{ color: '#555' }}
+                        >
+                          {src.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            })()}
 
             {/* Tags */}
             {post.tags?.length > 0 && (

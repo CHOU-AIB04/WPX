@@ -1,7 +1,7 @@
 // app/sitemap.js — Dynamic sitemap (static pages + all published blog posts)
 import { getAllSlugs } from '@/lib/blog'
 
-const BASE_URL = 'https://wepushx.com'
+const BASE_URL = 'https://www.wepushx.com'
 
 export const revalidate = 3600 // Revalidate sitemap every hour
 

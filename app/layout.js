@@ -20,7 +20,7 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 })
 
-const BASE_URL = 'https://wepushx.com'
+const BASE_URL = 'https://www.wepushx.com'
 
 // ── Global structured data — injected into <head> on every page ──────────────
 

@@ -2,12 +2,12 @@ import ContactSection from '@/components/sections/contact/ContactSection'
 
 export const metadata = {
   title: 'Contact & Audit Gratuit | WePushX — Agence Marketing Digital Maroc',
-  description: 'Contactez WePushX pour un audit gratuit de 30 min. Réponse sous 24h. Sans engagement. Casablanca, Rabat, Marrakech.',
-  alternates: { canonical: 'https://wepushx.com/contact' },
+  description: 'Contactez WePushX pour un audit gratuit de 30 min. Réponse sous 24h. Sans engagement. Partout au Maroc.',
+  alternates: { canonical: 'https://www.wepushx.com/contact' },
   openGraph: {
     title: 'Contactez WePushX | Audit Gratuit Marketing Digital Maroc',
     description: 'Réservez votre audit gratuit de 30 minutes. Un expert WePushX analyse votre présence digitale et vous propose un plan d\'action concret.',
-    url: 'https://wepushx.com/contact',
+    url: 'https://www.wepushx.com/contact',
   },
 }
 

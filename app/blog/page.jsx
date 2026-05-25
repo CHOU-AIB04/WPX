@@ -12,11 +12,11 @@ export const revalidate = 3600
 export const metadata = {
   title: 'Blog Marketing Digital Maroc | Conseils PME — WePushX',
   description: 'Guides, études de cas et conseils pratiques en marketing digital pour les PME marocaines. Meta Ads, SEO, CRM, UGC IA — publiés chaque semaine par les experts WePushX.',
-  alternates: { canonical: 'https://wepushx.com/blog' },
+  alternates: { canonical: 'https://www.wepushx.com/blog' },
   openGraph: {
     title: 'Blog WePushX | Marketing Digital Maroc',
     description: 'Tout ce que vous devez savoir pour dominer le digital au Maroc. Guides pratiques, études de cas et stratégies éprouvées.',
-    url: 'https://wepushx.com/blog',
+    url: 'https://www.wepushx.com/blog',
   },
 }
 

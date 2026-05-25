@@ -6,13 +6,13 @@ import ServicesFAQ from '@/components/sections/services/ServicesFAQ'
 import CTASection from '@/components/sections/home/CTASection'
 
 export const metadata = {
-  title: 'Nos Services Marketing Digital | Meta Ads, Google Ads, SEO, Sites Web, UGC IA, CRM — Maroc',
+  title: 'Nos Services Marketing Digital | Meta Ads, SEO, Sites Web — Maroc',
   description: 'Decouvrez tous les services WePushX : gestion Meta Ads & Google Ads, creation de sites web, SEO, UGC par IA, CRM automation sur mesure. Tarifs clairs pour les PME marocaines.',
-  alternates: { canonical: 'https://wepushx.com/services' },
+  alternates: { canonical: 'https://www.wepushx.com/services' },
   openGraph: {
     title: 'Services WePushX | Agence Marketing Digital Maroc',
     description: 'Meta Ads, Google Ads, SEO, Sites Web, UGC IA, CRM automation pour dominer votre marche digital au Maroc.',
-    url: 'https://wepushx.com/services',
+    url: 'https://www.wepushx.com/services',
   },
 }
 
@@ -20,11 +20,11 @@ const offerCatalogJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'OfferCatalog',
   name: 'Services Marketing Digital — WePushX',
-  url: 'https://wepushx.com/services',
+  url: 'https://www.wepushx.com/services',
   provider: {
     '@type': 'Organization',
     name: 'WePushX',
-    url: 'https://wepushx.com',
+    url: 'https://www.wepushx.com',
     address: { '@type': 'PostalAddress', addressLocality: 'Casablanca', addressCountry: 'MA' },
   },
   itemListElement: [
@@ -32,42 +32,42 @@ const offerCatalogJsonLd = {
       '@type': 'Offer',
       name: 'Gestion Meta Ads',
       description: "Gestion complète de vos campagnes Facebook et Instagram : création de créatifs, ciblage d'audience, A/B testing, optimisation ROAS et reporting mensuel.",
-      url: 'https://wepushx.com/services#meta-ads',
+      url: 'https://www.wepushx.com/services#meta-ads',
       seller: { '@type': 'Organization', name: 'WePushX' },
     },
     {
       '@type': 'Offer',
       name: 'Gestion Google Ads',
       description: 'Campagnes Search, Display et YouTube optimisées pour le marché marocain. Stratégie de mots-clés, Quality Score, extensions et tracking conversions.',
-      url: 'https://wepushx.com/services#google-ads',
+      url: 'https://www.wepushx.com/services#google-ads',
       seller: { '@type': 'Organization', name: 'WePushX' },
     },
     {
       '@type': 'Offer',
       name: 'SEO & Référencement Naturel',
       description: 'Audit SEO technique, optimisation on-page, link building, SEO local Google Business Profile et stratégie de contenu pour le marché marocain.',
-      url: 'https://wepushx.com/services#seo',
+      url: 'https://www.wepushx.com/services#seo',
       seller: { '@type': 'Organization', name: 'WePushX' },
     },
     {
       '@type': 'Offer',
       name: 'Création de Sites Web',
       description: "Développement de sites vitrines, landing pages haute conversion et e-commerce avec Next.js. Mobile-first, Core Web Vitals optimisés, SEO intégré.",
-      url: 'https://wepushx.com/services#sites-web',
+      url: 'https://www.wepushx.com/services#sites-web',
       seller: { '@type': 'Organization', name: 'WePushX' },
     },
     {
       '@type': 'Offer',
       name: 'CRM & Marketing Automation',
       description: "Mise en place de systèmes d'automatisation : séquences email, WhatsApp, SMS, pipelines de vente, scoring de leads et workflows de nurturing.",
-      url: 'https://wepushx.com/services#crm',
+      url: 'https://www.wepushx.com/services#crm',
       seller: { '@type': 'Organization', name: 'WePushX' },
     },
     {
       '@type': 'Offer',
       name: 'UGC IA — Contenu Généré par IA',
       description: "Production de vidéos UGC synthétiques et visuels publicitaires par IA pour les campagnes Meta Ads et Google. Scripts optimisés, montage professionnel.",
-      url: 'https://wepushx.com/services#ugc-ia',
+      url: 'https://www.wepushx.com/services#ugc-ia',
       seller: { '@type': 'Organization', name: 'WePushX' },
     },
   ],
@@ -146,6 +146,55 @@ const servicesFaqJsonLd = {
   ],
 }
 
+// ── Credible external sources per service (GEO / AI citation signal) ──────────
+const OFFICIAL_SOURCES = [
+  {
+    category: 'Meta Ads & Facebook Ads',
+    color: '#3b82f6',
+    links: [
+      { label: 'Meta Business Help Center',         url: 'https://www.facebook.com/business/help' },
+      { label: 'Meta Pixel — Guide d\'installation', url: 'https://www.facebook.com/business/help/952192354843755' },
+      { label: 'Meta Ads Manager',                  url: 'https://adsmanager.facebook.com/' },
+    ],
+  },
+  {
+    category: 'Google Ads',
+    color: '#34d399',
+    links: [
+      { label: 'Google Ads — Centre d\'aide',       url: 'https://support.google.com/google-ads' },
+      { label: 'Think with Google — Insights',      url: 'https://www.thinkwithgoogle.com/' },
+      { label: 'Google Search Central',             url: 'https://developers.google.com/search/docs' },
+    ],
+  },
+  {
+    category: 'SEO & GEO',
+    color: '#f59e0b',
+    links: [
+      { label: 'Google Search Central — Docs SEO',  url: 'https://developers.google.com/search/docs' },
+      { label: 'Google Business Profile — Aide',    url: 'https://support.google.com/business/' },
+      { label: 'Moz — Guide du SEO',                url: 'https://moz.com/beginners-guide-to-seo' },
+    ],
+  },
+  {
+    category: 'CRM & Marketing Automation',
+    color: '#a78bfa',
+    links: [
+      { label: 'WhatsApp Business API — Officiel',  url: 'https://business.whatsapp.com/' },
+      { label: 'HubSpot — CRM & Automation',        url: 'https://blog.hubspot.com/crm' },
+      { label: 'DataReportal — Maroc Digital 2024', url: 'https://datareportal.com/reports/digital-2024-morocco' },
+    ],
+  },
+  {
+    category: 'UGC & Contenu IA',
+    color: '#00F5FF',
+    links: [
+      { label: 'Meta AI — Business Tools',          url: 'https://ai.meta.com/business/' },
+      { label: 'Think with Google — Vidéo Marketing', url: 'https://www.thinkwithgoogle.com/marketing-strategies/video/' },
+      { label: 'HubSpot — AI Marketing',            url: 'https://blog.hubspot.com/marketing/ai-marketing' },
+    ],
+  },
+]
+
 export default function ServicesPage() {
   return (
     <>
@@ -162,6 +211,50 @@ export default function ServicesPage() {
       <ServicesGrid />
       <OneShotSection />
       <ServicesFAQ />
+
+      {/* ── Références officielles (GEO / AI citation signal) ─────────────────── */}
+      <section className="section-sm" style={{ background: '#040404' }}>
+        <div className="wrap">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-xs font-semibold uppercase tracking-widest mb-8 text-center" style={{ color: '#444' }}>
+              Références &amp; ressources officielles
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {OFFICIAL_SOURCES.map((group) => (
+                <div
+                  key={group.category}
+                  className="rounded-2xl p-5"
+                  style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}
+                >
+                  <p
+                    className="text-xs font-semibold mb-3"
+                    style={{ color: group.color }}
+                  >
+                    {group.category}
+                  </p>
+                  <ul className="flex flex-col gap-2">
+                    {group.links.map((link) => (
+                      <li key={link.url} className="flex items-start gap-2">
+                        <span style={{ color: group.color, fontSize: '0.5rem', marginTop: '0.35rem', flexShrink: 0 }}>✦</span>
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs leading-snug transition-colors hover:text-white"
+                          style={{ color: '#555' }}
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <CTASection />
     </>
   )

@@ -1,4 +1,4 @@
-const BASE_URL = 'https://wepushx.com'
+const BASE_URL = 'https://www.wepushx.com'
 
 export default function robots() {
   return {

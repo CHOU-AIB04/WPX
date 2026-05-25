@@ -14,8 +14,8 @@ import CTASection from '@/components/sections/home/CTASection'
 export const metadata = {
   title: 'Agence Marketing Digital Maroc | Meta Ads, Google Ads, SEO & Sites Web',
   description:
-    "WePushX est l'agence marketing digital au Maroc pour les PME. Meta Ads, Google Ads, creation de sites web, SEO, UGC IA & CRM. Audit gratuit. Resultats garantis en 60 jours — Casablanca, Rabat, Marrakech.",
-  alternates: { canonical: 'https://wepushx.com' },
+    "WePushX est l'agence marketing digital au Maroc pour les PME. Meta Ads, Google Ads, creation de sites web, SEO, UGC IA & CRM. Audit gratuit. Resultats garantis en 60 jours.",
+  alternates: { canonical: 'https://www.wepushx.com' },
 }
 
 const homeFaqJsonLd = {
@@ -85,6 +85,18 @@ const homeFaqJsonLd = {
   ],
 }
 
+// ── External references for GEO / AI citation signal ──────────────────────────
+const HOME_SOURCES = [
+  { label: 'Meta Business Help Center',          url: 'https://www.facebook.com/business/help' },
+  { label: 'Google Ads — Centre d\'aide',        url: 'https://support.google.com/google-ads' },
+  { label: 'Google Search Central',              url: 'https://developers.google.com/search/docs' },
+  { label: 'Think with Google — Insights',       url: 'https://www.thinkwithgoogle.com/' },
+  { label: 'WhatsApp Business API',              url: 'https://business.whatsapp.com/' },
+  { label: 'DataReportal — Digital Maroc 2024',  url: 'https://datareportal.com/reports/digital-2024-morocco' },
+  { label: 'Google Business Profile — Aide',     url: 'https://support.google.com/business/' },
+  { label: 'HubSpot — Marketing Resources',      url: 'https://blog.hubspot.com/marketing' },
+]
+
 export default function HomePage() {
   return (
     <>
@@ -104,6 +116,32 @@ export default function HomePage() {
       <TestimonialsSection />
       <PricingSection />
       <FAQSection />
+
+      {/* ── Références officielles (GEO / AI citation signal) ─────────────────── */}
+      <section className="py-10" style={{ background: '#040404' }}>
+        <div className="wrap">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-xs font-semibold uppercase tracking-widest mb-5 text-center" style={{ color: '#333' }}>
+              Références officielles
+            </p>
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2">
+              {HOME_SOURCES.map((src) => (
+                <a
+                  key={src.url}
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs transition-colors hover:text-white"
+                  style={{ color: '#3a3a3a' }}
+                >
+                  {src.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <CTASection />
     </>
   )
