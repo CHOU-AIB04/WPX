@@ -154,6 +154,7 @@ export default function RootLayout({ children }) {
         {/* Organization + LocalBusiness + services catalog */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <link rel="alternate" type="application/rss+xml" title="Blog WePushX" href="/feed.xml" />
+        <script src="https://analytics.ahrefs.com/analytics.js" data-key="uT4eAVKql9tbwyfnRNvl8A" async></script>
       </head>
       <body className="min-h-full flex flex-col bg-black antialiased">
         <PageLoader />
