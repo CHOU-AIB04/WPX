@@ -22,83 +22,6 @@ const spaceGrotesk = Space_Grotesk({
 
 const BASE_URL = 'https://www.wepushx.com'
 
-// ── Global structured data — injected into <head> on every page ──────────────
-
-const websiteJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'WePushX',
-  url: BASE_URL,
-  description: 'Agence marketing digital au Maroc — Meta Ads, Google Ads, SEO, Sites Web & CRM automation.',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: { '@type': 'EntryPoint', urlTemplate: `${BASE_URL}/blog?category={search_term_string}` },
-    'query-input': 'required name=search_term_string',
-  },
-}
-
-const organizationJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': ['Organization', 'LocalBusiness', 'ProfessionalService'],
-  '@id': `${BASE_URL}/#organization`,
-  name: 'WePushX',
-  alternateName: 'WePushX Agence Marketing Digital',
-  url: BASE_URL,
-  logo: {
-    '@type': 'ImageObject',
-    url: `${BASE_URL}/logo.png`,
-    width: 512,
-    height: 512,
-  },
-  image: `${BASE_URL}/og-image.jpg`,
-  description: 'WePushX est une agence de marketing digital basée à Casablanca, Maroc. Spécialisée en Meta Ads, Google Ads, SEO, création de sites web, UGC IA et CRM automation pour les PME marocaines. Résultats garantis en 60 jours.',
-  foundingDate: '2023',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Casablanca',
-    addressLocality: 'Casablanca',
-    addressRegion: 'Grand Casablanca',
-    addressCountry: 'MA',
-  },
-  areaServed: [
-    { '@type': 'City', name: 'Casablanca' },
-    { '@type': 'City', name: 'Rabat' },
-    { '@type': 'City', name: 'Marrakech' },
-    { '@type': 'City', name: 'Agadir' },
-    { '@type': 'City', name: 'Fès' },
-    { '@type': 'City', name: 'Tanger' },
-    { '@type': 'Country', name: 'Maroc' },
-  ],
-  contactPoint: [
-    {
-      '@type': 'ContactPoint',
-      contactType: 'customer service',
-      availableLanguage: ['French', 'Arabic'],
-      areaServed: 'MA',
-      url: `${BASE_URL}/contact`,
-    },
-  ],
-  sameAs: [
-    'https://www.facebook.com/wepushx',
-    'https://www.instagram.com/wepushx',
-    'https://www.linkedin.com/company/wepushx',
-  ],
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Services Marketing Digital',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Meta Ads', description: 'Gestion de campagnes publicitaires Facebook et Instagram pour les PME marocaines.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Google Ads', description: 'Référencement payant Search, Display et YouTube au Maroc.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SEO', description: 'Référencement naturel et SEO local pour les PME marocaines.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Création de site web', description: 'Sites vitrines, landing pages et e-commerce haute performance.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'CRM & Marketing Automation', description: 'Automatisation des séquences email, WhatsApp et SMS.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'UGC IA', description: 'Contenu vidéo et visuel généré par intelligence artificielle.' } },
-    ],
-  },
-  slogan: 'Résultats garantis en 60 jours ou remboursement',
-  priceRange: '$$',
-}
-
 export const metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
@@ -142,17 +65,36 @@ export const metadata = {
     description: 'Meta Ads, Google Ads, SEO, Sites Web & CRM au Maroc.',
     images: ['/og-image.jpg'],
   },
-  alternates: { canonical: BASE_URL },
+  alternates: {
+    canonical: BASE_URL,
+    languages: {
+      'fr':    BASE_URL,
+      'fr-MA': BASE_URL,
+      'x-default': BASE_URL,
+    },
+  },
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="fr" className={`${inter.variable} ${spaceGrotesk.variable} h-full`}>
       <head>
-        {/* WebSite schema + SearchAction */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
-        {/* Organization + LocalBusiness + services catalog */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
+        {/* Unified entity graph — Organization, LocalBusiness, OfferCatalog, WebSite */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        {/* Speakable — signals to voice assistants & AI which content to read aloud */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          speakable: {
+            '@type': 'SpeakableSpecification',
+            cssSelector: ['h1', 'h2', '.badge', '[data-speakable]'],
+          },
+          url: BASE_URL,
+        }) }} />
+        {/* hreflang self-referencing links */}
+        <link rel="alternate" hrefLang="fr"      href={BASE_URL} />
+        <link rel="alternate" hrefLang="fr-MA"   href={BASE_URL} />
+        <link rel="alternate" hrefLang="x-default" href={BASE_URL} />
         <link rel="alternate" type="application/rss+xml" title="Blog WePushX" href="/feed.xml" />
         <script src="https://analytics.ahrefs.com/analytics.js" data-key="uT4eAVKql9tbwyfnRNvl8A" async></script>
       </head>

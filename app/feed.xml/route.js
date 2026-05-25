@@ -1,6 +1,6 @@
 import { getAllPosts } from '@/lib/blog'
 
-const BASE_URL = 'https://wepushx.com'
+const BASE_URL = 'https://www.wepushx.com'
 
 export async function GET() {
   const posts = await getAllPosts()

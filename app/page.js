@@ -97,6 +97,14 @@ const HOME_SOURCES = [
   { label: 'HubSpot — Marketing Resources',      url: 'https://blog.hubspot.com/marketing' },
 ]
 
+const homeBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://www.wepushx.com' },
+  ],
+}
+
 export default function HomePage() {
   return (
     <>
@@ -104,6 +112,10 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeBreadcrumbJsonLd) }}
       />
       <HeroSection />
       {/* <LogosBar background="#000" /> */}

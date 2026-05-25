@@ -24,14 +24,23 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
   name: 'Blog WePushX — Marketing Digital Maroc',
-  url: 'https://wepushx.com/blog',
+  url: 'https://www.wepushx.com/blog',
   description: 'Conseils marketing digital pour PME marocaines',
   publisher: {
     '@type': 'Organization',
     name: 'WePushX',
-    url: 'https://wepushx.com',
-    logo: { '@type': 'ImageObject', url: 'https://wepushx.com/logo.png' },
+    url: 'https://www.wepushx.com',
+    logo: { '@type': 'ImageObject', url: 'https://www.wepushx.com/logo.png' },
   },
+}
+
+const blogBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://www.wepushx.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.wepushx.com/blog' },
+  ],
 }
 
 export default async function BlogPage({ searchParams }) {
@@ -46,6 +55,11 @@ export default async function BlogPage({ searchParams }) {
         id="blog-jsonld"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Script
+        id="blog-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogBreadcrumbJsonLd) }}
       />
 
       {/* Hero — client component handles all motion */}

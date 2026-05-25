@@ -48,12 +48,25 @@ const contactFaqJsonLd = {
   ],
 }
 
+const contactBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://www.wepushx.com' },
+    { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://www.wepushx.com/contact' },
+  ],
+}
+
 export default function ContactPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactFaqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactBreadcrumbJsonLd) }}
       />
       <ContactSection />
     </>

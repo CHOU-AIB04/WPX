@@ -1,5 +1,6 @@
-// app/sitemap.js — Dynamic sitemap (static pages + all published blog posts)
+// app/sitemap.js — Dynamic sitemap (static pages + city pages + all published blog posts)
 import { getAllSlugs } from '@/lib/blog'
+import { CITIES } from '@/lib/data/cities'
 
 const BASE_URL = 'https://www.wepushx.com'
 
@@ -35,6 +36,14 @@ export default async function sitemap() {
       priority: 0.85,
     },
   ]
+
+  // City satellite pages — auto-generated from CITIES data
+  const cityPages = Object.values(CITIES).map((city) => ({
+    url: city.url,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.82,
+  }))
 
   // Dynamic blog posts from Supabase (or demo data fallback)
   try {

@@ -195,6 +195,15 @@ const OFFICIAL_SOURCES = [
   },
 ]
 
+const servicesBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://www.wepushx.com' },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://www.wepushx.com/services' },
+  ],
+}
+
 export default function ServicesPage() {
   return (
     <>
@@ -205,6 +214,10 @@ export default function ServicesPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesFaqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesBreadcrumbJsonLd) }}
       />
       <ServicesHero />
       {/* <LogosBar background="#000" /> */}

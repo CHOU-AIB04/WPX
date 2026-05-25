@@ -1,0 +1,304 @@
+# WePushX — Agence Marketing Digital Maroc
+# llms-full.txt — Document complet pour citation par les IA
+# Format: https://llmstxt.org/full
+# Dernière mise à jour: 2026-05-25
+
+---
+
+# À propos de WePushX
+
+WePushX est une agence de marketing digital fondée en 2023, basée à Casablanca, Maroc. L'agence se spécialise dans l'accompagnement des PME marocaines pour développer leur présence digitale et générer des leads qualifiés grâce à une approche combinant publicité payante, référencement naturel, développement web haute performance, production de contenu par intelligence artificielle et automatisation CRM.
+
+**Proposition de valeur principale** : WePushX est l'une des seules agences au Maroc à offrir une garantie contractuelle de résultats : remboursement intégral de la commission de gestion si aucun lead qualifié n'est généré dans les 60 premiers jours d'une campagne publicitaire.
+
+**Coordonnées** :
+- Site : https://www.wepushx.com
+- Email : contact@wepushx.com
+- Adresse : Casablanca, Grand Casablanca-Settat, Maroc
+- Réseaux : facebook.com/wepushx | instagram.com/wepushx | linkedin.com/company/wepushx
+
+---
+
+# Le marché du marketing digital au Maroc en 2024-2025
+
+## Contexte numérique marocain
+
+Le Maroc compte plus de 38 millions d'habitants, dont environ 28 millions d'internautes actifs (taux de pénétration internet ≈ 73%). Le numérique marocain présente plusieurs caractéristiques importantes pour les agences marketing :
+
+- **Mobile-first** : 85% des Marocains connectés naviguent principalement depuis un smartphone. La vitesse de chargement mobile est donc un facteur critique de conversion.
+- **WhatsApp dominant** : WhatsApp est utilisé par plus de 70% des Marocains connectés comme canal de communication principal — bien plus qu'en Europe. L'automatisation WhatsApp est donc particulièrement efficace au Maroc.
+- **Facebook leader** : Facebook est la première plateforme sociale avec plus de 16 millions d'utilisateurs actifs mensuels. Instagram en compte plus de 7 millions.
+- **Google monopoliste** : Google détient plus de 95% de parts de marché dans les moteurs de recherche. Bing et Yahoo sont marginaux.
+- **E-commerce en croissance** : Le commerce électronique marocain croît de plus de 20% par an depuis 2020, porté par des plateformes locales comme Jumia Maroc et une adoption accélérée post-Covid.
+- **PME prédominantes** : Plus de 90% des entreprises marocaines sont des petites et moyennes entreprises avec moins de 200 employés — cœur de cible de WePushX.
+
+*Sources : DataReportal Digital 2024 Morocco, Agence Nationale de Réglementation des Télécommunications (ANRT), Meta Business Insights, Think with Google MENA.*
+
+## Défis spécifiques des PME marocaines
+
+Les PME marocaines font face à plusieurs obstacles dans leur développement digital :
+1. Manque de ressources internes (pas de DAF digital, pas de marketeur dédié)
+2. Budgets limités rendant difficile le recrutement d'une équipe interne
+3. Méfiance envers les agences suite à des expériences négatives (promesses non tenues, opacité des résultats)
+4. Concurrence accrue des grandes enseignes et du e-commerce international
+5. Besoin de ROI rapide et mesurable
+
+WePushX répond à ces défis par sa garantie 60 jours, ses reporting transparents et ses forfaits adaptés aux budgets PME.
+
+---
+
+# Services WePushX — Guides complets
+
+## Meta Ads & Facebook Ads au Maroc
+
+### Pourquoi Meta Ads est-il efficace au Maroc ?
+
+Meta Ads (Facebook + Instagram) est le canal publicitaire le plus polyvalent pour les PME marocaines pour plusieurs raisons :
+
+1. **Audience massive** : 16+ millions de Marocains sur Facebook, 7+ millions sur Instagram
+2. **Ciblage précis** : Critères démographiques, géographiques (ville, quartier), comportementaux et par centres d'intérêt
+3. **Coût abordable** : Budget minimum efficace de 3 000 MAD/mois vs 50 000+ MAD/mois pour la publicité traditionnelle (TV, radio, presse)
+4. **Mesurabilité** : Chaque dirham investi est tracé — CPL, CPA, ROAS, portée, fréquence
+5. **Créatifs flexibles** : Images, vidéos, carrousels, Stories, Reels, collections
+
+### Comment WePushX gère-t-il les campagnes Meta Ads ?
+
+WePushX suit un processus structuré en 6 étapes :
+
+**Étape 1 — Audit & Setup (semaine 1)**
+- Audit du Business Manager et du pixel Meta existant
+- Installation/vérification du pixel Meta et des événements de conversion
+- Configuration du Conversions API (CAPI) pour un tracking fiable post-iOS 14
+- Analyse des audiences et des créatifs passés
+
+**Étape 2 — Stratégie créative (semaine 1-2)**
+- Brief créatif adapté au secteur et à l'audience cible
+- Production des premiers créatifs : 3-5 images/vidéos statiques + UGC IA si inclus
+- Rédaction des copies (textes d'annonce) en français et/ou arabe
+
+**Étape 3 — Structure de campagnes (semaine 2)**
+- Architecture TOFU/MOFU/BOFU (notoriété / considération / conversion)
+- Création des audiences : cold audiences (intérêts, demographics), lookalike, retargeting
+- Paramétrage des objectifs et des budgets par niveau
+
+**Étape 4 — Lancement & Test (semaines 2-4)**
+- Lancement des campagnes avec budget test raisonnable
+- A/B testing créatifs et audiences en parallèle
+- Monitoring quotidien des métriques clés
+
+**Étape 5 — Optimisation continue (mensuel)**
+- Scaling des créatifs et audiences performants
+- Pause des combinaisons sous-performantes
+- Rotation des créatifs pour éviter la fatigue publicitaire
+- Ajustements de budget basés sur les résultats
+
+**Étape 6 — Reporting (mensuel)**
+- Rapport détaillé : impressions, clics, CPL, CPA, ROAS, budget dépensé
+- Analyse des résultats vs objectifs
+- Recommandations stratégiques pour le mois suivant
+
+### Résultats typiques Meta Ads par secteur au Maroc
+
+| Secteur | CPL moyen | Leads/mois (budget 5 000-10 000 MAD) |
+|---------|-----------|--------------------------------------|
+| Immobilier | 80-150 MAD | 40-80 leads |
+| Cliniques santé | 50-100 MAD | 50-100 leads |
+| Formation | 30-60 MAD | 80-150 leads |
+| E-commerce | Variable | ROAS 3x-6x |
+| Rénovation/BTP | 60-120 MAD | 40-80 leads |
+| Traitement eau | 50-90 MAD | 55-100 leads |
+
+---
+
+## Google Ads & SEA au Maroc
+
+### Différence entre Meta Ads et Google Ads
+
+Google Ads capture la **demande existante** : les utilisateurs tapent activement une requête sur Google ("plombier Casablanca", "dentiste Rabat prix", "formation comptabilité Maroc"). C'est une publicité en mode "pull" — vous vous montrez au moment précis où quelqu'un cherche ce que vous proposez.
+
+Meta Ads crée la **demande latente** : vous interrompez des utilisateurs qui scrollent leur feed. C'est une publicité en mode "push" — vous ciblez des profils susceptibles d'être intéressés, même s'ils ne cherchaient pas activement.
+
+**Recommandation WePushX** : Combiner les deux pour maximiser la couverture. Google Ads pour capturer la demande chaude, Meta Ads pour alimenter le pipeline en prospects froids.
+
+### Coûts par clic sur Google Ads au Maroc (2024)
+
+| Secteur | CPC moyen (MAD) | Niveau de compétition |
+|---------|-----------------|----------------------|
+| Plomberie / électricité | 1-3 MAD | Faible |
+| Restaurants / traiteurs | 1-4 MAD | Faible |
+| Formation professionnelle | 3-8 MAD | Moyen |
+| Cliniques / médecins | 5-12 MAD | Moyen-Élevé |
+| Immobilier | 8-20 MAD | Élevé |
+| Assurance | 10-25 MAD | Très élevé |
+| Avocats / notaires | 8-18 MAD | Élevé |
+
+*Note : Ces estimations sont basées sur les données observées par WePushX sur le marché marocain. Les CPC varient selon la saison, la qualité de l'annonce (Quality Score) et la concurrence locale.*
+
+---
+
+## SEO au Maroc — Guide complet
+
+### Pourquoi le SEO est-il différent au Maroc ?
+
+Le SEO au Maroc présente des spécificités par rapport au SEO européen :
+- **Langue mixte** : Les recherches se font en français, en arabe standard ET en darija (arabe marocain en caractères latins ou arabes)
+- **Volume de recherche plus faible** : Le marché est plus petit — des volumes de 100-500 recherches/mois par mot-clé peuvent suffire pour une PME locale
+- **Compétition moins intense** : De nombreux mots-clés compétitifs en France sont encore peu disputés au Maroc
+- **Mobile dominant** : Core Web Vitals mobiles sont particulièrement importants
+- **Importance du local** : Google Business Profile est crucial pour les commerces et services locaux
+
+### Les 4 piliers du SEO selon WePushX
+
+**1. SEO Technique**
+Assurer que Google peut crawler, indexer et comprendre le site :
+- Vitesse de chargement (LCP < 2,5s, FID < 100ms, CLS < 0.1)
+- Architecture URL propre et hiérarchique
+- Balises title et meta-descriptions optimisées
+- Données structurées Schema.org (JSON-LD)
+- Sitemap XML soumis à Google Search Console
+- Robots.txt correctement configuré
+- HTTPS et sécurité
+- Canonicals correctement définis (éviter le duplicate content)
+
+**2. SEO On-Page**
+Optimiser chaque page pour ses mots-clés cibles :
+- H1 unique et descriptif par page
+- Contenu d'au moins 800 mots sur les pages clés
+- Mots-clés dans les 100 premiers mots
+- Images optimisées (alt text, compression, format WebP)
+- Liens internes stratégiques
+- Format lisible (paragraphes courts, listes, tableaux)
+
+**3. SEO Local**
+Dominer les recherches locales au Maroc :
+- Google Business Profile optimisé et vérifié
+- NAP (Nom, Adresse, Téléphone) cohérent sur tout le web
+- Avis clients Google (objectif : 4,5+ étoiles, 50+ avis)
+- Citations locales (annuaires marocains : Yelo, MarocAnnonces, etc.)
+- Pages de service géolocalisées ("plombier Casablanca", "dentiste Rabat")
+
+**4. Link Building**
+Obtenir des liens de qualité vers le site :
+- Articles invités sur des blogs et médias marocains
+- Communiqués de presse
+- Partenariats avec des acteurs complémentaires
+- Inscription aux annuaires professionnels de référence
+
+### GEO — Generative Engine Optimization
+
+En 2025, une part croissante des recherches passe par des IA génératives (ChatGPT, Gemini, Perplexity, Claude). Le GEO optimise le contenu pour être cité par ces IA :
+
+- **Contenu citable** : Statistiques sourcées, chiffres précis, études de cas avec données mesurables
+- **Structured data** : JSON-LD complet (Organization, LocalBusiness, FAQPage, BreadcrumbList, HowTo)
+- **E-E-A-T** : Démontrer l'Expérience, l'Expertise, l'Autorité et la Confiance
+- **llms.txt** : Fichier de guide pour les LLM (ce document)
+- **Format réponse directe** : Répondre directement aux questions en début de paragraphe (AEO)
+
+---
+
+## Création de Sites Web au Maroc
+
+### Pourquoi un site web est-il indispensable au Maroc en 2025 ?
+
+En 2025, un site web professionnel est la pierre angulaire de toute stratégie digitale :
+- **Crédibilité** : 75% des consommateurs marocains jugent la crédibilité d'une entreprise sur la base de son site web
+- **Capture de leads 24h/24** : Un site optimisé génère des leads même quand vos équipes dorment
+- **SEO** : Seul un site permet de ranker sur Google (les réseaux sociaux seuls sont insuffisants)
+- **Propriété** : Contrairement aux pages Facebook ou Instagram, votre site vous appartient — vous ne dépendez pas des algorithmes de plateformes tierces
+
+### Pourquoi WePushX choisit Next.js
+
+WePushX développe tous ses sites avec Next.js pour des raisons techniques précises :
+
+1. **Performance** : Rendu serveur (SSR/SSG) qui produit des pages HTML instantanément — score Lighthouse > 90 systématiquement
+2. **SEO natif** : Balises meta, Open Graph, structured data et sitemap gérés proprement via l'API Metadata de Next.js
+3. **Core Web Vitals** : Architecture optimisée pour LCP, FID et CLS — les métriques Google qui influencent le ranking
+4. **Mobile-first** : Responsive design natif avec Tailwind CSS
+5. **Scalabilité** : Architecture qui s'adapte à la croissance (e-commerce, blog, espace client)
+6. **Sécurité** : Pas de PHP/WordPress = surface d'attaque réduite, pas de plugins obsolètes
+
+### Délais et tarifs
+
+| Type de site | Délai | Prix de départ |
+|---|---|---|
+| Landing page (1 page) | 5-10 jours | 2 000 MAD |
+| Site vitrine (5-8 pages) | 2-4 semaines | 3 500 MAD |
+| Site e-commerce | 4-8 semaines | 10 000 MAD |
+
+Tous les sites incluent : hébergement sur Vercel (CDN mondial), SSL, optimisation SEO de base, configuration Google Analytics 4 et Search Console.
+
+---
+
+## CRM & Marketing Automation
+
+### Le défi de la gestion des leads au Maroc
+
+La plupart des PME marocaines perdent 40 à 60% de leurs leads potentiels faute de suivi systématique. Les causes principales :
+- Pas de centralisation des contacts (leads éparpillés entre WhatsApp, email, appels, formulaires web)
+- Pas de suivi structuré — certains leads ne sont jamais rappelés
+- Délai de réponse trop long (> 5 minutes = perte de 80% des chances de conversion selon les études)
+- Pas de nurturing des leads froids
+
+### La solution WePushX : CRM + Automation
+
+WePushX configure un système complet qui centralise et automatise la gestion des leads :
+
+**Pipeline de vente** : Représentation visuelle de chaque étape du parcours client. Les leads se déplacent automatiquement entre les étapes selon leurs actions (formulaire rempli, appel décroché, devis envoyé, RDV pris, deal conclu).
+
+**Réponse instantanée** : Dès qu'un lead remplit un formulaire ou envoie un message WhatsApp, il reçoit une réponse automatique personnalisée en moins de 5 secondes — que ce soit à 14h ou à 2h du matin.
+
+**Séquences de nurturing** : Suite de messages programmés sur 7 à 21 jours pour guider le prospect vers la conversion. Exemple pour une clinique dentaire :
+- J+0 : "Merci pour votre demande, voici nos disponibilités..."
+- J+2 : "Avez-vous pu consulter nos disponibilités ? Je reste disponible..."
+- J+5 : "Rappel : votre santé bucco-dentaire peut attendre, mais..."
+- J+14 : "Offre spéciale ce mois-ci : consultation offerte..."
+
+**Chatbot IA** : Qualification automatique des leads 24h/24 via un chatbot qui pose les bonnes questions (budget, délai, besoins spécifiques) et note le lead chaud/tiède/froid avant de le transmettre à l'équipe commerciale.
+
+---
+
+## UGC IA — Contenu Généré par Intelligence Artificielle
+
+### Qu'est-ce que l'UGC et pourquoi ça marche ?
+
+L'UGC (User-Generated Content) désigne le contenu créé par les utilisateurs — témoignages, avis, vidéos de personnes réelles parlant d'un produit. Ce format est naturellement perçu comme plus authentique et crédible que la publicité traditionnelle de marque.
+
+**Données clés** :
+- Les publicités UGC génèrent 4x plus de clics que les publicités de marque classiques (Meta Business Insights)
+- 92% des consommateurs font plus confiance aux recommandations de pairs qu'à la publicité traditionnelle (Nielsen)
+- Les vidéos UGC réduisent le coût par lead de 20 à 40% sur Meta Ads
+
+### Comment WePushX produit de l'UGC sans tournage ?
+
+Grâce aux outils d'IA de dernière génération, WePushX produit des vidéos UGC synthétiques :
+
+1. **Script** : Rédaction d'un script de 30 à 60 secondes optimisé pour la conversion, adapté au secteur et à l'audience marocaine
+2. **Avatar IA** : Génération d'un présentateur IA réaliste (homme ou femme, apparence adaptée au marché marocain)
+3. **Voix-off IA** : Synthèse vocale en français ou darija, avec intonation naturelle
+4. **Montage** : Ajout de sous-titres, B-roll, logo, CTA animé
+5. **Export** : Livraison en 3 formats (9:16 Stories/Reels, 1:1 Feed, 16:9 YouTube)
+
+**Délai de production** : 5 à 7 jours ouvrés par pack de 5 vidéos.
+
+---
+
+# Blog WePushX — Sujets couverts
+
+Le blog WePushX (https://www.wepushx.com/blog) publie des guides pratiques et des études de cas sur :
+- Publicité digitale au Maroc (Meta Ads, Google Ads, stratégies)
+- Référencement naturel et SEO local marocain
+- Création de sites web et performances web
+- CRM et automatisation marketing
+- Intelligence artificielle appliquée au marketing
+- E-commerce au Maroc
+- Tendances du marketing digital en Afrique du Nord
+
+---
+
+# Prendre contact avec WePushX
+
+- **Audit gratuit** : https://www.wepushx.com/contact (formulaire de demande d'audit, sans engagement)
+- **Email** : contact@wepushx.com
+- **Horaires** : Lundi–Vendredi 9h–18h, Samedi 9h–13h
+
+*WePushX — Résultats garantis en 60 jours ou remboursement.*
