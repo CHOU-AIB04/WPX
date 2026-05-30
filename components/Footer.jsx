@@ -155,6 +155,17 @@ export default function Footer() {
           style={{ borderTop: '1px solid rgba(255,255,255,0.05)', color: '#444' }}
         >
           <p>© {year} WePushX. Tous droits réservés. Agence Marketing Digital Maroc.</p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link href="/politique-de-confidentialite" className="transition-colors hover:text-white" style={{ color: '#444' }}>
+              Politique de confidentialité
+            </Link>
+            <Link href="/mentions-legales" className="transition-colors hover:text-white" style={{ color: '#444' }}>
+              Mentions légales & CGU
+            </Link>
+            <Link href="/contact" className="transition-colors hover:text-white" style={{ color: '#444' }}>
+              Contact
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

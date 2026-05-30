@@ -35,6 +35,18 @@ export default async function sitemap() {
       changeFrequency: 'daily',
       priority: 0.85,
     },
+    {
+      url: `${BASE_URL}/politique-de-confidentialite`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/mentions-legales`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ]
 
   // City satellite pages — auto-generated from CITIES data
