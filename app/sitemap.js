@@ -11,48 +11,12 @@ export default async function sitemap() {
 
   // Static pages
   const staticPages = [
-    {
-      url: BASE_URL,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 1.0,
-    },
-    {
-      url: `${BASE_URL}/services`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/contact`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/blog`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.85,
-    },
-    {
-      url: `${BASE_URL}/merci`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.1,
-    },
-    {
-      url: `${BASE_URL}/politique-de-confidentialite`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: `${BASE_URL}/mentions-legales`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
+    { url: BASE_URL,                                          lastModified: now, changeFrequency: 'weekly',  priority: 1.0  },
+    { url: `${BASE_URL}/services`,                           lastModified: now, changeFrequency: 'weekly',  priority: 0.9  },
+    { url: `${BASE_URL}/contact`,                            lastModified: now, changeFrequency: 'monthly', priority: 0.8  },
+    { url: `${BASE_URL}/blog`,                               lastModified: now, changeFrequency: 'daily',   priority: 0.85 },
+    { url: `${BASE_URL}/politique-de-confidentialite`,       lastModified: now, changeFrequency: 'yearly',  priority: 0.3  },
+    { url: `${BASE_URL}/mentions-legales`,                   lastModified: now, changeFrequency: 'yearly',  priority: 0.3  },
   ]
 
   // City satellite pages — auto-generated from CITIES data
@@ -63,17 +27,22 @@ export default async function sitemap() {
     priority: 0.82,
   }))
 
-
-  // Dynamic blog posts from Supabase (or demo data fallback)
+  // Dynamic blog posts from Supabase
   try {
     const slugs = await getAllSlugs()
     const blogPages = slugs.map((item) => ({
       url: `${BASE_URL}/blog/${item.slug}`,
-      lastModified: item.updated_at ? new Date(item.updated_at) : (item.published_at ? new Date(item.published_at) : now),
+      lastModified: item.updated_at
+        ? new Date(item.updated_at)
+        : item.published_at
+          ? new Date(item.published_at)
+          : now,
       changeFrequency: 'weekly',
       priority: 0.7,
     }))
     return [...staticPages, ...cityPages, ...blogPages]
   } catch (err) {
     console.error('[Sitemap] Error fetching blog slugs:', err)
-    return [...
+    return [...staticPages, ...cityPages]
+  }
+}
