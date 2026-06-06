@@ -197,7 +197,7 @@ export default function HeroSection() {
             <motion.div {...fadeUp(0.24)} className="flex flex-wrap items-center gap-4">
               <div onClick={()=>{route.push("/contact"),window.scrollTo({top:100,behavior:"smooth"})}}
                 className="btn-primary text-base px-8 py-4">
-                Réserver mon Audit Gratuit
+                Réserver mon Audit
                 <ArrowRight size={18} />
               </div>
               <Link href="/services" className="btn-outline text-base px-8 py-4">
@@ -211,7 +211,7 @@ export default function HeroSection() {
               className="text-[12px] md:text-sm"
               style={{ color: '#444' }}
             >
-              ✦ Audit 100% gratuit · Sans engagement · Réponse sous 24h
+              ✦ Sans engagement · Réponse sous 24h · Résultats garantis
             </motion.p>
 
             {/* Trust row */}

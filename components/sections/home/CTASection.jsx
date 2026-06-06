@@ -34,7 +34,7 @@ export default function CTASection() {
           />
 
           <div className="relative z-10 max-w-2xl mx-auto">
-            <span className="badge mb-6">Audit Gratuit</span>
+            <span className="badge mb-6">Audit</span>
             <h2
               className="text-3xl md:text-6xl font-bold leading-tight mb-6"
               style={{ fontFamily: 'var(--font-space, sans-serif)' }}
@@ -44,14 +44,14 @@ export default function CTASection() {
               {' '}votre business ?
             </h2>
             <p className="text-lg mb-10 leading-relaxed" style={{ color: '#888' }}>
-              30 minutes d&apos;audit gratuit. On analyse votre situation, on identifie exactement
+              30 minutes d'audit. On analyse votre situation, On analyse votre situation, on identifie exactement
               où vous perdez de l&apos;argent, et on vous dit comment le récupérer.
               <strong style={{ color: '#fff' }}> Sans engagement.</strong>
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4">
               <div onClick={()=>{route.push("/contact"),window.scrollTo({top:100,behavior:"smooth"})}} className="btn-primary text-base px-8 py-4">
-                Réserver mon Audit Gratuit
+                Réserver mon Audit
                 <ArrowRight size={18} />
               </div>
               <Link href="/services" className="btn-outline text-base px-8 py-4">

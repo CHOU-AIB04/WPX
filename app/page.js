@@ -14,7 +14,7 @@ import CTASection from '@/components/sections/home/CTASection'
 export const metadata = {
   title: 'Agence Marketing Digital Maroc | Meta Ads, Google Ads, SEO & Sites Web',
   description:
-    "WePushX est l'agence marketing digital au Maroc pour les PME. Meta Ads, Google Ads, creation de sites web, SEO, UGC IA & CRM. Audit gratuit. Resultats garantis en 60 jours.",
+    "WePushX est l'agence marketing digital au Maroc pour les PME. Meta Ads, Google Ads, creation de sites web, SEO, UGC IA & CRM. Resultats garantis en 60 jours.",
   alternates: { canonical: 'https://www.wepushx.com' },
 }
 
@@ -70,7 +70,7 @@ const homeFaqJsonLd = {
     {
       '@type': 'Question',
       name: 'Comment démarrer avec WePushX ?',
-      acceptedAnswer: { '@type': 'Answer', text: "Pour démarrer, réservez un audit gratuit de 30 minutes via notre page de contact. Un expert WePushX analysera votre présence digitale actuelle, vos objectifs et votre marché. Nous vous proposons ensuite un plan d'action personnalisé avec des objectifs chiffrés. Aucun engagement requis pour l'audit." },
+      acceptedAnswer: { '@type': 'Answer', text: "Pour démarrer, réservez un audit de 30 minutes via notre page de contact. Un expert WePushX analysera votre présence digitale actuelle, vos objectifs et votre marché. Nous vous proposons ensuite un plan d'action personnalisé avec des objectifs chiffrés. Aucun engagement requis pour l'audit." },
     },
     {
       '@type': 'Question',

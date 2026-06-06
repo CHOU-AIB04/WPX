@@ -36,6 +36,12 @@ export default async function sitemap() {
       priority: 0.85,
     },
     {
+      url: `${BASE_URL}/merci`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.1,
+    },
+    {
       url: `${BASE_URL}/politique-de-confidentialite`,
       lastModified: now,
       changeFrequency: 'yearly',
@@ -57,6 +63,7 @@ export default async function sitemap() {
     priority: 0.82,
   }))
 
+
   // Dynamic blog posts from Supabase (or demo data fallback)
   try {
     const slugs = await getAllSlugs()
@@ -66,9 +73,7 @@ export default async function sitemap() {
       changeFrequency: 'weekly',
       priority: 0.7,
     }))
-    return [...staticPages, ...blogPages]
+    return [...staticPages, ...cityPages, ...blogPages]
   } catch (err) {
     console.error('[Sitemap] Error fetching blog slugs:', err)
-    return staticPages
-  }
-}
+    return [...

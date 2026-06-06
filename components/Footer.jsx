@@ -135,7 +135,7 @@ export default function Footer() {
               Prêt à scaler ?
             </h3>
             <p className="text-sm leading-relaxed mb-5" style={{ color: '#666' }}>
-              Audit gratuit de 30 min on analyse votre présence digitale et identifie exactement où vous perdez de l&apos;argent.
+              Audit de 30 min — on analyse votre présence digitale et identifie exactement où vous perdez de l&apos;argent.
             </p>
             <div
               onClick={()=>{route.push("/contact"),window.scrollTo({top:100,behavior:"smooth"})}}

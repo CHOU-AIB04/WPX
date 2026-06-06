@@ -81,7 +81,7 @@ export default function Header() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center">
             <div onClick={()=>{route.push("/contact"),window.scrollTo({top:1000,behavior:"smooth"})}} className="btn-primary text-sm px-5 py-2.5">
-              Audit Gratuit <ArrowRight size={14} />
+              Audit <ArrowRight size={14} />
             </div>
           </div>
 
@@ -142,7 +142,7 @@ export default function Header() {
               className="mt-6"
             >
               <Link href="/contact" className="btn-primary w-full justify-center text-base py-4">
-                Réserver mon Audit Gratuit <ArrowRight size={17} />
+                Réserver mon Audit <ArrowRight size={17} />
               </Link>
             </motion.div>
           </motion.div>

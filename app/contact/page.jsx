@@ -1,12 +1,12 @@
 import ContactSection from '@/components/sections/contact/ContactSection'
 
 export const metadata = {
-  title: 'Contact & Audit Gratuit | WePushX — Agence Marketing Digital Maroc',
-  description: 'Contactez WePushX pour un audit gratuit de 30 min. Réponse sous 24h. Sans engagement. Partout au Maroc.',
+  title: 'Contact & Audit | WePushX — Agence Marketing Digital Maroc',
+  description: 'Contactez WePushX pour un audit de 30 min. Réponse sous 24h. Sans engagement. Partout au Maroc.',
   alternates: { canonical: 'https://www.wepushx.com/contact' },
   openGraph: {
-    title: 'Contactez WePushX | Audit Gratuit Marketing Digital Maroc',
-    description: 'Réservez votre audit gratuit de 30 minutes. Un expert WePushX analyse votre présence digitale et vous propose un plan d\'action concret.',
+    title: 'Contactez WePushX | Audit Marketing Digital Maroc',
+    description: 'Réservez votre audit de 30 minutes. Un expert WePushX analyse votre présence digitale et vous propose un plan d\'action concret.',
     url: 'https://www.wepushx.com/contact',
   },
 }
@@ -17,8 +17,8 @@ const contactFaqJsonLd = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: "L'audit gratuit WePushX est-il vraiment sans engagement ?",
-      acceptedAnswer: { '@type': 'Answer', text: "Oui, l'audit de 30 minutes est entièrement gratuit et sans engagement. Aucune carte bancaire, aucun contrat à signer. Vous repartez avec un rapport d'analyse de votre présence digitale actuelle et des recommandations concrètes, que vous choisissiez ou non de travailler avec WePushX par la suite." },
+      name: "L'audit WePushX est-il sans engagement ?",
+      acceptedAnswer: { '@type': 'Answer', text: "Oui, l'audit de 30 minutes est sans engagement. Aucune carte bancaire, aucun contrat à signer. Vous repartez avec un rapport d'analyse de votre présence digitale actuelle et des recommandations concrètes, que vous choisissiez ou non de travailler avec WePushX par la suite." },
     },
     {
       '@type': 'Question',
@@ -27,7 +27,7 @@ const contactFaqJsonLd = {
     },
     {
       '@type': 'Question',
-      name: "Que se passe-t-il lors d'un audit gratuit avec WePushX ?",
+      name: "Que se passe-t-il lors d'un audit avec WePushX ?",
       acceptedAnswer: { '@type': 'Answer', text: "Durant les 30 minutes, un expert WePushX analyse : votre présence digitale actuelle (site web, réseaux sociaux, SEO), vos campagnes publicitaires existantes si vous en avez, votre secteur et vos concurrents au Maroc, vos objectifs commerciaux. À l'issue de l'audit, vous recevez un rapport personnalisé avec des recommandations prioritaires et une proposition d'accompagnement si approprié." },
     },
     {

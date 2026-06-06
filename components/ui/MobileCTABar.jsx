@@ -43,7 +43,7 @@ export default function MobileCTABar() {
 
             {/* Text */}
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-white leading-tight">Audit Gratuit 30 min</p>
+              <p className="text-xs font-semibold text-white leading-tight">Audit 30 min</p>
               <p className="text-[10px] truncate" style={{ color: '#555' }}>Sans engagement · Réponse sous 24h</p>
             </div>
 

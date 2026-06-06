@@ -300,10 +300,10 @@ export default async function BlogPostPage({ params }) {
                 Prêt à implémenter cette stratégie pour votre business ?
               </h3>
               <p className="mb-6" style={{ color: '#666' }}>
-                Réservez un audit gratuit de 30 minutes. Nos experts analysent votre situation et vous proposent un plan d&apos;action concret — sans engagement.
+                Réservez un audit de 30 minutes. Nos experts analysent votre situation et vous proposent un plan d&apos;action concret — sans engagement.
               </p>
               <Link href="/contact" className="btn-primary">
-                Réserver mon Audit Gratuit <ArrowRight size={16} />
+                Réserver mon Audit <ArrowRight size={16} />
               </Link>
             </div>
 
