@@ -47,7 +47,7 @@ export default function PricingSection() {
             <span className="text-gradient">votre croissance</span>
           </h2>
           <p className="text-base max-w-xl mx-auto mb-8" style={{ color: '#666' }}>
-            Des forfaits transparents sans surprise. Garantie remboursement 60 jours.
+            Des forfaits clairs, sans surprise. Tous les prix sont en MAD HT. Paiement mensuel.
           </p>
 
           {/* Toggle */}
@@ -211,7 +211,7 @@ export default function PricingSection() {
           className="text-center text-sm mt-8"
           style={{ color: '#444' }}
         >
-          ✦ Garantie remboursement 60 jours · Pas de frais cachés · Budget publicitaire séparé
+          ✦ Prix en MAD HT · Engagement minimum 3 mois · Garantie résultats 60 jours · Budget pub séparé
         </motion.p>
       </div>
     </section>

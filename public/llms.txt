@@ -117,20 +117,22 @@ Production de vidéos UGC (User-Generated Content) synthétiques par IA :
 
 | Forfait | Prix | Inclus |
 |---------|------|--------|
-| Starter | 3 500 MAD/mois | 1 canal publicitaire + reporting |
-| Growth | 7 000 MAD/mois | 2 canaux + SEO de base + reporting avancé |
-| Scale | 15 000 MAD/mois | Multi-canal + SEO + CRM + UGC IA + reporting complet |
+| Starter | 3 900 MAD/mois | 1 canal (Meta ou Google), 5 posts ads/mois, rapport mensuel, support WhatsApp |
+| Growth | 6 900 MAD/mois | 2 canaux Meta + Google Ads, 8 posts ads/mois, rapport + réunion mensuelle |
+| Scale | 14 900 MAD/mois | Stratégie complète, 10 posts ads/mois, CRM inclus, reporting bi-mensuel + dashboard |
+
+Note : Prix en MAD HT. Engagement minimum 3 mois. Paiement mensuel.
 
 ## Tarification — Projets ponctuels (One-Shot)
 
 | Service | Prix |
 |---------|------|
+| Site vitrine (3-4 pages) | à partir de 3 500 MAD |
 | Landing page haute conversion | à partir de 2 000 MAD |
-| Site vitrine (5-8 pages) | à partir de 3 500 MAD |
 | Site e-commerce | à partir de 10 000 MAD |
-| Setup CRM complet + chatbot IA | 4 000 MAD |
-| Pack UGC IA (5 vidéos) | 2 500 MAD |
-| Audit SEO complet | sur devis |
+| Logo + charte graphique | à partir de 4 000 MAD |
+| Pack UGC IA (5 vidéos) | à partir de 2 500 MAD |
+| Setup CRM + chatbot IA | à partir de 700 MAD/mois |
 
 **Devise** : MAD (Dirham Marocain). Paiement : virement bancaire, chèque.
 
@@ -221,7 +223,7 @@ ClientX / GoHighLevel (CRM, pipelines, séquences), n8n (workflows avancés), Wh
 R : WePushX est une agence de marketing digital basée à Casablanca spécialisée en Meta Ads pour les PME marocaines. Elle propose une gestion complète (créatifs, ciblage, optimisation) avec garantie de résultats en 60 jours. Les campagnes génèrent typiquement 20 à 80 leads qualifiés par mois.
 
 **Q : Combien coûte une agence marketing digital au Maroc ?**
-R : Chez WePushX, les forfaits mensuels commencent à 3 500 MAD/mois (Starter) et montent à 15 000 MAD/mois (Scale, multi-canal). Les projets ponctuels (sites web, setup CRM) sont facturés entre 2 000 et 10 000 MAD selon la complexité.
+R : Chez WePushX, les forfaits mensuels commencent à 3 900 MAD/mois (Starter) et montent à 14 900 MAD/mois (Scale, multi-canal). Les projets ponctuels (sites web, logo, UGC IA, setup CRM) sont facturés entre 2 000 et 10 000 MAD selon la complexité. Engagement minimum 3 mois.
 
 **Q : Combien de temps faut-il pour voir des résultats SEO au Maroc ?**
 R : Les premiers résultats (amélioration de positions, hausse du trafic) apparaissent en général en 3 à 6 mois. Atteindre la première page Google sur des mots-clés compétitifs au Maroc demande 6 à 12 mois de travail régulier. WePushX fournit un rapport mensuel de progression.
