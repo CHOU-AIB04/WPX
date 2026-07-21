@@ -162,6 +162,9 @@ export default function Footer() {
             <Link href="/mentions-legales" className="transition-colors hover:text-white" style={{ color: '#444' }}>
               Mentions légales & CGU
             </Link>
+            <Link href="/cgv" className="transition-colors hover:text-white" style={{ color: '#444' }}>
+              CGV
+            </Link>
             <Link href="/contact" className="transition-colors hover:text-white" style={{ color: '#444' }}>
               Contact
             </Link>
