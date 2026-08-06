@@ -1,26 +1,87 @@
-// app/sitemap.js — Dynamic sitemap (static pages + city pages + all published blog posts)
+// app/sitemap.js — Dynamic sitemap with multilingual URLs (FR / EN / ES)
 import { getAllSlugs } from '@/lib/blog'
 import { CITIES } from '@/lib/data/cities'
 
 const BASE_URL = 'https://www.wepushx.com'
 
-export const revalidate = 3600 // Revalidate sitemap every hour
+export const revalidate = 3600 // Revalidate every hour
+
+// Core pages with their priority + change frequency
+const CORE_PAGES = [
+  { path: '',          changeFrequency: 'weekly',  priority: { fr: 1.0, en: 0.95, es: 0.95 } },
+  { path: '/services', changeFrequency: 'weekly',  priority: { fr: 0.9, en: 0.85, es: 0.85 } },
+  { path: '/contact',  changeFrequency: 'monthly', priority: { fr: 0.8, en: 0.75, es: 0.75 } },
+]
+
+// Legal pages (FR only — no translation needed)
+const FR_ONLY_PAGES = [
+  { path: '/blog',                               changeFrequency: 'daily',   priority: 0.85 },
+  { path: '/politique-de-confidentialite',       changeFrequency: 'yearly',  priority: 0.3  },
+  { path: '/mentions-legales',                   changeFrequency: 'yearly',  priority: 0.3  },
+  { path: '/cgv',                                changeFrequency: 'yearly',  priority: 0.3  },
+]
 
 export default async function sitemap() {
   const now = new Date()
 
-  // Static pages
-  const staticPages = [
-    { url: BASE_URL,                                          lastModified: now, changeFrequency: 'weekly',  priority: 1.0  },
-    { url: `${BASE_URL}/services`,                           lastModified: now, changeFrequency: 'weekly',  priority: 0.9  },
-    { url: `${BASE_URL}/contact`,                            lastModified: now, changeFrequency: 'monthly', priority: 0.8  },
-    { url: `${BASE_URL}/blog`,                               lastModified: now, changeFrequency: 'daily',   priority: 0.85 },
-    { url: `${BASE_URL}/politique-de-confidentialite`,       lastModified: now, changeFrequency: 'yearly',  priority: 0.3  },
-    { url: `${BASE_URL}/mentions-legales`,                   lastModified: now, changeFrequency: 'yearly',  priority: 0.3  },
-    { url: `${BASE_URL}/cgv`,                                lastModified: now, changeFrequency: 'yearly',  priority: 0.3  },
-  ]
+  // ── Multilingual core pages ─────────────────────────────────────────────────
+  const multilingualPages = CORE_PAGES.flatMap(({ path, changeFrequency, priority }) => [
+    // FR at root (no prefix)
+    {
+      url: `${BASE_URL}${path}`,
+      lastModified: now,
+      changeFrequency,
+      priority: priority.fr,
+      alternates: {
+        languages: {
+          fr:        `${BASE_URL}${path}`,
+          en:        `${BASE_URL}/en${path}`,
+          es:        `${BASE_URL}/es${path}`,
+          'x-default': `${BASE_URL}${path}`,
+        },
+      },
+    },
+    // EN
+    {
+      url: `${BASE_URL}/en${path}`,
+      lastModified: now,
+      changeFrequency,
+      priority: priority.en,
+      alternates: {
+        languages: {
+          fr:        `${BASE_URL}${path}`,
+          en:        `${BASE_URL}/en${path}`,
+          es:        `${BASE_URL}/es${path}`,
+          'x-default': `${BASE_URL}${path}`,
+        },
+      },
+    },
+    // ES
+    {
+      url: `${BASE_URL}/es${path}`,
+      lastModified: now,
+      changeFrequency,
+      priority: priority.es,
+      alternates: {
+        languages: {
+          fr:        `${BASE_URL}${path}`,
+          en:        `${BASE_URL}/en${path}`,
+          es:        `${BASE_URL}/es${path}`,
+          'x-default': `${BASE_URL}${path}`,
+        },
+      },
+    },
+  ])
 
-  // City satellite pages — auto-generated from CITIES data
+  // ── FR-only pages ────────────────────────────────────────────────────────────
+  const frOnlyPages = FR_ONLY_PAGES.map(({ path, changeFrequency, priority }) => ({
+    url: `${BASE_URL}${path}`,
+    lastModified: now,
+    changeFrequency,
+    priority,
+  }))
+
+  // ── City satellite pages (FR only) ──────────────────────────────────────────
   const cityPages = Object.values(CITIES).map((city) => ({
     url: city.url,
     lastModified: now,
@@ -28,7 +89,7 @@ export default async function sitemap() {
     priority: 0.82,
   }))
 
-  // Dynamic blog posts from Supabase
+  // ── Dynamic blog posts from Supabase ────────────────────────────────────────
   try {
     const slugs = await getAllSlugs()
     const blogPages = slugs.map((item) => ({
@@ -41,9 +102,9 @@ export default async function sitemap() {
       changeFrequency: 'weekly',
       priority: 0.7,
     }))
-    return [...staticPages, ...cityPages, ...blogPages]
+    return [...multilingualPages, ...frOnlyPages, ...cityPages, ...blogPages]
   } catch (err) {
     console.error('[Sitemap] Error fetching blog slugs:', err)
-    return [...staticPages, ...cityPages]
+    return [...multilingualPages, ...frOnlyPages, ...cityPages]
   }
 }
