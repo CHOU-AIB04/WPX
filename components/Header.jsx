@@ -3,21 +3,66 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'motion/react'
-import { Menu, X, ArrowRight } from 'lucide-react'
+import { Menu, X, ArrowRight, Globe } from 'lucide-react'
 import Image from 'next/image'
+import { useLocale } from '@/lib/locale-context'
 
-const navLinks = [
-  { href: '/', label: 'Accueil' },
-  { href: '/services', label: 'Services' },
-  // { href: '/blog', label: 'Blog' },
-  { href: '/contact', label: 'Contact' },
+// Resolve nav links based on locale prefix
+function useLocaleNav(locale) {
+  const prefix = locale === 'fr' ? '' : `/${locale}`
+  const d = {
+    fr: { home: 'Accueil', services: 'Services', blog: 'Blog', contact: 'Contact', cta: 'Audit' },
+    en: { home: 'Home', services: 'Services', blog: 'Blog', contact: 'Contact', cta: 'Audit' },
+    es: { home: 'Inicio', services: 'Servicios', blog: 'Blog', contact: 'Contacto', cta: 'Auditoría' },
+  }[locale] || {}
+
+  return [
+    { href: `${prefix}/`, label: d.home },
+    { href: `${prefix}/services`, label: d.services },
+    // { href: `${prefix}/blog`, label: d.blog },
+    { href: `${prefix}/contact`, label: d.contact },
+  ]
+}
+
+// Language switcher pill
+const LANGS = [
+  { code: 'fr', label: 'FR', href: '/' },
+  { code: 'en', label: 'EN', href: '/en' },
+  { code: 'es', label: 'ES', href: '/es' },
 ]
+
+function LangSwitcher({ currentLocale }) {
+  return (
+    <div className="flex items-center gap-0.5 rounded-xl px-1 py-1" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
+      <Globe size={11} style={{ color: '#555', marginLeft: 4, marginRight: 2 }} />
+      {LANGS.map((lang) => (
+        <Link
+          key={lang.code}
+          href={lang.href}
+          className="px-2 py-0.5 rounded-lg text-[11px] font-semibold transition-all duration-200"
+          style={{
+            color: currentLocale === lang.code ? '#000' : '#666',
+            background: currentLocale === lang.code ? '#00F5FF' : 'transparent',
+          }}
+        >
+          {lang.label}
+        </Link>
+      ))}
+    </div>
+  )
+}
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
   const route = useRouter()
+  const { locale, dict } = useLocale()
+
+  const navLinks = useLocaleNav(locale)
+  const prefix = locale === 'fr' ? '' : `/${locale}`
+  const ctaLabel = dict?.header?.cta || 'Audit'
+  const contactHref = `${prefix}/contact`
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -42,9 +87,9 @@ export default function Header() {
         role="banner"
       >
         <div
-          className="flex items-center justify-between gap-6 px-5 py-3 rounded-2xl w-full transition-all duration-400"
+          className="flex items-center justify-between gap-4 px-5 py-3 rounded-2xl w-full transition-all duration-400"
           style={{
-            maxWidth: '1000px',
+            maxWidth: '1060px',
             background: scrolled ? 'rgba(5,5,5,0.9)' : 'rgba(5,5,5,0.65)',
             backdropFilter: 'blur(20px)',
             border: scrolled ? '1px solid rgba(0,245,255,0.18)' : '1px solid rgba(255,255,255,0.08)',
@@ -52,14 +97,14 @@ export default function Header() {
           }}
         >
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="WePushX — Accueil">
-            <Image src={"/wpx.png"} width={100} height={100} alt='wepushx Agence digital' className='w-[100px] ' />
+          <Link href={prefix + '/'} className="flex items-center gap-2 shrink-0" aria-label="WePushX">
+            <Image src={"/wpx.png"} width={100} height={100} alt='WePushX Digital Marketing Agency' className='w-[100px]' />
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1" aria-label="Navigation principale">
+          <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
             {navLinks.map((link) => {
-              const active = pathname === link.href
+              const active = pathname === link.href || (link.href !== '/' && link.href !== `/${locale}/` && pathname.startsWith(link.href))
               return (
                 <Link
                   key={link.href}
@@ -78,10 +123,14 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center">
-            <div onClick={()=>{route.push("/contact"),window.scrollTo({top:1000,behavior:"smooth"})}} className="btn-primary text-sm px-5 py-2.5">
-              Audit <ArrowRight size={14} />
+          {/* Desktop right: lang switcher + CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <LangSwitcher currentLocale={locale} />
+            <div
+              onClick={() => { route.push(contactHref); window.scrollTo({ top: 1000, behavior: 'smooth' }) }}
+              className="btn-primary text-sm px-5 py-2.5"
+            >
+              {ctaLabel} <ArrowRight size={14} />
             </div>
           </div>
 
@@ -90,7 +139,7 @@ export default function Header() {
             className="md:hidden w-9 h-9 rounded-xl flex items-center justify-center transition-colors"
             style={{ background: 'rgba(255,255,255,0.05)', color: '#fff' }}
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
           >
             {menuOpen ? <X size={17} /> : <Menu size={17} />}
@@ -135,14 +184,25 @@ export default function Header() {
                 )
               })}
             </nav>
+
+            {/* Mobile lang switcher */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25, delay: 0.18 }}
+              className="mt-4 flex justify-center"
+            >
+              <LangSwitcher currentLocale={locale} />
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.28, delay: 0.22 }}
-              className="mt-6"
+              className="mt-4"
             >
-              <Link href="/contact" className="btn-primary w-full justify-center text-base py-4">
-                Réserver mon Audit <ArrowRight size={17} />
+              <Link href={contactHref} className="btn-primary w-full justify-center text-base py-4">
+                {ctaLabel} <ArrowRight size={17} />
               </Link>
             </motion.div>
           </motion.div>

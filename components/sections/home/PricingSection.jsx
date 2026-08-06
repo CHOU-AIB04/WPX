@@ -1,15 +1,25 @@
 'use client'
 import { useState } from 'react'
-import Link from 'next/link'
 import { motion, AnimatePresence } from 'motion/react'
 import { Check, ArrowRight } from 'lucide-react'
-import { pricing } from '@/lib/data/home'
+import { getPricing } from '@/lib/data/home'
 import TiltCard from '@/components/ui/TiltCard'
 import { useRouter } from 'next/navigation'
+import { useLocale } from '@/lib/locale-context'
 
 export default function PricingSection() {
   const [yearly, setYearly] = useState(false)
   const route = useRouter()
+  const { locale, dict } = useLocale()
+
+  const p = dict?.pricing || {}
+  const pricingData = getPricing(locale)
+  const prefix = locale === 'fr' ? '' : `/${locale}`
+  const contactHref = `${prefix}/contact`
+
+  const currencySymbol = p.currency_symbol ?? (locale === 'fr' ? '' : '$')
+  const perMonth = p.per_month || (locale === 'fr' ? '/mois' : '/mo')
+
   return (
     <section className="section relative overflow-hidden" style={{ background: '#000' }}>
       {/* Giant background "Pricing" text */}
@@ -38,16 +48,16 @@ export default function PricingSection() {
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12"
         >
-          <span className="badge mb-4">Tarifs</span>
+          <span className="badge mb-4">{p.badge || 'Tarifs'}</span>
           <h2
             className="text-4xl md:text-5xl font-bold mb-4"
             style={{ fontFamily: 'var(--font-space, sans-serif)' }}
           >
-            Investissez dans{' '}
-            <span className="text-gradient">votre croissance</span>
+            {p.h2_pre || 'Investissez dans'}{' '}
+            <span className="text-gradient">{p.h2_highlight || 'votre croissance'}</span>
           </h2>
           <p className="text-base max-w-xl mx-auto mb-8" style={{ color: '#666' }}>
-            Des forfaits clairs, sans surprise. Tous les prix sont en MAD HT. Paiement mensuel.
+            {p.subtitle || 'Des forfaits clairs, sans surprise. Tous les prix sont en MAD HT. Paiement mensuel.'}
           </p>
 
           {/* Toggle */}
@@ -62,7 +72,7 @@ export default function PricingSection() {
                 color: !yearly ? '#000' : '#888',
               }}
             >
-              Mensuel
+              {p.monthly || 'Mensuel'}
             </button>
             <button
               onClick={() => setYearly(true)}
@@ -72,14 +82,14 @@ export default function PricingSection() {
                 color: yearly ? '#000' : '#888',
               }}
             >
-              Annuel <span className="text-xs ml-1 opacity-80">-15%</span>
+              {p.yearly || 'Annuel'} <span className="text-xs ml-1 opacity-80">{p.yearly_discount || '-15%'}</span>
             </button>
           </div>
         </motion.div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {pricing.map((plan, i) => (
+          {pricingData.map((plan, i) => (
             <motion.div
               key={plan.name}
               initial={{ opacity: 0, y: 32 }}
@@ -110,12 +120,12 @@ export default function PricingSection() {
               )}
               {plan.featured && (
                 <div className="absolute top-4 right-4">
-                  <span className="badge text-xs">Le plus populaire</span>
+                  <span className="badge text-xs">{p.popular_badge || 'Le plus populaire'}</span>
                 </div>
               )}
 
               <div className="p-8 flex flex-col gap-6 flex-1">
-                {/* Plan name & desc */}
+                {/* Plan name */}
                 <div>
                   <h3
                     className="text-xl font-bold mb-1"
@@ -126,7 +136,6 @@ export default function PricingSection() {
                   >
                     {plan.name}
                   </h3>
-                  {/* <p className="text-xs" style={{ color: '#555' }}>{plan.target}</p> */}
                 </div>
 
                 {/* Price */}
@@ -144,10 +153,10 @@ export default function PricingSection() {
                         color: plan.featured ? '#00F5FF' : '#fff',
                       }}
                     >
-                      {(yearly ? plan.price.yearly : plan.price.monthly).toLocaleString('fr-FR')}
+                      {currencySymbol}{(yearly ? plan.price.yearly : plan.price.monthly).toLocaleString(locale === 'fr' ? 'fr-FR' : 'en-US')}
                     </motion.span>
                   </AnimatePresence>
-                  <span className="text-sm mb-2" style={{ color: '#555' }}>MAD/mois</span>
+                  <span className="text-sm mb-2" style={{ color: '#555' }}>{perMonth}</span>
                 </div>
 
                 <p className="text-sm leading-relaxed" style={{ color: '#666' }}>{plan.desc}</p>
@@ -168,8 +177,8 @@ export default function PricingSection() {
 
                 {/* CTA */}
                 <div
-                  onClick={()=>{route.push("/contact"),window.scrollTo({top:100,behavior:"smooth"})}}
-                  className="mt-auto w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-300"
+                  onClick={() => { route.push(contactHref); window.scrollTo({ top: 100, behavior: 'smooth' }) }}
+                  className="mt-auto w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-300 cursor-pointer"
                   style={plan.featured ? {
                     background: '#00F5FF',
                     color: '#000',
@@ -211,7 +220,7 @@ export default function PricingSection() {
           className="text-center text-sm mt-8"
           style={{ color: '#444' }}
         >
-          ✦ Prix en MAD HT · Engagement minimum 3 mois · Garantie résultats 60 jours · Budget pub séparé
+          {p.note || '✦ Prix en MAD HT · Engagement minimum 3 mois · Garantie résultats 60 jours · Budget pub séparé'}
         </motion.p>
       </div>
     </section>

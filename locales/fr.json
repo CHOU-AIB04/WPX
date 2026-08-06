@@ -1,0 +1,128 @@
+{
+  "locale": "fr",
+  "meta": {
+    "home_title": "Agence Marketing Digital Maroc | Meta Ads, Google Ads, SEO & Sites Web",
+    "home_desc": "WePushX est l'agence marketing digital au Maroc pour les PME. Meta Ads, Google Ads, création de sites web, SEO, UGC IA & CRM. Résultats garantis en 60 jours.",
+    "services_title": "Services Marketing Digital | WePushX",
+    "services_desc": "Découvrez tous nos services : Meta Ads, Google Ads, création de sites web, SEO, UGC IA et CRM automation. Agence marketing digital au Maroc.",
+    "contact_title": "Contact & Devis Gratuit | WePushX",
+    "contact_desc": "Réservez votre audit de 30 minutes. WePushX analyse votre présence digitale et vous propose un plan d'action personnalisé."
+  },
+  "header": {
+    "nav_home": "Accueil",
+    "nav_services": "Services",
+    "nav_blog": "Blog",
+    "nav_contact": "Contact",
+    "cta": "Réserver mon Audit"
+  },
+  "hero": {
+    "badge": "Agence Marketing Digital · Maroc",
+    "h1_pre": "Transformez chaque",
+    "h1_highlight": "dirham investi",
+    "h1_post": "en clients qualifiés",
+    "subtitle": "Meta Ads, Google Ads, SEO, Sites Web, CRM & Automation IA. Nous gérons tout pendant que vous vous concentrez sur votre business.",
+    "guarantee": "Résultats garantis en 60 jours.",
+    "cta_primary": "Réserver mon Audit",
+    "cta_secondary": "Voir nos services",
+    "tagline": "Sans engagement · Réponse sous 24h · Résultats garantis",
+    "trust_clients": "clients",
+    "trust_reviews": "avis positifs",
+    "trust_guarantee": "garantie",
+    "db_title": "Tableau de bord client",
+    "db_updated": "Mis à jour il y a 2 min",
+    "db_kpi_traffic": "Trafic qualifié",
+    "db_kpi_leads": "Leads / mois",
+    "db_kpi_cost": "Coût / lead",
+    "db_kpi_roas": "ROAS moyen",
+    "db_this_month": "ce mois",
+    "db_chart_title": "Leads générés — 6 derniers mois",
+    "db_months": ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin"],
+    "db_guarantee": "Garantie 60 jours — remboursement si aucun résultat",
+    "db_notification": "+23 leads aujourd'hui"
+  },
+  "cta_section": {
+    "badge": "Audit",
+    "h2_pre": "Prêt à",
+    "h2_highlight": "scaler",
+    "h2_post": "votre business ?",
+    "subtitle": "30 minutes d'audit. On analyse votre situation, on identifie exactement où vous perdez de l'argent, et on vous dit comment le récupérer.",
+    "no_commit": "Sans engagement.",
+    "cta_primary": "Réserver mon Audit",
+    "cta_secondary": "Découvrir nos services",
+    "trust_guarantee": "Garantie 60 jours",
+    "trust_response": "Réponse sous 24h",
+    "trust_nocommit": "Aucun engagement"
+  },
+  "pricing": {
+    "badge": "Tarifs",
+    "h2_pre": "Investissez dans",
+    "h2_highlight": "votre croissance",
+    "subtitle": "Des forfaits clairs, sans surprise. Tous les prix sont en MAD HT. Paiement mensuel.",
+    "monthly": "Mensuel",
+    "yearly": "Annuel",
+    "yearly_discount": "-15%",
+    "popular_badge": "Le plus populaire",
+    "currency_symbol": "",
+    "currency_code": "MAD",
+    "per_month": "/mois",
+    "note": "✦ Prix en MAD HT · Engagement minimum 3 mois · Garantie résultats 60 jours · Budget pub séparé"
+  },
+  "services_section": {
+    "badge": "Services",
+    "h2_pre": "Tout ce qu'il faut pour",
+    "h2_highlight": "dominer le digital"
+  },
+  "process_section": {
+    "badge": "Notre Process",
+    "h2_pre": "De l'audit à la",
+    "h2_highlight": "croissance"
+  },
+  "results_section": {
+    "badge": "Résultats Clients",
+    "h2_pre": "Des chiffres",
+    "h2_highlight": "réels"
+  },
+  "testimonials_section": {
+    "badge": "Témoignages",
+    "h2_pre": "Ils ont choisi",
+    "h2_highlight": "WePushX"
+  },
+  "faq_section": {
+    "badge": "FAQ",
+    "h2_pre": "Vos",
+    "h2_highlight": "questions"
+  },
+  "why_us_section": {
+    "badge": "Pourquoi nous",
+    "h2_pre": "La différence",
+    "h2_highlight": "WePushX"
+  },
+  "footer": {
+    "tagline": "L'agence marketing digital qui transforme chaque dirham investi en clients qualifiés. Nous accompagnons les PME ambitieuses vers leur croissance digitale.",
+    "services_title": "Services",
+    "ready_title": "Prêt à scaler ?",
+    "ready_text": "Audit de 30 min — on analyse votre présence digitale et identifie exactement où vous perdez de l'argent.",
+    "cta": "Réserver mon Audit",
+    "guarantee_note": "✦ Garantie remboursement 60 jours",
+    "copyright_suffix": "Tous droits réservés. Agence Marketing Digital Maroc.",
+    "link_privacy": "Politique de confidentialité",
+    "link_legal": "Mentions légales & CGU",
+    "link_cgv": "CGV",
+    "link_contact": "Contact"
+  },
+  "contact_page": {
+    "badge": "Démarrons",
+    "h1": "Démarrons votre croissance",
+    "subtitle": "Réservez un audit de 30 minutes. Aucun engagement, 100% gratuit.",
+    "availability": "Lun–Sam, 9h–18h",
+    "form_name": "Votre nom *",
+    "form_email": "Email professionnel *",
+    "form_phone": "WhatsApp / Téléphone",
+    "form_company": "Entreprise (optionnel)",
+    "form_service_label": "Service souhaité",
+    "form_budget_label": "Budget mensuel",
+    "form_message": "Décrivez votre situation en quelques mots…",
+    "form_submit": "Envoyer ma demande →",
+    "form_note": "Réponse garantie sous 24h ouvrées"
+  }
+}

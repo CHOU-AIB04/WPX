@@ -2,7 +2,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Plus, Minus } from 'lucide-react'
-import { faqServices } from '@/lib/data/services'
+import { getFaqServices } from '@/lib/data/services'
+import { useLocale } from '@/lib/locale-context'
 
 function FAQItem({ faq, index }) {
   const [open, setOpen] = useState(false)
@@ -52,6 +53,13 @@ function FAQItem({ faq, index }) {
 }
 
 export default function ServicesFAQ() {
+  const { locale } = useLocale()
+  const faqServices = getFaqServices(locale)
+
+  const badge = locale === 'en' ? 'Frequently Asked' : locale === 'es' ? 'Preguntas frecuentes' : 'Questions fréquentes'
+  const h2Pre = locale === 'en' ? 'Everything you want to' : locale === 'es' ? 'Todo lo que quieres' : 'Tout ce que vous voulez'
+  const h2Highlight = locale === 'en' ? 'know' : locale === 'es' ? 'saber' : 'savoir'
+
   return (
     <section className="section" style={{ background: '#040404' }}>
       <div className="wrap">
@@ -62,13 +70,13 @@ export default function ServicesFAQ() {
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="text-center max-w-xl mx-auto mb-12"
         >
-          <span className="badge mb-4">Questions fréquentes</span>
+          <span className="badge mb-4">{badge}</span>
           <h2
             className="text-4xl font-bold"
             style={{ fontFamily: 'var(--font-space, sans-serif)' }}
           >
-            Tout ce que vous voulez{' '}
-            <span className="text-gradient">savoir</span>
+            {h2Pre}{' '}
+            <span className="text-gradient">{h2Highlight}</span>
           </h2>
         </motion.div>
         <div className="max-w-2xl mx-auto flex flex-col gap-3">

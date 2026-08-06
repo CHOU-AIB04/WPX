@@ -1,0 +1,128 @@
+{
+  "locale": "es",
+  "meta": {
+    "home_title": "Agencia de Marketing Digital USA | Meta Ads, Google Ads, SEO & Web",
+    "home_desc": "WePushX es tu agencia de marketing digital. Meta Ads, Google Ads, diseño web, SEO, UGC IA & automatización CRM. Resultados garantizados en 60 días.",
+    "services_title": "Servicios de Marketing Digital | WePushX",
+    "services_desc": "Descubre todos nuestros servicios: Meta Ads, Google Ads, diseño web, SEO, UGC IA y automatización CRM. Resultados garantizados.",
+    "contact_title": "Contacto & Auditoría Gratis | WePushX",
+    "contact_desc": "Reserva tu auditoría gratuita de 30 minutos. WePushX analiza tu presencia digital y entrega un plan de acción personalizado. Resultados garantizados."
+  },
+  "header": {
+    "nav_home": "Inicio",
+    "nav_services": "Servicios",
+    "nav_blog": "Blog",
+    "nav_contact": "Contacto",
+    "cta": "Reservar Auditoría"
+  },
+  "hero": {
+    "badge": "Agencia de Marketing Digital · USA",
+    "h1_pre": "Convierte cada",
+    "h1_highlight": "dólar invertido",
+    "h1_post": "en clientes calificados",
+    "subtitle": "Meta Ads, Google Ads, SEO, Diseño Web, CRM & Automatización IA. Lo gestionamos todo mientras te concentras en tu negocio.",
+    "guarantee": "Resultados garantizados en 60 días.",
+    "cta_primary": "Reservar mi Auditoría",
+    "cta_secondary": "Ver nuestros servicios",
+    "tagline": "Sin compromiso · Respuesta en 24h · Resultados garantizados",
+    "trust_clients": "clientes",
+    "trust_reviews": "reseñas positivas",
+    "trust_guarantee": "garantía",
+    "db_title": "Panel del cliente",
+    "db_updated": "Actualizado hace 2 min",
+    "db_kpi_traffic": "Tráfico calificado",
+    "db_kpi_leads": "Leads / mes",
+    "db_kpi_cost": "Coste / lead",
+    "db_kpi_roas": "ROAS promedio",
+    "db_this_month": "este mes",
+    "db_chart_title": "Leads generados — últimos 6 meses",
+    "db_months": ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+    "db_guarantee": "Garantía 60 días — reembolso si no hay resultados",
+    "db_notification": "+23 leads hoy"
+  },
+  "cta_section": {
+    "badge": "Auditoría",
+    "h2_pre": "¿Listo para",
+    "h2_highlight": "escalar",
+    "h2_post": "tu negocio?",
+    "subtitle": "30 minutos de auditoría. Analizamos tu situación, identificamos exactamente dónde estás perdiendo dinero, y te decimos cómo recuperarlo.",
+    "no_commit": "Sin compromiso.",
+    "cta_primary": "Reservar mi Auditoría",
+    "cta_secondary": "Descubrir nuestros servicios",
+    "trust_guarantee": "Garantía 60 días",
+    "trust_response": "Respuesta en 24h",
+    "trust_nocommit": "Sin compromiso"
+  },
+  "pricing": {
+    "badge": "Precios",
+    "h2_pre": "Invierte en",
+    "h2_highlight": "tu crecimiento",
+    "subtitle": "Paquetes claros, sin sorpresas. Todos los precios en USD. Facturación mensual.",
+    "monthly": "Mensual",
+    "yearly": "Anual",
+    "yearly_discount": "-15%",
+    "popular_badge": "El más popular",
+    "currency_symbol": "$",
+    "currency_code": "USD",
+    "per_month": "/mes",
+    "note": "✦ Precios en USD · Compromiso mínimo 3 meses · Garantía resultados 60 días · Presupuesto publicitario aparte"
+  },
+  "services_section": {
+    "badge": "Servicios",
+    "h2_pre": "Todo lo que necesitas para",
+    "h2_highlight": "dominar lo digital"
+  },
+  "process_section": {
+    "badge": "Nuestro Proceso",
+    "h2_pre": "De la auditoría al",
+    "h2_highlight": "crecimiento"
+  },
+  "results_section": {
+    "badge": "Resultados de Clientes",
+    "h2_pre": "Números",
+    "h2_highlight": "reales"
+  },
+  "testimonials_section": {
+    "badge": "Testimonios",
+    "h2_pre": "Ellos eligieron",
+    "h2_highlight": "WePushX"
+  },
+  "faq_section": {
+    "badge": "FAQ",
+    "h2_pre": "Tus",
+    "h2_highlight": "preguntas"
+  },
+  "why_us_section": {
+    "badge": "Por qué nosotros",
+    "h2_pre": "La diferencia",
+    "h2_highlight": "WePushX"
+  },
+  "footer": {
+    "tagline": "La agencia de marketing digital que convierte cada dólar invertido en clientes calificados. Ayudamos a negocios ambiciosos a lograr su crecimiento digital.",
+    "services_title": "Servicios",
+    "ready_title": "¿Listo para escalar?",
+    "ready_text": "Auditoría de 30 min — analizamos tu presencia digital e identificamos exactamente dónde estás perdiendo dinero.",
+    "cta": "Reservar mi Auditoría",
+    "guarantee_note": "✦ Garantía de reembolso 60 días",
+    "copyright_suffix": "Todos los derechos reservados. Agencia de Marketing Digital USA.",
+    "link_privacy": "Política de Privacidad",
+    "link_legal": "Aviso Legal & T&C",
+    "link_cgv": "Términos de Venta",
+    "link_contact": "Contacto"
+  },
+  "contact_page": {
+    "badge": "Empecemos",
+    "h1": "Hagamos crecer tu negocio",
+    "subtitle": "Reserva una auditoría de 30 minutos. Sin compromiso, 100% gratis.",
+    "availability": "Lun–Sáb, 9am–6pm",
+    "form_name": "Tu nombre *",
+    "form_email": "Email profesional *",
+    "form_phone": "Teléfono / WhatsApp",
+    "form_company": "Empresa (opcional)",
+    "form_service_label": "Servicio deseado",
+    "form_budget_label": "Presupuesto mensual",
+    "form_message": "Describe tu situación brevemente…",
+    "form_submit": "Enviar mi solicitud →",
+    "form_note": "Respuesta garantizada en 24 horas hábiles"
+  }
+}

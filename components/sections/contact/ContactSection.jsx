@@ -2,11 +2,52 @@
 import { motion } from 'motion/react'
 import Script from 'next/script'
 import { Mail, Phone, MapPin, Clock, CheckCircle, Shield } from 'lucide-react'
-import { contactInfo, guaranteePoints } from '@/lib/data/contact'
+import { getContactInfo, getGuaranteePoints } from '@/lib/data/contact'
+import { useLocale } from '@/lib/locale-context'
 
 const ICONS = { Mail, Phone, MapPin, Clock }
 
 export default function ContactSection() {
+  const { locale, dict } = useLocale()
+  const contactInfo = getContactInfo(locale)
+  const guaranteePoints = getGuaranteePoints(locale)
+  const c = dict?.contact_page || {}
+
+  const headingH1 = c.h1 || (locale === 'en' ? "Let's grow your business" : locale === 'es' ? 'Hablemos de tu crecimiento' : 'Parlons de votre croissance')
+  const headingBadge = c.badge || (locale === 'en' ? "Let's start" : locale === 'es' ? 'Empecemos' : 'Audit')
+  const headingSubtitle = c.subtitle || (
+    locale === 'en'
+      ? '30-minute audit. We analyze your digital presence and tell you exactly how to generate more customers. No commitment.'
+      : locale === 'es'
+      ? '30 minutos para analizar tu presencia digital y decirte exactamente cómo generar más clientes. Sin compromiso.'
+      : '30 minutes pour analyser votre présence digitale et vous dire exactement comment générer plus de clients. Sans engagement.'
+  )
+  const contactDirectly = locale === 'en' ? 'Contact us directly' : locale === 'es' ? 'Contáctanos directamente' : 'Nous contacter directement'
+  const ourCommitments = locale === 'en' ? 'Our commitments' : locale === 'es' ? 'Nuestros compromisos' : 'Nos engagements'
+  const howItWorks = locale === 'en' ? 'How does it work?' : locale === 'es' ? '¿Cómo funciona?' : 'Comment ça se passe ?'
+  const formNote = locale === 'en' ? 'Your data is confidential · Response within 24h' : locale === 'es' ? 'Sus datos son confidenciales · Respuesta en 24h' : 'Vos données sont confidentielles · Réponse sous 24h'
+
+  const processSteps = locale === 'en'
+    ? [
+        { num: '01', text: 'You send your request' },
+        { num: '02', text: 'We respond within 24h' },
+        { num: '03', text: '30-min consultation call' },
+        { num: '04', text: 'Custom proposal with ROI' },
+      ]
+    : locale === 'es'
+    ? [
+        { num: '01', text: 'Envías tu solicitud' },
+        { num: '02', text: 'Te respondemos en 24h' },
+        { num: '03', text: 'Llamada de consulta de 30 min' },
+        { num: '04', text: 'Propuesta personalizada con ROI' },
+      ]
+    : [
+        { num: '01', text: 'Vous envoyez votre demande' },
+        { num: '02', text: 'On vous répond sous 24h' },
+        { num: '03', text: 'Appel de consultation de 30 min' },
+        { num: '04', text: 'Proposition personnalisée avec ROI' },
+      ]
+
   return (
     <section className="section" style={{ background: '#000' }}>
       <div className="wrap">
@@ -18,17 +59,20 @@ export default function ContactSection() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-center max-w-2xl mx-auto mb-14 pt-20 md:pt-0"
         >
-          <span className="badge mb-4">Audit</span>
+          <span className="badge mb-4">{headingBadge}</span>
           <h1
             className="text-4xl md:text-6xl font-bold leading-tight mb-4"
             style={{ fontFamily: 'var(--font-space, sans-serif)' }}
           >
-            Parlons de votre{' '}
-            <span className="text-gradient">croissance</span>
+            {headingH1.includes('croissance') || headingH1.includes('grow') || headingH1.includes('crecimiento') ? (
+              <>
+                {headingH1.split(' ').slice(0, -1).join(' ')}{' '}
+                <span className="text-gradient">{headingH1.split(' ').at(-1)}</span>
+              </>
+            ) : headingH1}
           </h1>
           <p className="text-base leading-relaxed" style={{ color: '#666' }}>
-            30 minutes pour analyser votre présence digitale et vous dire exactement
-            comment générer plus de clients. Sans engagement.
+            {headingSubtitle}
           </p>
         </motion.div>
 
@@ -84,7 +128,7 @@ export default function ContactSection() {
 
               {/* Bottom note */}
               <p className="text-center text-xs pb-4" style={{ color: '#333' }}>
-                Vos données sont confidentielles · Réponse sous 24h
+                {formNote}
               </p>
             </div>
           </motion.div>
@@ -101,7 +145,7 @@ export default function ContactSection() {
               className="rounded-2xl p-6 flex flex-col gap-4"
               style={{ background: 'rgba(10,10,10,0.8)', border: '1px solid rgba(255,255,255,0.07)' }}
             >
-              <h3 className="font-semibold text-white text-base">Nous contacter directement</h3>
+              <h3 className="font-semibold text-white text-base">{contactDirectly}</h3>
               {contactInfo.map((item) => {
                 const Icon = ICONS[item.icon]
                 const content = (
@@ -140,7 +184,7 @@ export default function ContactSection() {
             >
               <div className="flex items-center gap-2">
                 <Shield size={18} style={{ color: '#00F5FF' }} />
-                <h3 className="font-semibold text-white text-sm">Nos engagements</h3>
+                <h3 className="font-semibold text-white text-sm">{ourCommitments}</h3>
               </div>
               {guaranteePoints.map((point) => (
                 <div key={point} className="flex items-start gap-2.5">
@@ -155,13 +199,8 @@ export default function ContactSection() {
               className="rounded-2xl p-6"
               style={{ background: 'rgba(10,10,10,0.8)', border: '1px solid rgba(255,255,255,0.07)' }}
             >
-              <h3 className="font-semibold text-white text-sm mb-4">Comment ça se passe ?</h3>
-              {[
-                { num: '01', text: 'Vous envoyez votre demande' },
-                { num: '02', text: 'On vous répond sous 24h' },
-                { num: '03', text: 'Appel de consultation de 30 min' },
-                { num: '04', text: 'Proposition personnalisée avec ROI' },
-              ].map((step) => (
+              <h3 className="font-semibold text-white text-sm mb-4">{howItWorks}</h3>
+              {processSteps.map((step) => (
                 <div key={step.num} className="flex items-center gap-3 py-2.5"
                   style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}
                 >

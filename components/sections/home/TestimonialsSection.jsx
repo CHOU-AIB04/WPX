@@ -1,7 +1,8 @@
 'use client'
 import { motion } from 'motion/react'
 import { Star, Quote } from 'lucide-react'
-import { testimonials } from '@/lib/data/home'
+import { getTestimonials } from '@/lib/data/home'
+import { useLocale } from '@/lib/locale-context'
 
 function StarRating({ count = 5 }) {
   return (
@@ -86,11 +87,29 @@ function TestimonialCard({ t }) {
   )
 }
 
-/* Duplicated rows for seamless infinite scroll */
-const row1 = testimonials.slice(0, 3)
-const row2 = testimonials.slice(3, 6)
-
 export default function TestimonialsSection() {
+  const { locale, dict } = useLocale()
+  const testimonials = getTestimonials(locale)
+  const t = dict?.testimonials_section || {}
+
+  const row1 = testimonials.slice(0, 3)
+  const row2 = testimonials.slice(3, 6)
+
+  const h2Pre = t.h2_pre || (locale === 'en' ? 'They chose' : locale === 'es' ? 'Eligieron' : 'Ce que disent')
+  const h2Highlight = t.h2_highlight || 'WePushX'
+  const subtitle = locale === 'en'
+    ? 'Businesses that chose WePushX to scale their customer acquisition.'
+    : locale === 'es'
+    ? 'Empresas que eligieron WePushX para escalar su adquisición de clientes.'
+    : 'Des PME marocaines qui ont choisi WePushX pour scaler leur acquisition client.'
+
+  const trustStats = [
+    { val: '50+', label: locale === 'en' ? 'happy clients' : locale === 'es' ? 'clientes satisfechos' : 'clients satisfaits' },
+    { val: '100%', label: locale === 'en' ? 'positive reviews' : locale === 'es' ? 'reseñas positivas' : 'avis positifs' },
+    { val: '60d', label: locale === 'en' ? 'results guarantee' : locale === 'es' ? 'garantía de resultados' : 'garantie résultats' },
+    { val: '24h', label: locale === 'en' ? 'guaranteed response' : locale === 'es' ? 'respuesta garantizada' : 'réponse garantie' },
+  ]
+
   return (
     <section className="section overflow-hidden noise relative" style={{ background: '#000' }}>
       {/* Header */}
@@ -103,29 +122,27 @@ export default function TestimonialsSection() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10"
         >
           <div>
-            <span className="badge mb-4">Témoignages</span>
+            <span className="badge mb-4">{t.badge || 'Témoignages'}</span>
             <h2
               className="text-4xl md:text-5xl font-bold leading-tight"
               style={{ fontFamily: 'var(--font-space, sans-serif)' }}
             >
-              Ce que disent{' '}
-              <span className="text-gradient">nos clients</span>
+              {h2Pre}{' '}
+              <span className="text-gradient">{h2Highlight}</span>
             </h2>
           </div>
           <p className="text-base max-w-sm leading-relaxed md:text-right" style={{ color: '#555' }}>
-            Des PME marocaines qui ont choisi WePushX pour scaler leur acquisition client.
+            {subtitle}
           </p>
         </motion.div>
       </div>
 
       {/* Marquee row 1 — scroll left */}
       <div className="relative">
-        {/* Edge fade left */}
         <div
           className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
           style={{ background: 'linear-gradient(to right, #000, transparent)' }}
         />
-        {/* Edge fade right */}
         <div
           className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
           style={{ background: 'linear-gradient(to left, #000, transparent)' }}
@@ -176,12 +193,7 @@ export default function TestimonialsSection() {
           className="flex flex-wrap items-center justify-center gap-8 text-sm pt-20"
           style={{ color: '#444' }}
         >
-          {[
-            { val: '50+', label: 'clients satisfaits' },
-            { val: '100%', label: 'avis positifs' },
-            { val: '60j', label: 'garantie résultats' },
-            { val: '24h', label: 'réponse garantie' },
-          ].map((item) => (
+          {trustStats.map((item) => (
             <div key={item.label} className="flex items-center gap-2">
               <span
                 className="font-bold tabular-nums"

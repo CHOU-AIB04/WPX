@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { motion } from 'motion/react'
 import { ArrowRight, Play, TrendingUp, Users, DollarSign, Zap } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useLocale } from '@/lib/locale-context'
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 32 },
@@ -10,7 +11,15 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] },
 })
 
-function DashboardMockup() {
+function DashboardMockup({ h }) {
+  const kpis = [
+    { icon: TrendingUp, label: h.db_kpi_traffic, value: '+340%', delta: '+12%', color: '#00F5FF' },
+    { icon: Users,      label: h.db_kpi_leads,   value: '89',    delta: '+23',  color: '#a78bfa' },
+    { icon: DollarSign, label: h.db_kpi_cost,    value: '-42%',  delta: '-8%',  color: '#34d399' },
+    { icon: Zap,        label: h.db_kpi_roas,    value: '4.2x',  delta: '+0.6', color: '#f59e0b' },
+  ]
+  const months = h.db_months || ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin']
+
   return (
     <motion.div
       initial={{ opacity: 0, x: 40, scale: 0.96 }}
@@ -43,8 +52,8 @@ function DashboardMockup() {
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
           <div>
-            <p className="text-xs font-semibold text-white">Tableau de bord client</p>
-            <p className="text-[10px] mt-0.5" style={{ color: '#444' }}>Mis à jour il y a 2 min</p>
+            <p className="text-xs font-semibold text-white">{h.db_title || 'Tableau de bord client'}</p>
+            <p className="text-[10px] mt-0.5" style={{ color: '#444' }}>{h.db_updated || 'Mis à jour il y a 2 min'}</p>
           </div>
           <div
             className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold"
@@ -57,12 +66,7 @@ function DashboardMockup() {
 
         {/* KPI grid */}
         <div className="grid grid-cols-2 gap-3 mb-4">
-          {[
-            { icon: TrendingUp, label: 'Trafic qualifié', value: '+340%', delta: '+12%', color: '#00F5FF' },
-            { icon: Users,      label: 'Leads / mois',   value: '89',     delta: '+23',  color: '#a78bfa' },
-            { icon: DollarSign, label: 'Coût / lead',    value: '-42%',   delta: '-8%',  color: '#34d399' },
-            { icon: Zap,        label: 'ROAS moyen',     value: '4.2x',   delta: '+0.6', color: '#f59e0b' },
-          ].map((kpi) => (
+          {kpis.map((kpi) => (
             <div
               key={kpi.label}
               className="rounded-xl p-3"
@@ -79,7 +83,7 @@ function DashboardMockup() {
                 {kpi.value}
               </p>
               <p className="text-[10px] mt-1 font-semibold" style={{ color: '#34d399' }}>
-                ↑ {kpi.delta} ce mois
+                ↑ {kpi.delta} {h.db_this_month || 'ce mois'}
               </p>
             </div>
           ))}
@@ -90,7 +94,9 @@ function DashboardMockup() {
           className="rounded-xl p-3"
           style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}
         >
-          <p className="text-[10px] font-semibold mb-3" style={{ color: '#555' }}>Leads générés — 6 derniers mois</p>
+          <p className="text-[10px] font-semibold mb-3" style={{ color: '#555' }}>
+            {h.db_chart_title || 'Leads générés — 6 derniers mois'}
+          </p>
           <div className="flex items-end gap-1.5 h-12">
             {[28, 42, 38, 55, 67, 89].map((v, i) => (
               <motion.div
@@ -104,7 +110,7 @@ function DashboardMockup() {
             ))}
           </div>
           <div className="flex justify-between mt-1.5">
-            {['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'].map((m) => (
+            {months.map((m) => (
               <span key={m} className="text-[9px]" style={{ color: '#333' }}>{m}</span>
             ))}
           </div>
@@ -115,7 +121,7 @@ function DashboardMockup() {
           className="mt-4 flex items-center gap-2 px-3 py-2 rounded-xl text-[10px] font-semibold"
           style={{ background: 'rgba(0,245,255,0.06)', border: '1px solid rgba(0,245,255,0.15)', color: '#00F5FF' }}
         >
-          ✦ Garantie 60 jours — remboursement si aucun résultat
+          ✦ {h.db_guarantee || 'Garantie 60 jours — remboursement si aucun résultat'}
         </div>
       </div>
 
@@ -131,7 +137,7 @@ function DashboardMockup() {
           boxShadow: '0 0 20px rgba(0,245,255,0.5)',
         }}
       >
-        +23 leads aujourd&apos;hui
+        {h.db_notification || '+23 leads aujourd\'hui'}
       </motion.div>
     </motion.div>
   )
@@ -139,6 +145,18 @@ function DashboardMockup() {
 
 export default function HeroSection() {
   const route = useRouter()
+  const { locale, dict } = useLocale()
+  const h = dict?.hero || {}
+  const prefix = locale === 'fr' ? '' : `/${locale}`
+  const contactHref = `${prefix}/contact`
+  const servicesHref = `${prefix}/services`
+
+  const trustStats = [
+    { val: '50+', label: h.trust_clients || 'clients' },
+    { val: '100%', label: h.trust_reviews || 'avis positifs' },
+    { val: '60j', label: h.trust_guarantee || 'garantie' },
+  ]
+
   return (
     <section
       className="relative min-h-screen flex items-center overflow-hidden pt-28 md:pt-0"
@@ -170,7 +188,9 @@ export default function HeroSection() {
             <motion.div {...fadeUp(0)}>
               <span className="badge">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00F5FF] animate-pulse" />
-                <span className='text-[11px] md:text-[16px]'>Agence Marketing Digital , Maroc</span>
+                <span className='text-[11px] md:text-[16px]'>
+                  {h.badge || 'Agence Marketing Digital · Maroc'}
+                </span>
               </span>
             </motion.div>
 
@@ -179,9 +199,9 @@ export default function HeroSection() {
               className="text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight"
               style={{ fontFamily: 'var(--font-space, sans-serif)' }}
             >
-              Transformez chaque{' '}
-              <span className="text-gradient">dirham investi</span>
-              {' '}en clients qualifiés
+              {h.h1_pre || 'Transformez chaque'}{' '}
+              <span className="text-gradient">{h.h1_highlight || 'dirham investi'}</span>
+              {' '}{h.h1_post || 'en clients qualifiés'}
             </motion.h1>
 
             <motion.p
@@ -189,20 +209,21 @@ export default function HeroSection() {
               className="text-lg md:text-xl max-w-xl leading-relaxed"
               style={{ color: '#999' }}
             >
-              Meta Ads, Google Ads, SEO, Sites Web, CRM & Automation IA.
-              Nous gérons tout pendant que vous vous concentrez sur votre business.{' '}
-              <strong style={{ color: '#fff' }}>Résultats garantis en 60 jours.</strong>
+              {h.subtitle || 'Meta Ads, Google Ads, SEO, Sites Web, CRM & Automation IA. Nous gérons tout pendant que vous vous concentrez sur votre business.'}{' '}
+              <strong style={{ color: '#fff' }}>{h.guarantee || 'Résultats garantis en 60 jours.'}</strong>
             </motion.p>
 
             <motion.div {...fadeUp(0.24)} className="flex flex-wrap items-center gap-4">
-              <div onClick={()=>{route.push("/contact"),window.scrollTo({top:100,behavior:"smooth"})}}
-                className="btn-primary text-base px-8 py-4">
-                Réserver mon Audit
+              <div
+                onClick={() => { route.push(contactHref); window.scrollTo({ top: 100, behavior: 'smooth' }) }}
+                className="btn-primary text-base px-8 py-4 cursor-pointer"
+              >
+                {h.cta_primary || 'Réserver mon Audit'}
                 <ArrowRight size={18} />
               </div>
-              <Link href="/services" className="btn-outline text-base px-8 py-4">
+              <Link href={servicesHref} className="btn-outline text-base px-8 py-4">
                 <Play size={16} fill="currentColor" className="opacity-70" />
-                Voir nos services
+                {h.cta_secondary || 'Voir nos services'}
               </Link>
             </motion.div>
 
@@ -211,7 +232,7 @@ export default function HeroSection() {
               className="text-[12px] md:text-sm"
               style={{ color: '#444' }}
             >
-              ✦ Sans engagement · Réponse sous 24h · Résultats garantis
+              ✦ {h.tagline || 'Sans engagement · Réponse sous 24h · Résultats garantis'}
             </motion.p>
 
             {/* Trust row */}
@@ -219,11 +240,7 @@ export default function HeroSection() {
               {...fadeUp(0.36)}
               className="flex flex-wrap items-center gap-6 pt-2"
             >
-              {[
-                { val: '50+', label: 'clients' },
-                { val: '100%', label: 'avis positifs' },
-                { val: '60j', label: 'garantie' },
-              ].map((s) => (
+              {trustStats.map((s) => (
                 <div key={s.label} className="flex items-center gap-2">
                   <span
                     className="text-xl font-bold"
@@ -239,7 +256,7 @@ export default function HeroSection() {
 
           {/* RIGHT — Dashboard mockup */}
           <div className="w-full lg:w-[420px] shrink-0">
-            <DashboardMockup />
+            <DashboardMockup h={h} />
           </div>
 
         </div>

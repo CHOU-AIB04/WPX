@@ -1,0 +1,128 @@
+{
+  "locale": "en",
+  "meta": {
+    "home_title": "Digital Marketing Agency USA | Meta Ads, Google Ads, SEO & Web Design",
+    "home_desc": "WePushX is your digital marketing agency. Meta Ads, Google Ads, web design, SEO, AI UGC & CRM automation. Results guaranteed in 60 days.",
+    "services_title": "Digital Marketing Services | WePushX",
+    "services_desc": "Discover our full range of services: Meta Ads, Google Ads, web design, SEO, AI UGC and CRM automation. Guaranteed results.",
+    "contact_title": "Contact & Free Audit | WePushX",
+    "contact_desc": "Book your free 30-minute audit. WePushX analyzes your digital presence and delivers a custom action plan. Guaranteed results."
+  },
+  "header": {
+    "nav_home": "Home",
+    "nav_services": "Services",
+    "nav_blog": "Blog",
+    "nav_contact": "Contact",
+    "cta": "Book My Audit"
+  },
+  "hero": {
+    "badge": "Digital Marketing Agency · USA",
+    "h1_pre": "Turn every",
+    "h1_highlight": "dollar invested",
+    "h1_post": "into qualified customers",
+    "subtitle": "Meta Ads, Google Ads, SEO, Web Design, CRM & AI Automation. We handle everything while you focus on your business.",
+    "guarantee": "Results guaranteed in 60 days.",
+    "cta_primary": "Book My Audit",
+    "cta_secondary": "View our services",
+    "tagline": "No commitment · 24h response · Guaranteed results",
+    "trust_clients": "clients",
+    "trust_reviews": "positive reviews",
+    "trust_guarantee": "guarantee",
+    "db_title": "Client Dashboard",
+    "db_updated": "Updated 2 min ago",
+    "db_kpi_traffic": "Qualified traffic",
+    "db_kpi_leads": "Leads / month",
+    "db_kpi_cost": "Cost / lead",
+    "db_kpi_roas": "Avg ROAS",
+    "db_this_month": "this month",
+    "db_chart_title": "Leads generated — last 6 months",
+    "db_months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    "db_guarantee": "60-day guarantee — refund if no results",
+    "db_notification": "+23 leads today"
+  },
+  "cta_section": {
+    "badge": "Audit",
+    "h2_pre": "Ready to",
+    "h2_highlight": "scale",
+    "h2_post": "your business?",
+    "subtitle": "30-minute audit. We analyze your situation, identify exactly where you're losing money, and tell you how to fix it.",
+    "no_commit": "No commitment.",
+    "cta_primary": "Book My Audit",
+    "cta_secondary": "Discover our services",
+    "trust_guarantee": "60-day guarantee",
+    "trust_response": "24h response",
+    "trust_nocommit": "No commitment"
+  },
+  "pricing": {
+    "badge": "Pricing",
+    "h2_pre": "Invest in",
+    "h2_highlight": "your growth",
+    "subtitle": "Clear packages, no surprises. All prices in USD. Monthly billing.",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "yearly_discount": "-15%",
+    "popular_badge": "Most popular",
+    "currency_symbol": "$",
+    "currency_code": "USD",
+    "per_month": "/mo",
+    "note": "✦ Prices in USD · Minimum 3-month commitment · 60-day results guarantee · Ad budget separate"
+  },
+  "services_section": {
+    "badge": "Services",
+    "h2_pre": "Everything you need to",
+    "h2_highlight": "dominate digital"
+  },
+  "process_section": {
+    "badge": "Our Process",
+    "h2_pre": "From audit to",
+    "h2_highlight": "growth"
+  },
+  "results_section": {
+    "badge": "Client Results",
+    "h2_pre": "Real",
+    "h2_highlight": "numbers"
+  },
+  "testimonials_section": {
+    "badge": "Testimonials",
+    "h2_pre": "They chose",
+    "h2_highlight": "WePushX"
+  },
+  "faq_section": {
+    "badge": "FAQ",
+    "h2_pre": "Your",
+    "h2_highlight": "questions"
+  },
+  "why_us_section": {
+    "badge": "Why us",
+    "h2_pre": "The",
+    "h2_highlight": "WePushX difference"
+  },
+  "footer": {
+    "tagline": "The digital marketing agency that turns every dollar invested into qualified customers. We help ambitious businesses achieve digital growth.",
+    "services_title": "Services",
+    "ready_title": "Ready to scale?",
+    "ready_text": "30-min audit — we analyze your digital presence and identify exactly where you're losing money.",
+    "cta": "Book My Audit",
+    "guarantee_note": "✦ 60-day money-back guarantee",
+    "copyright_suffix": "All rights reserved. Digital Marketing Agency USA.",
+    "link_privacy": "Privacy Policy",
+    "link_legal": "Legal Notice & T&C",
+    "link_cgv": "Terms of Sale",
+    "link_contact": "Contact"
+  },
+  "contact_page": {
+    "badge": "Let's start",
+    "h1": "Let's grow your business",
+    "subtitle": "Book a 30-minute audit. No commitment, 100% free.",
+    "availability": "Mon–Sat, 9am–6pm",
+    "form_name": "Your name *",
+    "form_email": "Business email *",
+    "form_phone": "Phone / WhatsApp",
+    "form_company": "Company (optional)",
+    "form_service_label": "Service needed",
+    "form_budget_label": "Monthly budget",
+    "form_message": "Describe your situation briefly…",
+    "form_submit": "Send my request →",
+    "form_note": "Guaranteed response within 24 business hours"
+  }
+}

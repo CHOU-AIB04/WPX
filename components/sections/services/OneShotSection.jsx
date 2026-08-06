@@ -2,9 +2,24 @@
 import Link from 'next/link'
 import { motion } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
-import { oneShots } from '@/lib/data/services'
+import { getOneShots } from '@/lib/data/services'
+import { useLocale } from '@/lib/locale-context'
 
 export default function OneShotSection() {
+  const { locale } = useLocale()
+  const oneShots = getOneShots(locale)
+  const contactHref = locale === 'fr' ? '/contact' : `/${locale}/contact`
+
+  const badge = locale === 'en' ? 'One-Shot Projects' : locale === 'es' ? 'Proyectos One-Shot' : 'Projets One-Shot'
+  const h2Pre = locale === 'en' ? 'Need a' : locale === 'es' ? '¿Necesitas un proyecto' : "Besoin d'un projet"
+  const h2Highlight = locale === 'en' ? 'one-time project?' : locale === 'es' ? 'puntual?' : 'ponctuel ?'
+  const subtitle = locale === 'en'
+    ? 'No subscription required. Precise deliverables at a fixed price.'
+    : locale === 'es'
+    ? 'No se requiere suscripción. Entregables precisos a precio fijo.'
+    : "Pas d'abonnement requis. Des livrables précis à prix fixe."
+  const startProject = locale === 'en' ? 'Start this project' : locale === 'es' ? 'Iniciar este proyecto' : 'Démarrer ce projet'
+
   return (
     <section className="section" style={{ background: '#fff', clipPath: 'ellipse(150% 100% at 50% 0%)' }}>
       <div className="wrap">
@@ -15,16 +30,16 @@ export default function OneShotSection() {
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="text-center max-w-xl mx-auto mb-14"
         >
-          <span className="badge mb-4">Projets One-Shot</span>
+          <span className="badge mb-4">{badge}</span>
           <h2
             className="text-4xl md:text-5xl font-bold mb-4 text-black"
             style={{ fontFamily: 'var(--font-space, sans-serif)' }}
           >
-            Besoin d'un projet{' '}
-            <span>ponctuel ?</span>
+            {h2Pre}{' '}
+            <span>{h2Highlight}</span>
           </h2>
           <p className="text-base" style={{ color: '#666' }}>
-            Pas d'abonnement requis. Des livrables précis à prix fixe.
+            {subtitle}
           </p>
         </motion.div>
 
@@ -49,11 +64,11 @@ export default function OneShotSection() {
               </div>
               <p className="text-sm" style={{ color: '#666' }}>{item.desc}</p>
               <Link
-                href="/contact"
+                href={contactHref}
                 className="mt-auto text-sm flex items-center gap-1.5 font-medium transition-colors hover:text-[#00F5FF]"
                 style={{ color: '#555' }}
               >
-                Démarrer ce projet <ArrowRight size={14} />
+                {startProject} <ArrowRight size={14} />
               </Link>
             </motion.div>
           ))}

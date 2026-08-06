@@ -1,15 +1,19 @@
 'use client'
 import { motion } from 'motion/react'
 import CountUp from '@/components/ui/CountUp'
-import { stats } from '@/lib/data/home'
+import { getStats } from '@/lib/data/home'
+import { useLocale } from '@/lib/locale-context'
 
 export default function StatsSection() {
+  const { locale } = useLocale()
+  const stats = getStats(locale)
+
   return (
-    <section 
-      className="relative py-40 md:py-56 overflow-hidden" 
-      style={{ 
+    <section
+      className="relative py-40 md:py-56 overflow-hidden"
+      style={{
         background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)',
-        clipPath: 'polygon(0 10%, 100% 0%, 100% 90%, 0% 100%)' 
+        clipPath: 'polygon(0 10%, 100% 0%, 100% 90%, 0% 100%)'
       }}
     >
       {/* Background Decorative Element - Subtle Glow */}
@@ -22,7 +26,7 @@ export default function StatsSection() {
               key={s.label}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -8 }} // Premium micro-interaction
+              whileHover={{ y: -8 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="group flex flex-col items-center gap-4 text-center"
@@ -35,9 +39,9 @@ export default function StatsSection() {
                 >
                   <CountUp end={s.value} duration={3} suffix={s.suffix} />
                 </span>
-                
+
                 {/* Subtle underline decoration */}
-                <motion.div 
+                <motion.div
                    className="h-[2px] w-0 bg-cyan-400 mx-auto mt-1 group-hover:w-full transition-all duration-500"
                 />
               </div>
@@ -51,7 +55,7 @@ export default function StatsSection() {
         </div>
       </div>
 
-      {/* Optional: Add a subtle watermark or pattern */}
+      {/* Optional: watermark */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none flex items-center justify-center">
         <span className="text-[20vw] font-black uppercase">Stats</span>
       </div>

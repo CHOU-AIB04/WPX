@@ -1,31 +1,36 @@
 "use client"
 import Link from 'next/link'
-import { MapPin, Mail, Phone, ArrowRight } from 'lucide-react'
+import { MapPin, Mail, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useLocale } from '@/lib/locale-context'
 
-const services = [
+const servicesList = [
   'Meta Ads',
   'Google Ads',
-  'Création de Sites Web',
-  'Landing Pages optimisées',
+  'Web Design',
+  'Landing Pages',
   'SEO & GEO',
-  'UGC par Intelligence Artificielle',
-  'CRM & Marketing Automation',
+  'AI UGC Videos',
+  'CRM & Automation',
   'Community Management',
 ]
-
-const zones = ['Tout le Maroc', 'Grandes villes', 'PME & startups', 'Secteurs variés']
 
 export default function Footer() {
   const year = new Date().getFullYear()
   const route = useRouter()
+  const { locale, dict } = useLocale()
+
+  const f = dict?.footer || {}
+  const prefix = locale === 'fr' ? '' : `/${locale}`
+  const contactHref = `${prefix}/contact`
+  const servicesHref = `${prefix}/services`
 
   return (
     <footer
       className="relative border-t pt-10 pb-10"
       style={{ borderColor: 'rgba(255,255,255,0.06)', background: '#040404' }}
-      aria-label="Pied de page WePushX"
+      aria-label="Footer WePushX"
     >
       {/* Top glow line */}
       <div
@@ -38,12 +43,11 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" aria-label="WePushX Accueil">
-              <Image src={"/wpx.png"} width={100} height={100} alt='wepushx Agence digital' className='w-[150px] ' />
+            <Link href={prefix + '/'} aria-label="WePushX Home">
+              <Image src={"/wpx.png"} width={100} height={100} alt='WePushX Digital Marketing Agency' className='w-[150px]' />
             </Link>
             <p className="mt-4 text-sm leading-relaxed" style={{ color: '#666' }}>
-              L'agence marketing digital qui transforme chaque dirham investi en clients qualifiés.
-              Présents dans tout le Maroc, nous accompagnons les PME ambitieuses vers leur croissance digitale.
+              {f.tagline || "L'agence marketing digital qui transforme chaque investissement en clients qualifiés."}
             </p>
             <div className="mt-6 flex flex-col gap-3">
               <a
@@ -54,18 +58,9 @@ export default function Footer() {
                 <Mail size={14} style={{ color: '#00F5FF' }} />
                 contact@wepushx.com
               </a>
-              {/* <a
-                href="https://wa.me/212600000000"
-                className="flex items-center gap-2 text-sm transition-colors hover:text-[#00F5FF]"
-                style={{ color: '#888' }}
-                target="_blank" rel="noopener noreferrer"
-              >
-                <Phone size={14} style={{ color: '#00F5FF' }} />
-                +212 6 00 00 00 00
-              </a> */}
               <div className="flex items-center gap-2 text-sm" style={{ color: '#888' }}>
                 <MapPin size={14} style={{ color: '#00F5FF' }} />
-                30 N Gould St Ste N Sheridan, WY, 82801 USA
+                30 N Gould St Ste N, Sheridan, WY 82801 USA
               </div>
             </div>
           </div>
@@ -73,13 +68,13 @@ export default function Footer() {
           {/* Services */}
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: '#fff' }}>
-              Services
+              {f.services_title || 'Services'}
             </h3>
             <ul className="flex flex-col gap-2">
-              {services.map((s) => (
+              {servicesList.map((s) => (
                 <li key={s}>
                   <Link
-                    href="/services"
+                    href={servicesHref}
                     className="text-sm flex items-center gap-1.5 transition-colors hover:text-[#00F5FF]"
                     style={{ color: '#666' }}
                   >
@@ -91,60 +86,22 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Zones */}
-          {/* <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: '#fff' }}>
-              Zones d&apos;intervention
-            </h3>
-            <ul className="flex flex-col gap-2">
-              {zones.map((zone) => (
-                <li key={zone} className="flex items-center gap-1.5 text-sm" style={{ color: '#666' }}>
-                  <MapPin size={12} style={{ color: '#00F5FF' }} />
-                  {zone}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8">
-              <h3 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: '#fff' }}>
-                Liens
-              </h3>
-              <ul className="flex flex-col gap-2">
-                {[
-                  { href: '/', label: 'Accueil' },
-                  { href: '/services', label: 'Nos Services' },
-                  { href: '/contact', label: 'Contact & Devis' },
-                ].map((l) => (
-                  <li key={l.href}>
-                    <Link
-                      href={l.href}
-                      className="text-sm flex items-center gap-1.5 transition-colors hover:text-[#00F5FF]"
-                      style={{ color: '#666' }}
-                    >
-                      <ArrowRight size={12} style={{ color: '#00F5FF' }} />
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div> */}
-
           {/* CTA block */}
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: '#fff' }}>
-              Prêt à scaler ?
+              {f.ready_title || 'Prêt à scaler ?'}
             </h3>
             <p className="text-sm leading-relaxed mb-5" style={{ color: '#666' }}>
-              Audit de 30 min — on analyse votre présence digitale et identifie exactement où vous perdez de l&apos;argent.
+              {f.ready_text || "Audit de 30 min — on analyse votre présence digitale et identifie exactement où vous perdez de l'argent."}
             </p>
             <div
-              onClick={()=>{route.push("/contact"),window.scrollTo({top:100,behavior:"smooth"})}}
-              className="btn-primary text-sm"
+              onClick={() => { route.push(contactHref); window.scrollTo({ top: 100, behavior: 'smooth' }) }}
+              className="btn-primary text-sm cursor-pointer"
             >
-              Réserver mon Audit
+              {f.cta || 'Réserver mon Audit'}
             </div>
             <p className="mt-4 text-xs" style={{ color: '#444' }}>
-              ✦ Garantie remboursement 60 jours
+              {f.guarantee_note || '✦ Garantie remboursement 60 jours'}
             </p>
           </div>
         </div>
@@ -154,19 +111,19 @@ export default function Footer() {
           className="mt-14 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
           style={{ borderTop: '1px solid rgba(255,255,255,0.05)', color: '#444' }}
         >
-          <p>© {year} WePushX. Tous droits réservés. Agence Marketing Digital Maroc.</p>
+          <p>© {year} WePushX. {f.copyright_suffix || 'Tous droits réservés. Agence Marketing Digital.'}</p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <Link href="/politique-de-confidentialite" className="transition-colors hover:text-white" style={{ color: '#444' }}>
-              Politique de confidentialité
+              {f.link_privacy || 'Politique de confidentialité'}
             </Link>
             <Link href="/mentions-legales" className="transition-colors hover:text-white" style={{ color: '#444' }}>
-              Mentions légales & CGU
+              {f.link_legal || 'Mentions légales & CGU'}
             </Link>
             <Link href="/cgv" className="transition-colors hover:text-white" style={{ color: '#444' }}>
-              CGV
+              {f.link_cgv || 'CGV'}
             </Link>
-            <Link href="/contact" className="transition-colors hover:text-white" style={{ color: '#444' }}>
-              Contact
+            <Link href={contactHref} className="transition-colors hover:text-white" style={{ color: '#444' }}>
+              {f.link_contact || 'Contact'}
             </Link>
           </div>
         </div>

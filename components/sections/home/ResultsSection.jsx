@@ -1,10 +1,23 @@
 'use client'
 import { motion } from 'motion/react'
-import { results } from '@/lib/data/home'
+import { getResults } from '@/lib/data/home'
+import { useLocale } from '@/lib/locale-context'
 
 export default function ResultsSection() {
+  const { locale, dict } = useLocale()
+  const results = getResults(locale)
+  const r = dict?.results_section || {}
+
+  const h2Pre = r.h2_pre || (locale === 'en' ? 'Real' : locale === 'es' ? 'Números' : 'Des chiffres')
+  const h2Highlight = r.h2_highlight || (locale === 'en' ? 'numbers' : locale === 'es' ? 'reales' : 'réels, vérifiables')
+  const subtitle = locale === 'en'
+    ? 'No vague promises. Here is what our clients achieved.'
+    : locale === 'es'
+    ? 'Sin promesas vagas. Esto es lo que lograron nuestros clientes.'
+    : 'Pas de promesses vagues. Voici ce que nos clients ont obtenu.'
+
   return (
-    <section className="section" style={{ background: '#fff', clipPath: 'polygon(0 10%, 100% 0%, 100% 90%, 0% 100%)'  }}>
+    <section className="section" style={{ background: '#fff', clipPath: 'polygon(0 10%, 100% 0%, 100% 90%, 0% 100%)' }}>
       <div className="wrap">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -13,16 +26,16 @@ export default function ResultsSection() {
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="text-center max-w-2xl mx-auto mb-14 pt-15 md:pt-0"
         >
-          <span className="badge mb-4">Résultats Clients</span>
+          <span className="badge mb-4">{r.badge || 'Résultats Clients'}</span>
           <h2
             className="text-4xl text-black md:text-5xl font-bold mb-4"
             style={{ fontFamily: 'var(--font-space, sans-serif)' }}
           >
-            Des chiffres{' '}
-            <span >réels, vérifiables</span>
+            {h2Pre}{' '}
+            <span>{h2Highlight}</span>
           </h2>
           <p className="text-base" style={{ color: '#666' }}>
-            Pas de promesses vagues. Voici ce que nos clients ont obtenu.
+            {subtitle}
           </p>
         </motion.div>
 

@@ -2,7 +2,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Plus, Minus } from 'lucide-react'
-import { faqs } from '@/lib/data/home'
+import { getFaqs } from '@/lib/data/home'
+import { useLocale } from '@/lib/locale-context'
 
 function FAQItem({ faq, index }) {
   const [open, setOpen] = useState(false)
@@ -26,12 +27,12 @@ function FAQItem({ faq, index }) {
           onClick={() => setOpen(!open)}
           aria-expanded={open}
         >
-          <span className="font-medium text-base pr-4" style={{ color: open ? '#000' : '#fff',}}>{faq.q}</span>
+          <span className="font-medium text-base pr-4" style={{ color: open ? '#000' : '#fff' }}>{faq.q}</span>
           <span
             className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300"
             style={{
               background: open ? '#00F5FF' : 'rgba(255,255,255,0.06)',
-              color: open ? '#000' : '#000',
+              color: '#000',
             }}
           >
             {open ? <Minus size={14} /> : <Plus size={14} />}
@@ -58,8 +59,20 @@ function FAQItem({ faq, index }) {
 }
 
 export default function FAQSection() {
+  const { locale, dict } = useLocale()
+  const faqs = getFaqs(locale)
+  const f = dict?.faq_section || {}
+
+  const h2Pre = f.h2_pre || (locale === 'en' ? 'Your' : locale === 'es' ? 'Sus' : 'Vos questions,')
+  const h2Highlight = f.h2_highlight || (locale === 'en' ? 'questions' : locale === 'es' ? 'preguntas' : 'nos réponses')
+  const subtitle = locale === 'en'
+    ? 'Total transparency. If you have other questions, we\'re here.'
+    : locale === 'es'
+    ? 'Transparencia total. Si tienes más preguntas, estamos aquí.'
+    : "Transparence totale. Si vous avez d'autres questions, on est là."
+
   return (
-    <section className="section" style={{ background: '#fff',clipPath: 'polygon(0 10%, 100% 0%, 100% 90%, 0% 100%)'  }}>
+    <section className="section" style={{ background: '#fff', clipPath: 'polygon(0 10%, 100% 0%, 100% 90%, 0% 100%)' }}>
       <div className="wrap">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -68,16 +81,16 @@ export default function FAQSection() {
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="text-center max-w-xl mx-auto mb-14 pt-15 md:pt-0"
         >
-          <span className="badge mb-4">FAQ</span>
+          <span className="badge mb-4">{f.badge || 'FAQ'}</span>
           <h2
             className="text-4xl text-black md:text-5xl font-bold mb-4"
             style={{ fontFamily: 'var(--font-space, sans-serif)' }}
           >
-            Vos questions,{' '}
-            <span className="">nos réponses</span>
+            {h2Pre}{' '}
+            <span>{h2Highlight}</span>
           </h2>
           <p className="text-base" style={{ color: '#666' }}>
-            Transparence totale. Si vous avez d&apos;autres questions, on est là.
+            {subtitle}
           </p>
         </motion.div>
 

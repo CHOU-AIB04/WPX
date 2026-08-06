@@ -1,8 +1,21 @@
 'use client'
 import { motion } from 'motion/react'
-import { process } from '@/lib/data/home'
+import { getProcess } from '@/lib/data/home'
+import { useLocale } from '@/lib/locale-context'
 
 export default function ProcessSection() {
+  const { locale, dict } = useLocale()
+  const process = getProcess(locale)
+  const p = dict?.process_section || {}
+
+  const h2Pre = p.h2_pre || (locale === 'en' ? 'From audit to' : locale === 'es' ? 'De cero a' : 'De zéro à')
+  const h2Highlight = p.h2_highlight || (locale === 'en' ? 'growth' : locale === 'es' ? 'clientes cualificados' : 'clients qualifiés')
+  const subtitle = locale === 'en'
+    ? 'A proven, transparent process. No jargon. You always know exactly where we are.'
+    : locale === 'es'
+    ? 'Un proceso probado, transparente, sin jerga. Siempre sabes exactamente dónde estamos.'
+    : 'Un process éprouvé, transparent, sans jargon. Vous savez exactement où on en est.'
+
   return (
     <section className="section" style={{ background: '#040404' }}>
       <div className="wrap">
@@ -13,16 +26,16 @@ export default function ProcessSection() {
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="badge mb-4">Notre Process</span>
+          <span className="badge mb-4">{p.badge || 'Notre Process'}</span>
           <h2
             className="text-4xl md:text-5xl font-bold mb-4"
             style={{ fontFamily: 'var(--font-space, sans-serif)' }}
           >
-            De zéro à{' '}
-            <span className="text-gradient">clients qualifiés</span>
+            {h2Pre}{' '}
+            <span className="text-gradient">{h2Highlight}</span>
           </h2>
           <p className="text-base leading-relaxed" style={{ color: '#666' }}>
-            Un process éprouvé, transparent, sans jargon. Vous savez exactement où on en est.
+            {subtitle}
           </p>
         </motion.div>
 

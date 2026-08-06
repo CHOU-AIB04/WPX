@@ -2,9 +2,15 @@
 import Link from 'next/link'
 import { motion } from 'motion/react'
 import { Check, ArrowRight } from 'lucide-react'
-import { mainServices } from '@/lib/data/services'
+import { getMainServices } from '@/lib/data/services'
+import { useLocale } from '@/lib/locale-context'
 
 export default function ServicesGrid() {
+  const { locale } = useLocale()
+  const mainServices = getMainServices(locale)
+  const learnMore = locale === 'en' ? 'Learn more' : locale === 'es' ? 'Saber más' : 'En savoir plus'
+  const contactHref = locale === 'fr' ? '/contact' : `/${locale}/contact`
+
   return (
     <section className="section" style={{ background: '#040404' }}>
       <div className="wrap">
@@ -63,11 +69,11 @@ export default function ServicesGrid() {
                   {service.price}
                 </span>
                 <Link
-                  href="/contact"
+                  href={contactHref}
                   className="text-sm font-medium flex items-center gap-1.5 transition-colors hover:text-[#00F5FF]"
                   style={{ color: '#666' }}
                 >
-                  En savoir plus <ArrowRight size={14} />
+                  {learnMore} <ArrowRight size={14} />
                 </Link>
               </div>
             </motion.article>
