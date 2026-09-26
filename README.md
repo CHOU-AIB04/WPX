@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WePushX - site vitrine (refonte 2026)
 
-## Getting Started
+Next.js 16 (App Router) · Tailwind v4 · Motion 13 · Lenis. Français, dark editorial, logo vectorisé.
 
-First, run the development server:
+## Lancer
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # renseigner les variables
+npm run dev                  # http://localhost:3000
+npm run build && npm start   # prod locale
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Chemin | Rôle |
+|---|---|
+| `src/lib/content.ts` | **Tous les textes** (services, tarifs, témoignages, FAQ...). Modifier ici, pas dans les composants |
+| `src/lib/legal.json` | Mentions légales + confidentialité migrées de l'ancien site |
+| `public/cgv.pdf` | CGV (PDF de l'ancien site) |
+| `src/components/brand/` | Logo SVG (tracé depuis le logo officiel), animation de balayage |
+| `src/components/sections/` | Sections de la home + pages |
+| `src/components/layout/` | Header, footer, preloader, curseur, Lenis, bouton WhatsApp |
+| `src/app/api/lead/route.ts` | Réception du formulaire, relais vers `LEAD_WEBHOOK_URL` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tracking
 
-## Learn More
+- GTM chargé si `NEXT_PUBLIC_GTM_ID` est défini.
+- Événements `dataLayer` :
+  - `generate_lead` (formulaire envoyé) : `event_id` (UUID, pour dédup Pixel / CAPI), `service`, `budget`, `plan`
+  - `whatsapp_click` (bouton flottant)
+  - `cta_click` : `cta` = `hero_audit`, `header_audit`, `pricing_growth`, `final_audit`...
+- Le formulaire transmet aussi les `utm_*`, `gclid` et `fbclid` présents dans l'URL au webhook.
 
-To learn more about Next.js, take a look at the following resources:
+## Animations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Preloader (1 fois par session), titres révélés ligne par ligne, logo en balayage diagonal, parallaxe du hero,
+manifeste révélé mot à mot au scroll, bandeaux dont la vitesse suit le scroll, aperçus services qui suivent
+le curseur, méthode en scroll horizontal épinglé, compteurs, prix animés, badge garantie rotatif, curseur custom.
+Tout est désactivé avec `prefers-reduced-motion`.

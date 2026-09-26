@@ -1,0 +1,646 @@
+{
+"mentions-legales": [
+[
+"h1",
+"Mentions Légales & Conditions d'Utilisation"
+],
+[
+"p",
+"Dernière mise à jour : 25 mai 2025"
+],
+[
+"h2",
+"1. Identification de l'éditeur"
+],
+[
+"kv",
+"Société : WePushX"
+],
+[
+"kv",
+"Forme juridique : Société commerciale"
+],
+[
+"kv",
+"Siège social : 30 N Gould St Ste N, Sheridan, WY 82801, États-Unis"
+],
+[
+"kv",
+"Bureau opérationnel : Casablanca, Grand Casablanca-Settat, Maroc"
+],
+[
+"kv",
+"Email : contact@wepushx.com"
+],
+[
+"kv",
+"Site web : https://www.wepushx.com"
+],
+[
+"kv",
+"Directeur de publication : WePushX - Direction générale"
+],
+[
+"h2",
+"2. Hébergement du site"
+],
+[
+"p",
+"Hébergeur Vercel Inc."
+],
+[
+"p",
+"Adresse 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis"
+],
+[
+"p",
+"Site vercel.com"
+],
+[
+"p",
+"Le site est hébergé sur l'infrastructure cloud de Vercel, avec des serveurs distribués mondialement via un CDN (Content Delivery Network) garantissant disponibilité et performance."
+],
+[
+"h2",
+"3. Propriété intellectuelle"
+],
+[
+"p",
+"L'ensemble du contenu du site https://www.wepushx.com - textes, images, logos, graphismes, vidéos, structure et code source - est la propriété exclusive de WePushX ou de ses partenaires, et est protégé par les lois applicables en matière de propriété intellectuelle."
+],
+[
+"p",
+"Toute reproduction, distribution, modification, adaptation ou utilisation à des fins commerciales, totale ou partielle, sans autorisation écrite préalable de WePushX , est strictement interdite et constitue une contrefaçon sanctionnée par la loi."
+],
+[
+"p",
+"Les marques et logos présents sur ce site sont des marques déposées ou propriétés de WePushX . Leur utilisation sans autorisation est interdite."
+],
+[
+"h2",
+"4. Conditions Générales d'Utilisation (CGU)"
+],
+[
+"h3",
+"4.1 Acceptation"
+],
+[
+"p",
+"L'accès et l'utilisation du site impliquent l'acceptation pleine et entière des présentes conditions. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser ce site."
+],
+[
+"h3",
+"4.2 Accès au site"
+],
+[
+"p",
+"WePushX s'efforce d'assurer la disponibilité du site 24h/24 et 7j/7. Toutefois, l'accès peut être interrompu pour des raisons de maintenance, de mise à jour technique ou de force majeure. WePushX ne peut être tenue responsable des interruptions de service."
+],
+[
+"h3",
+"4.3 Utilisation autorisée"
+],
+[
+"p",
+"Vous vous engagez à utiliser ce site uniquement à des fins légales et conformément aux présentes CGU. Sont notamment interdits :"
+],
+[
+"li",
+"✦ Toute utilisation frauduleuse, abusive ou non autorisée du site"
+],
+[
+"li",
+"✦ La collecte automatisée de données (scraping) sans autorisation écrite"
+],
+[
+"li",
+"✦ La transmission de contenus illicites, diffamatoires, ou portant atteinte aux droits de tiers"
+],
+[
+"li",
+"✦ Toute tentative d'intrusion, de compromission ou d'attaque du système informatique"
+],
+[
+"li",
+"✦ L'usurpation d'identité ou la représentation trompeuse de votre affiliation à WePushX"
+],
+[
+"h3",
+"4.4 Liens externes"
+],
+[
+"p",
+"Ce site peut contenir des liens vers des sites tiers. WePushX n'est pas responsable du contenu de ces sites externes et n'exerce aucun contrôle sur ces derniers. L'établissement de liens vers https://www.wepushx.com sans autorisation préalable écrite est interdit."
+],
+[
+"h2",
+"5. Conditions Générales de Vente (CGV)"
+],
+[
+"h3",
+"5.1 Champ d'application"
+],
+[
+"p",
+"Les présentes CGV s'appliquent à toutes les prestations de services commercialisées par WePushX : gestion de campagnes publicitaires (Meta Ads, Google Ads), SEO, création de sites web, UGC IA, CRM automation et services associés."
+],
+[
+"h3",
+"5.2 Commandes et devis"
+],
+[
+"p",
+"Toute commande est précédée d'un devis personnalisé. La commande est ferme à réception du devis signé (ou de la validation électronique) et du règlement de l'acompte convenu. WePushX se réserve le droit de refuser une commande pour motif légitime."
+],
+[
+"h3",
+"5.3 Tarifs"
+],
+[
+"p",
+"Les tarifs sont exprimés en Dirhams Marocains (MAD) ou en Dollars Américains (USD) hors taxes, sauf indication contraire. Ils sont susceptibles d'être modifiés à tout moment - les modifications s'appliquent aux nouvelles commandes uniquement. La TVA applicable dépend de la résidence fiscale du client."
+],
+[
+"h3",
+"5.4 Modalités de paiement"
+],
+[
+"p",
+"Les paiements sont acceptés par :"
+],
+[
+"li",
+"✦ Virement bancaire (délai : 5 jours ouvrés)"
+],
+[
+"li",
+"✦ Carte bancaire via Stripe (Visa, Mastercard, American Express)"
+],
+[
+"li",
+"✦ Chèque (clients Maroc uniquement)"
+],
+[
+"p",
+"Les paiements par carte sont traités de manière sécurisée par Stripe Inc. (certifié PCI DSS niveau 1). WePushX ne stocke jamais vos informations de paiement."
+],
+[
+"p",
+"Sauf accord contraire, le règlement s'effectue : 50% à la commande, 50% à la livraison pour les projets one-shot ; ou en mensualités pour les forfaits récurrents."
+],
+[
+"h3",
+"5.5 Retards de paiement"
+],
+[
+"p",
+"Tout retard de paiement entraîne l'application de pénalités de retard au taux légal en vigueur, ainsi que le droit pour WePushX de suspendre les prestations jusqu'à régularisation complète. Des frais de recouvrement pourront être appliqués."
+],
+[
+"h3",
+"5.6 Garantie résultats 60 jours"
+],
+[
+"p",
+"WePushX offre une garantie de remboursement de la commission de gestion si aucun lead qualifié n'est généré dans les 60 premiers jours de gestion de campagnes publicitaires (forfaits Growth et Scale uniquement). Cette garantie est soumise aux conditions suivantes :"
+],
+[
+"li",
+"✦ Le client a appliqué les recommandations stratégiques de WePushX"
+],
+[
+"li",
+"✦ Le budget publicitaire minimum recommandé a été maintenu"
+],
+[
+"li",
+"✦ Le pixel/tracking a été correctement installé dès le départ"
+],
+[
+"li",
+"✦ La demande de remboursement est formulée par écrit dans les 10 jours suivant la fin du délai de 60 jours"
+],
+[
+"p",
+"Le remboursement porte exclusivement sur la commission de gestion - les budgets publicitaires investis directement auprès de Meta ou Google ne sont pas remboursables."
+],
+[
+"h3",
+"5.7 Résiliation"
+],
+[
+"p",
+"Pour les forfaits mensuels, chaque partie peut résilier le contrat avec un préavis de 30 jours par email à contact@wepushx.com . Aucun remboursement prorata n'est accordé pour le mois en cours au moment de la résiliation. Les projets one-shot ne sont pas résiliables après démarrage des travaux."
+],
+[
+"h3",
+"5.8 Responsabilité"
+],
+[
+"p",
+"WePushX s'engage à mettre en œuvre les meilleures pratiques du secteur pour atteindre les objectifs convenus. Toutefois, les performances publicitaires (CPL, ROAS, trafic SEO) dépendent de facteurs externes indépendants de notre volonté (algorithmes des plateformes, concurrence, saisonnalité). WePushX est soumise à une obligation de moyens, et non de résultat, au-delà de la garantie 60 jours stipulée au 5.6."
+],
+[
+"p",
+"La responsabilité de WePushX ne pourra excéder, pour tout préjudice confondu, le montant total des sommes effectivement encaissées au titre de la prestation en cause au cours des 3 derniers mois."
+],
+[
+"h2",
+"6. Protection des données personnelles"
+],
+[
+"p",
+"Le traitement de vos données personnelles est décrit en détail dans notre Politique de Confidentialité , accessible à tout moment depuis le bas de chaque page du site."
+],
+[
+"p",
+"En résumé : nous collectons uniquement les données nécessaires à l'exécution de nos services. Nous ne vendons pas vos données. Vous disposez de droits d'accès, de rectification et d'effacement que vous pouvez exercer à contact@wepushx.com ."
+],
+[
+"h2",
+"7. Droit applicable et juridiction"
+],
+[
+"p",
+"Les présentes mentions légales et CGU/CGV sont régies par le droit marocain (Loi n° 53-05 relative à l'échange électronique de données juridiques, Loi 31-08 sur la protection du consommateur, Loi 09-08 sur la protection des données personnelles) et, à titre subsidiaire, par le droit américain pour les aspects relevant du siège social."
+],
+[
+"p",
+"En cas de litige, les parties s'engagent à rechercher une solution amiable dans un délai de 30 jours. À défaut, les tribunaux compétents du ressort de Casablanca (Maroc) seront seuls compétents pour tout litige relatif à l'interprétation ou à l'exécution des présentes."
+],
+[
+"h2",
+"8. Contact"
+],
+[
+"p",
+"Pour toute question relative aux présentes mentions légales, CGU ou CGV, contactez-nous :"
+],
+[
+"p",
+"Email contact@wepushx.com"
+],
+[
+"p",
+"Formulaire wepushx.com/contact"
+],
+[
+"p",
+"Délai de réponse Sous 48h ouvrées"
+]
+],
+"politique-de-confidentialite": [
+[
+"h1",
+"Politique de Confidentialité"
+],
+[
+"p",
+"Dernière mise à jour : 25 mai 2025"
+],
+[
+"p",
+"Chez WePushX , la protection de votre vie privée est une priorité. Cette politique de confidentialité vous explique quelles données nous collectons, pourquoi nous les utilisons, avec qui nous les partageons et comment vous pouvez exercer vos droits. Elle s'applique à toutes les interactions avec notre site web https://www.wepushx.com ."
+],
+[
+"h2",
+"1. Responsable du traitement des données"
+],
+[
+"p",
+"Le responsable du traitement des données personnelles collectées sur le site https://www.wepushx.com est :"
+],
+[
+"p",
+"WePushX Siège social : 30 N Gould St Ste N, Sheridan, WY 82801, États-Unis Bureau opérationnel : Casablanca, Maroc Email : contact@wepushx.com"
+],
+[
+"p",
+"Pour toute question relative à la présente politique ou à l'exercice de vos droits, vous pouvez nous contacter à l'adresse email ci-dessus."
+],
+[
+"h2",
+"2. Données collectées"
+],
+[
+"p",
+"Nous collectons les données suivantes selon le contexte de votre utilisation du site :"
+],
+[
+"p",
+"Via le formulaire de contact et d'audit :"
+],
+[
+"li",
+"Nom et prénom"
+],
+[
+"li",
+"Adresse email professionnelle"
+],
+[
+"li",
+"Numéro de téléphone (optionnel)"
+],
+[
+"li",
+"Nom de l'entreprise"
+],
+[
+"li",
+"Message et informations relatives à votre projet"
+],
+[
+"p",
+"Via la navigation :"
+],
+[
+"li",
+"Adresse IP (anonymisée)"
+],
+[
+"li",
+"Type de navigateur et système d'exploitation"
+],
+[
+"li",
+"Pages visitées et durée de consultation"
+],
+[
+"li",
+"Source de trafic (référent)"
+],
+[
+"li",
+"Données de cookies (voir section 6)"
+],
+[
+"p",
+"Via les paiements (services payants) : Les données de paiement (numéro de carte, etc.) sont traitées directement par notre prestataire de paiement sécurisé Stripe Inc. (stripe.com). WePushX ne stocke jamais vos informations bancaires."
+],
+[
+"h2",
+"3. Finalités du traitement"
+],
+[
+"p",
+"Vos données personnelles sont utilisées aux fins suivantes :"
+],
+[
+"li",
+"Répondre à vos demandes : traitement des formulaires de contact, demandes d'audit et devis"
+],
+[
+"li",
+"Gestion de la relation client : suivi des projets, facturation, communications contractuelles"
+],
+[
+"li",
+"Traitement des paiements : facturation et encaissement via Stripe pour les services payants"
+],
+[
+"li",
+"Amélioration du site : analyse d'audience anonymisée via Google Analytics 4"
+],
+[
+"li",
+"Marketing et remarketing : si vous y avez consenti, via Meta Pixel et Google Ads"
+],
+[
+"li",
+"Obligation légale : conservation des documents comptables et contractuels"
+],
+[
+"p",
+"Nous ne vendons, ne louons et ne partageons jamais vos données personnelles à des tiers à des fins commerciales."
+],
+[
+"h2",
+"4. Base légale du traitement"
+],
+[
+"p",
+"Nos traitements reposent sur les bases légales suivantes :"
+],
+[
+"li",
+"Exécution d'un contrat : traitement nécessaire à la fourniture de nos services (devis, facturation, suivi)"
+],
+[
+"li",
+"Consentement : pour l'envoi de communications marketing et l'utilisation de cookies non essentiels"
+],
+[
+"li",
+"Intérêt légitime : pour l'analyse d'audience anonymisée et la sécurité du site"
+],
+[
+"li",
+"Obligation légale : conservation des données comptables conformément aux obligations fiscales applicables"
+],
+[
+"h2",
+"5. Partage des données avec des tiers"
+],
+[
+"p",
+"Nous partageons vos données uniquement avec les prestataires strictement nécessaires à nos services :"
+],
+[
+"p",
+"Prestataire Finalité Politique de confidentialité Stripe Inc. Traitement des paiements stripe.com/privacy Google Analytics 4 Analyse d'audience anonymisée policies.google.com/privacy Meta (Facebook Pixel) Mesure des conversions publicitaires facebook.com/policy Vercel Inc. Hébergement du site web vercel.com/legal/privacy-policy Supabase Inc. Base de données (articles blog) supabase.com/privacy"
+],
+[
+"p",
+"Tous nos prestataires sont soumis à des obligations contractuelles de confidentialité et ne peuvent utiliser vos données qu'aux fins spécifiées."
+],
+[
+"h2",
+"6. Cookies"
+],
+[
+"p",
+"Notre site utilise des cookies pour améliorer votre expérience."
+],
+[
+"p",
+"Cookies essentiels (pas de consentement requis) :"
+],
+[
+"li",
+"Cookies de session pour le bon fonctionnement du site"
+],
+[
+"li",
+"Cookie de sécurité CSRF"
+],
+[
+"p",
+"Cookies analytiques (soumis à consentement) :"
+],
+[
+"li",
+"Google Analytics 4 : mesure d'audience anonymisée (_ga, _gid)"
+],
+[
+"p",
+"Cookies marketing (soumis à consentement) :"
+],
+[
+"li",
+"Meta Pixel : mesure des conversions publicitaires Facebook/Instagram"
+],
+[
+"li",
+"Google Ads : mesure des conversions et remarketing"
+],
+[
+"p",
+"Vous pouvez gérer vos préférences de cookies à tout moment via les paramètres de votre navigateur ou via notre bandeau de consentement. Le refus des cookies non essentiels n'affecte pas votre accès au site."
+],
+[
+"h2",
+"7. Durée de conservation"
+],
+[
+"p",
+"Vos données sont conservées pendant les durées suivantes :"
+],
+[
+"li",
+"Données de contact : 3 ans à compter du dernier contact"
+],
+[
+"li",
+"Données contractuelles et de facturation : 10 ans (obligation légale comptable)"
+],
+[
+"li",
+"Données analytiques : 14 mois maximum (paramétrage Google Analytics 4)"
+],
+[
+"li",
+"Logs de connexion : 12 mois"
+],
+[
+"li",
+"Données de consentement aux cookies : 13 mois"
+],
+[
+"p",
+"Passé ces délais, vos données sont supprimées ou anonymisées."
+],
+[
+"h2",
+"8. Vos droits"
+],
+[
+"p",
+"Conformément au RGPD (Règlement Général sur la Protection des Données) et à la Loi 09-08 marocaine relative à la protection des données personnelles, vous disposez des droits suivants :"
+],
+[
+"li",
+"Droit d'accès : obtenir une copie de vos données personnelles"
+],
+[
+"li",
+"Droit de rectification : corriger des données inexactes ou incomplètes"
+],
+[
+"li",
+"Droit à l'effacement : demander la suppression de vos données"
+],
+[
+"li",
+"Droit à la limitation : restreindre le traitement de vos données"
+],
+[
+"li",
+"Droit à la portabilité : recevoir vos données dans un format structuré"
+],
+[
+"li",
+"Droit d'opposition : vous opposer à certains traitements (notamment le marketing)"
+],
+[
+"li",
+"Droit de retrait du consentement : à tout moment, sans affecter les traitements antérieurs"
+],
+[
+"p",
+"Pour exercer ces droits, contactez-nous à : contact@wepushx.com Nous répondons à toute demande dans un délai maximum de 30 jours."
+],
+[
+"h2",
+"9. Sécurité des données"
+],
+[
+"p",
+"WePushX met en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données :"
+],
+[
+"li",
+"Chiffrement HTTPS/TLS sur l'ensemble du site"
+],
+[
+"li",
+"Accès aux données restreint au personnel autorisé"
+],
+[
+"li",
+"Hébergement sur infrastructure sécurisée (Vercel)"
+],
+[
+"li",
+"Paiements traités exclusivement par Stripe (certifié PCI DSS)"
+],
+[
+"li",
+"Mots de passe hachés - nous ne stockons jamais vos mots de passe en clair"
+],
+[
+"p",
+"En cas de violation de données susceptible d'affecter vos droits, nous vous en informerons dans les délais légaux applicables."
+],
+[
+"h2",
+"10. Transferts internationaux"
+],
+[
+"p",
+"Certains de nos prestataires (Stripe, Google, Vercel, Supabase) sont basés aux États-Unis. Ces transferts sont encadrés par des garanties appropriées : clauses contractuelles types approuvées par la Commission européenne et/ou mécanismes de certification reconnus (Privacy Shield successors, Data Privacy Framework)."
+],
+[
+"h2",
+"11. Modifications de la politique"
+],
+[
+"p",
+"Nous nous réservons le droit de modifier la présente politique à tout moment. Toute modification substantielle sera notifiée sur le site avec une mise à jour de la date en haut de cette page. Nous vous encourageons à consulter régulièrement cette page."
+],
+[
+"p",
+"Dernière mise à jour : 25 mai 2025"
+],
+[
+"h2",
+"12. Contact"
+],
+[
+"p",
+"Pour toute question, réclamation ou exercice de droits concernant vos données personnelles :"
+],
+[
+"p",
+"📧 contact@wepushx.com 🌐 https://www.wepushx.com/contact"
+],
+[
+"p",
+"Si vous estimez que vos droits ne sont pas respectés, vous pouvez également introduire une réclamation auprès de l'autorité de protection des données compétente dans votre pays."
+],
+[
+"p",
+"Des questions ? Contactez-nous à contact@wepushx.com"
+]
+]
+}
