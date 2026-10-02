@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import { Arrow, Button, SectionLabel } from "@/components/ui/Button";
 import { EASE, Lines, Reveal } from "@/components/ui/motion";
 import { services } from "@/lib/content";
+import { offerHref } from "@/lib/catalog";
 import { ServiceVisual } from "./ServiceVisual";
 
 export function Services() {
@@ -50,7 +51,7 @@ export function Services() {
           {services.map((s, i) => (
             <Reveal key={s.id} delay={i * 0.04} y={20}>
               <Link
-                href={`/services#${s.id}`}
+                href={offerHref(s)}
                 onPointerEnter={() => setHovered(i)}
                 data-cursor="Voir"
                 className="group relative block overflow-hidden border-t border-line last:border-b"

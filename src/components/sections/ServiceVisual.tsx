@@ -96,6 +96,28 @@ export function ServiceVisual({ id }: { id: string }) {
           ))}
         </div>
       );
+    case "social":
+      return (
+        <div className={frame + " flex flex-col"}>
+          <div className="flex items-center justify-between">
+            <p className="label !text-[0.58rem] text-faint">Calendrier · Septembre</p>
+            <span className="rounded-full bg-violet px-2 py-0.5 text-[0.55rem] font-semibold text-snow">16 posts</span>
+          </div>
+          <div className="mt-3 grid flex-1 grid-cols-7 gap-1">
+            {Array.from({ length: 21 }).map((_, i) => {
+              const filled = [1, 3, 6, 8, 10, 13, 15, 17, 20].includes(i);
+              return (
+                <div key={i} className={`rounded-[0.3rem] ${filled ? "bg-violet/70" : "bg-ink-3"}`} />
+              );
+            })}
+          </div>
+          <div className="mt-2.5 flex flex-wrap gap-1">
+            {["IG", "FB", "TikTok", "LinkedIn", "GMB"].map((n) => (
+              <span key={n} className="rounded-full border border-line px-2 py-0.5 text-[0.55rem] text-muted">{n}</span>
+            ))}
+          </div>
+        </div>
+      );
     default:
       return (
         <div className={frame + " grid grid-cols-3 gap-2"}>

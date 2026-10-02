@@ -1,19 +1,41 @@
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/Button";
+export const metadata = {
+  title: 'CGV | WePushX — Agence Marketing Digital au Maroc',
+  description:
+    'Découvrez WePushX, agence de marketing digital au Maroc : notre expertise, nos services, notre approche et notre vision pour accompagner les marques dans leur croissance digitale.',
+  alternates: {
+    canonical: 'https://www.wepushx.com/cgv',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+}
 
-export const metadata: Metadata = { title: "Conditions générales de vente", alternates: { canonical: "/cgv" } };
 
-export default function Page() {
+export default function CGVPAGE() {
   return (
-    <section className="container-x pb-28 pt-36 md:pt-44">
-      <p className="label text-violet-bright">Légal</p>
-      <h1 className="display mt-6 text-[clamp(2.6rem,6vw,5.4rem)]">Conditions générales de vente</h1>
-      <div className="mt-8">
-        <Button href="/cgv.pdf" variant="ghost">Télécharger le PDF</Button>
+    <>
+      {/* Hide every layout chrome on this page */}
+      <style>{`
+        body { overflow: hidden !important; }
+        header, footer { display: none !important; }
+      `}</style>
+
+      {/* Full-viewport PDF — covers everything */}
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 99999,
+          background: '#fff',
+        }}
+      >
+        <iframe
+          src="/cgv.pdf"
+          title="Conditions Générales de Vente — WePushX"
+          style={{ display: 'block', width: '100%', height: '100%', border: 'none' }}
+        />
       </div>
-      <div className="mt-12 overflow-hidden rounded-[1.6rem] border border-line bg-white">
-        <iframe src="/cgv.pdf" title="CGV WePushX" className="h-[80vh] w-full" />
-      </div>
-    </section>
-  );
+    </>
+  )
 }

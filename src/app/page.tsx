@@ -12,6 +12,7 @@ import { Results } from "@/components/sections/Results";
 import { Services } from "@/components/sections/Services";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { faqs } from "@/lib/content";
+import { showPrices } from "@/lib/geo";
 
 const faqJsonLd = {
   "@context": "https://schema.org",
@@ -19,7 +20,10 @@ const faqJsonLd = {
   mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
 };
 
-export default function Home() {
+export default async function Home() {
+  /** Hors Maroc, la section tarifs garde les forfaits mais pas les montants. */
+  const priced = await showPrices();
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
@@ -32,7 +36,7 @@ export default function Home() {
       <Results />
       <Comparison />
       <Testimonials />
-      <Pricing />
+      <Pricing showPrices={priced} />
       <Guarantee />
       <Faq />
       <FinalCta />

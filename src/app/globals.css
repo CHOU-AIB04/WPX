@@ -20,6 +20,15 @@
   /* accent dans les sections "papier" (inversées en thème clair) */
   --color-accent-paper: #7a1c8c;
   --color-positive: #34d399;
+
+  /* Canevas d'automatisation : une couleur par famille d'actions.
+     Valeurs claires ici (fond sombre), assombries plus bas en thème clair. */
+  --color-flow-trigger: #b24fd3;
+  --color-flow-crm: #c084fc;
+  --color-flow-message: #34d399;
+  --color-flow-data: #60a5fa;
+  --color-flow-logic: #fbbf24;
+  --color-flow-ai: #f0abfc;
   --color-warn: rgb(252 211 77 / 0.85);
   --color-danger: #fca5a5;
 
@@ -58,6 +67,12 @@ html[data-theme="light"] {
   --color-line-ink: rgb(245 240 248 / 0.14);
   --color-accent-paper: #d6a2ec;
   --color-positive: #047857;
+  --color-flow-trigger: #9331b3;
+  --color-flow-crm: #6d28d9;
+  --color-flow-message: #047857;
+  --color-flow-data: #1d4ed8;
+  --color-flow-logic: #b45309;
+  --color-flow-ai: #be185d;
   --color-warn: #b45309;
   --color-danger: #b91c1c;
   --glow-a: rgba(178, 79, 211, 0.3);
@@ -210,3 +225,75 @@ html.lenis body {
 @media (pointer: fine) {
   .has-cursor, .has-cursor * { cursor: none !important; }
 }
+
+
+/* ── Canevas React Flow ───────────────────────────────────────────────
+   La librairie peint son propre fond et ses propres couleurs de contrôle.
+   On les neutralise pour que le canevas soit réellement transparent et
+   suive le thème du site. */
+.react-flow.wpx-flow,
+.wpx-flow .react-flow__pane,
+.wpx-flow .react-flow__renderer {
+  background: transparent !important;
+}
+.wpx-flow .react-flow__handle {
+  border: 0;
+  background: color-mix(in srgb, var(--color-fg) 32%, transparent);
+}
+.wpx-flow .react-flow__edge.selected .react-flow__edge-path {
+  stroke: var(--color-violet-bright);
+}
+.wpx-flow .react-flow__node { cursor: grab; }
+.wpx-flow .react-flow__node:active { cursor: grabbing; }
+
+
+/* ── Curseurs du simulateur de coût ───────────────────────────────────
+   Le natif <input type="range"> n'est pas stylable sans préfixes. La part
+   parcourue est peinte par un dégradé dur piloté par --pct, posé en ligne
+   par le composant. */
+.wpx-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--color-violet-bright) 0,
+    var(--color-violet-bright) var(--pct, 0%),
+    var(--color-line) var(--pct, 0%),
+    var(--color-line) 100%
+  );
+  cursor: pointer;
+  touch-action: pan-y;
+}
+.wpx-range:disabled { cursor: not-allowed; }
+
+.wpx-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 1.15rem;
+  width: 1.15rem;
+  border-radius: 999px;
+  background: var(--color-violet-bright);
+  border: 3px solid var(--color-ink);
+  box-shadow: 0 0 0 1px var(--color-line), 0 6px 18px -6px rgba(122, 28, 140, 0.9);
+  transition: transform 0.25s var(--ease-expo);
+}
+.wpx-range::-moz-range-thumb {
+  height: 1.15rem;
+  width: 1.15rem;
+  border-radius: 999px;
+  background: var(--color-violet-bright);
+  border: 3px solid var(--color-ink);
+  box-shadow: 0 0 0 1px var(--color-line);
+  transition: transform 0.25s var(--ease-expo);
+}
+.wpx-range:hover::-webkit-slider-thumb,
+.wpx-range:focus-visible::-webkit-slider-thumb { transform: scale(1.18); }
+.wpx-range:hover::-moz-range-thumb,
+.wpx-range:focus-visible::-moz-range-thumb { transform: scale(1.18); }
+.wpx-range:focus-visible {
+  outline: 2px solid var(--color-violet-bright);
+  outline-offset: 6px;
+}
+.wpx-range::-moz-range-track { height: 2px; background: transparent; }
