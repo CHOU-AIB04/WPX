@@ -29,7 +29,8 @@ export function PlansGrid({
   label: string;
   first: string;
   second: string;
-  footnote: string;
+  /** Mention de bas de bloc. Omise, rien n'est rendu. */
+  footnote?: string;
   showPrices?: boolean;
 }) {
   const [annual, setAnnual] = useState(false);
@@ -148,7 +149,7 @@ export function PlansGrid({
         })}
       </div>
 
-      <p className="label mt-10 text-center text-faint">{footnote}</p>
+      {footnote && <p className="label mt-10 text-center text-faint">{footnote}</p>}
     </>
   );
 }

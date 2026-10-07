@@ -414,7 +414,7 @@ export const oneShots = [
   { name: "Logo + charte", price: "À partir de 4.000 DH", body: "Identité visuelle complète adaptée à votre secteur." },
   { name: "Site e-commerce", price: "À partir de 10.000 DH", body: "WordPress ou Shopify prêt à vendre, catalogue et stock." },
   { name: "Pack UGC IA", price: "5 vidéos", body: "Scripts qui convertissent + 5 vidéos IA format Reels." },
-  { name: "Setup CRM + chatbot", price: "Sur devis", body: "Pipeline, relances automatiques, scoring des leads." },
+  { name: "Setup CRM + Agent d’accueil OFFERT", price: "800 DH / mois", body: "Pipeline, relances automatiques, scoring des leads. Agent d'accueil IA offert." },
 ];
 
 export const faqs = [

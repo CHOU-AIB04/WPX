@@ -6,14 +6,16 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { HashLanding } from "@/components/layout/HashLanding";
 import { AgentPacks } from "@/components/pricing/AgentPacks";
 import { PlansGrid } from "@/components/pricing/PlansGrid";
+import { QuoteCta } from "@/components/pricing/QuoteCta";
 import { showPrices } from "@/lib/geo";
 import { oneShots, site } from "@/lib/content";
+import { AdProof } from "@/components/sections/AdProof";
 import { CostSimulator } from "@/components/pricing/CostSimulator";
 
 export const metadata: Metadata = {
   title: "Présentation WePushX : l'agence, la méthode, le CRM all-in-one et les agents IA",
   description:
-    "Notre présentation complète : les quatre piliers de notre système de croissance, les résultats obtenus pour nos clients, la méthode en cinq étapes, les forfaits, le CRM all-in-one et les trois agents IA.",
+    "Notre présentation complète : le CRM all-in-one qui remplace huit outils, les trois piliers de notre système de croissance, les résultats obtenus pour nos clients, les captures de campagnes réelles, la méthode en cinq étapes, les forfaits et les trois agents IA.",
   alternates: { canonical: "/presentation" },
   openGraph: {
     title: "Présentation WePushX — agence marketing digital, Maroc",
@@ -25,22 +27,29 @@ export const metadata: Metadata = {
 
 /* ─────────────────────────────────────────────────────────── le contenu */
 
-const chapters = [
-  { n: "01", id: "approche", t: "Notre approche" },
-  { n: "02", id: "resultats", t: "Résultats clients" },
-  { n: "03", id: "methode", t: "Méthodologie" },
-  { n: "04", id: "offres", t: "Offres & tarifs" },
-  { n: "05", id: "agents", t: "Agents IA & CRM" },
-  { n: "06", id: "simulation", t: "Simulation" },
+/**
+ * Le sommaire dépend du pays : la dernière entrée mène au simulateur au
+ * Maroc, à la demande de devis ailleurs. Les ancres doivent correspondre aux
+ * `id` réellement rendus — `CostSimulator` pose `#simulateur`, `QuoteCta`
+ * pose `#devis`.
+ */
+const chaptersFor = (priced: boolean) => [
+  { n: "01", id: "crm", t: "Le CRM all-in-one" },
+  { n: "02", id: "approche", t: "Notre approche" },
+  { n: "03", id: "resultats", t: "Résultats clients" },
+  { n: "04", id: "campagnes", t: "Campagnes réelles" },
+  { n: "05", id: "methode", t: "Méthodologie" },
+  { n: "06", id: "offres", t: "Offres & tarifs" },
+  { n: "07", id: "agents", t: "Agents IA" },
+  { n: "08", id: priced ? "simulateur" : "devis", t: priced ? "Simulateur de coût" : "Votre devis" },
 ];
 
-const openingStats = [
-  { value: 32, suffix: " M", label: "Internautes au Maroc", detail: "Un marché déjà en ligne, et qui achète." },
-  { value: 18, prefix: "+", suffix: " %", label: "Croissance digitale / an", detail: "Le retard se rattrape maintenant." },
-  { value: 20, suffix: "+", label: "Clients accompagnés", detail: "PME, cliniques, e-commerce, concessions." },
-];
-
+/** Le CRM ouvre la liste : c'est lui qu'on met en avant. */
 const pillars = [
+  {
+    t: "CRM all-in-one & automatisation",
+    b: "CRM configuré sur mesure. Suivi des leads, relances automatiques, scoring, reporting pipeline.",
+  },
   {
     t: "Sites & Landing Pages",
     b: "Vitrines optimisées pour la conversion, boutiques e-commerce, une landing page par campagne avec A/B testing.",
@@ -48,14 +57,6 @@ const pillars = [
   {
     t: "Campagnes publicitaires",
     b: "Meta Ads et Google Ads gérées par un traffic manager certifié. Ciblage précis, optimisation hebdomadaire.",
-  },
-  {
-    t: "UGC par IA",
-    b: "Vingt vidéos authentiques par mois pour le prix de deux vidéos traditionnelles. Scripts, voix off et montage, tout en IA.",
-  },
-  {
-    t: "CRM all-in-one & automatisation",
-    b: "CRM configuré sur mesure. Suivi des leads, relances automatiques, scoring, reporting pipeline.",
   },
 ];
 
@@ -145,6 +146,7 @@ const crmCapabilities = [
 
 export default async function PresentationPage() {
   const priced = await showPrices();
+  const chapters = chaptersFor(priced);
 
   return (
     <>
@@ -204,28 +206,59 @@ export default async function PresentationPage() {
               </ul>
             </Reveal>
           </div>
-
-          {/* les trois chiffres d'ouverture */}
-          <div className="mt-20 grid gap-px overflow-hidden rounded-[1.8rem] border border-line bg-line sm:grid-cols-3">
-            {openingStats.map((s, i) => (
-              <Reveal key={s.label} delay={i * 0.08} className="bg-ink-2 p-8 md:p-10">
-                <p className="display text-[clamp(2.6rem,5vw,4.2rem)] text-gradient">
-                  <Counter value={s.value} prefix={s.prefix ?? ""} suffix={s.suffix ?? ""} />
-                </p>
-                <p className="mt-5 text-[1.02rem] text-fg/85">{s.label}</p>
-                <p className="mt-1.5 text-sm text-muted">{s.detail}</p>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════ 01 notre approche */}
+      {/* ═══════════════════════════════════ 01 le CRM all-in-one */}
+      <section id="crm" className="scroll-mt-24 border-t border-line bg-ink-2 py-24 md:py-32">
+        <div className="container-x">
+          <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
+            <div>
+              <SectionLabel n="01">Votre centre de commande</SectionLabel>
+              <Lines className="display mt-8 text-[clamp(2.4rem,6vw,5.6rem)]">
+                <span key="1">Un CRM all-in-one</span>
+                <span key="2">
+                  qui remplace <span className="serif-accent text-lilac">huit outils.</span>
+                </span>
+              </Lines>
+            </div>
+            <Reveal className="max-w-sm">
+              <p className="text-fg/60">
+                Arrêtez de jongler entre Excel, WhatsApp, Google Sheets et cinq applications. Tout est centralisé au
+                même endroit — et vos données restent vos données.
+              </p>
+              <Link href="/offres#plateforme" className="link-underline mt-5 inline-flex items-center gap-2 text-sm text-fg">
+                Les douze briques en détail
+                <Arrow className="h-3.5 w-3.5" />
+              </Link>
+            </Reveal>
+          </div>
+
+          <div className="mt-16 grid gap-px overflow-hidden rounded-[1.8rem] border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
+            {crmCapabilities.map((c, i) => (
+              <Reveal key={c.t} delay={(i % 3) * 0.06} className="bg-ink p-8 transition-colors duration-500 hover:bg-ink-2 md:p-10">
+                <p className="label text-faint">{String(i + 1).padStart(2, "0")}</p>
+                <h3 className="display mt-10 text-2xl">{c.t}</h3>
+                <p className="mt-3 text-[0.92rem] text-fg/60">{c.b}</p>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.1}>
+            <p className="mt-10 max-w-2xl text-[0.85rem] leading-relaxed text-muted">
+              Pas de vendor lock-in : vos données vous appartiennent, et la migration depuis n&apos;importe quel outil
+              est gratuite.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════ 02 notre approche */}
       <section id="approche" className="scroll-mt-24 border-t border-line py-24 md:py-32">
         <div className="container-x">
           <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
             <div>
-              <SectionLabel n="01">Notre approche</SectionLabel>
+              <SectionLabel n="02">Notre approche</SectionLabel>
               <Lines className="display mt-8 text-[clamp(2.4rem,6vw,5.6rem)]">
                 <span key="1">On ne vend pas</span>
                 <span key="2">
@@ -235,17 +268,19 @@ export default async function PresentationPage() {
             </div>
             <Reveal className="max-w-sm">
               <p className="text-fg/60">
-                On construit un système de croissance : quatre piliers interconnectés qui transforment chaque dirham
+                On construit un système de croissance : trois piliers interconnectés qui transforment chaque dirham
                 investi en client.
               </p>
             </Reveal>
           </div>
 
-          <div className="mt-16 grid gap-px overflow-hidden rounded-[1.8rem] border border-line bg-line sm:grid-cols-2">
+          {/* Trois piliers : grille de trois colonnes, sinon la grille en
+              filets laisse une cellule vide au dernier rang. */}
+          <div className="mt-16 grid gap-px overflow-hidden rounded-[1.8rem] border border-line bg-line md:grid-cols-3">
             {pillars.map((p, i) => (
               <Reveal
                 key={p.t}
-                delay={(i % 2) * 0.07}
+                delay={i * 0.07}
                 className="group bg-ink p-9 transition-colors duration-500 hover:bg-ink-2 md:p-11"
               >
                 <p className="label text-violet-bright">{String(i + 1).padStart(2, "0")}</p>
@@ -270,12 +305,12 @@ export default async function PresentationPage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════ 02 résultats */}
+      {/* ═══════════════════════════════════════════ 03 résultats */}
       <section id="resultats" className="scroll-mt-24 border-t border-line bg-ink-2 py-24 md:py-32">
         <div className="container-x">
           <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
             <div>
-              <SectionLabel n="02">Résultats clients</SectionLabel>
+              <SectionLabel n="03">Résultats clients</SectionLabel>
               <Lines className="display mt-8 text-[clamp(2.4rem,6vw,5.6rem)]">
                 <span key="1">Des chiffres,</span>
                 <span key="2">
@@ -312,10 +347,13 @@ export default async function PresentationPage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════ 03 méthodologie */}
+      {/* ═══════════════════════════════════════ 04 campagnes réelles */}
+      <AdProof n="04" />
+
+      {/* ═══════════════════════════════════════════ 05 méthodologie */}
       <section id="methode" className="scroll-mt-24 border-t border-line py-24 md:py-32">
         <div className="container-x">
-          <SectionLabel n="03">Méthodologie</SectionLabel>
+          <SectionLabel n="05">Méthodologie</SectionLabel>
           <Lines className="display mt-8 text-[clamp(2.4rem,6vw,5.6rem)]">
             <span key="1">De l&apos;audit à la</span>
             <span key="2">
@@ -358,24 +396,21 @@ export default async function PresentationPage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════ 04 offres & tarifs */}
+      {/* ═══════════════════════════════════════════ 06 offres & tarifs */}
       <section id="offres" className="relative scroll-mt-24 border-t border-line bg-ink-2 py-24 md:py-32">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 top-0 h-[50%] bg-[radial-gradient(60%_60%_at_50%_0%,rgba(122,28,140,0.2),transparent)]"
         />
         <div className="container-x relative">
+          {/* Pas de `footnote` ici : la plaquette reste commerciale, les
+              conditions de vente vivent sur /tarifs. */}
           <PlansGrid
-            n="04"
+            n="06"
             label="Offres & tarifs"
             first="Des forfaits clairs,"
             second="sans surprise."
             showPrices={priced}
-            footnote={
-              priced
-                ? "Prix en MAD HT · Engagement minimum 3 mois · Paiement mensuel · TVA 20 % applicable si assujetti"
-                : "Engagement minimum 3 mois · Paiement mensuel · Devis sous 48 h selon votre marché"
-            }
           />
 
           {/* à la carte */}
@@ -416,12 +451,12 @@ export default async function PresentationPage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════ 05 agents IA & CRM */}
+      {/* ═══════════════════════════════════════════ 07 agents IA */}
       <section id="agents" className="scroll-mt-24 border-t border-line py-24 md:py-32">
         <div className="container-x">
           <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
             <div>
-              <SectionLabel n="05">Nos agents IA</SectionLabel>
+              <SectionLabel n="07">Nos agents IA</SectionLabel>
               <Lines className="display mt-8 text-[clamp(2.4rem,6vw,5.6rem)]">
                 <span key="1">Trois agents, une</span>
                 <span key="2">
@@ -442,56 +477,11 @@ export default async function PresentationPage() {
           </div>
         </div>
       </section>
-      
-      {/* * ═══════════════════════════════════════════ 06 Simumation  */}
-      {
-        priced && <section id="simulation" className="scroll-mt-24 border-t border-line py-24 md:py-32">
-        <CostSimulator />
-      </section>
-      }
-      {/* ═══════════════════════════════════════════ le centre de commande */}
-      <section className="border-t border-line bg-ink-2 py-24 md:py-32">
-        <div className="container-x">
-          <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
-            <div>
-              <SectionLabel n="06">Votre centre de commande</SectionLabel>
-              <Lines className="display mt-8 text-[clamp(2.4rem,6vw,5.6rem)]">
-                <span key="1">Un CRM all-in-one</span>
-                <span key="2">
-                  qui remplace <span className="serif-accent text-lilac">huit outils.</span>
-                </span>
-              </Lines>
-            </div>
-            <Reveal className="max-w-sm">
-              <p className="text-fg/60">
-                Arrêtez de jongler entre Excel, WhatsApp, Google Sheets et cinq applications. Tout est centralisé au
-                même endroit — et vos données restent vos données.
-              </p>
-              <Link href="/offres#plateforme" className="link-underline mt-5 inline-flex items-center gap-2 text-sm text-fg">
-                Les douze briques en détail
-                <Arrow className="h-3.5 w-3.5" />
-              </Link>
-            </Reveal>
-          </div>
 
-          <div className="mt-16 grid gap-px overflow-hidden rounded-[1.8rem] border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
-            {crmCapabilities.map((c, i) => (
-              <Reveal key={c.t} delay={(i % 3) * 0.06} className="bg-ink p-8 transition-colors duration-500 hover:bg-ink-2 md:p-10">
-                <p className="label text-faint">{String(i + 1).padStart(2, "0")}</p>
-                <h3 className="display mt-10 text-2xl">{c.t}</h3>
-                <p className="mt-3 text-[0.92rem] text-fg/60">{c.b}</p>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.1}>
-            <p className="mt-10 max-w-2xl text-[0.85rem] leading-relaxed text-muted">
-              Pas de vendor lock-in : vos données vous appartiennent, et la migration depuis n&apos;importe quel outil
-              est gratuite.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      {/* ══════════════════════════════════ 08 simulateur ou devis ══════
+          `CostSimulator` et `QuoteCta` portent déjà leur propre <section>,
+          leur fond et leurs marges : on les pose tels quels, sans enrobage. */}
+      {priced ? <CostSimulator n="08" /> : <QuoteCta n="08" />}
 
       {/* ═══════════════════════════════════════════ contact */}
       <section className="border-t border-line py-24 md:py-32">
