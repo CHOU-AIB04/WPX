@@ -24,7 +24,7 @@
 export const FX_USD_MAD = 10;
 
 /** Multiplicateur appliqué aux coûts fournisseur (1.5 = +50%). */
-export const MARGIN = 1.5;
+export const MARGIN = 1;
 
 /** Coût fournisseur en USD → prix client en MAD. */
 export const toMad = (usd: number) => usd * MARGIN * FX_USD_MAD;

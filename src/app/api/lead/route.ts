@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     email: clean(body.email, 160).toLowerCase(),
     phone: clean(body.phone, 40),
     company: clean(body.company, 160),
-    service: clean(body.service, 80),
+    service: clean(body.service, 400),
     budget: clean(body.budget, 80),
     message: clean(body.message, 2000),
     plan: clean(body.plan, 40),
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
     createdAt: new Date().toISOString(),
   };
 
-  if (!lead.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) {
+  if (!lead.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email) || lead.message.length < 20) {
     return NextResponse.json({ ok: false, error: "validation" }, { status: 422 });
   }
 

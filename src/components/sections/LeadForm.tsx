@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { EASE } from "@/components/ui/motion";
-import { budgetOptions, serviceOptions, site } from "@/lib/content";
+import { budgetOptions, plans, serviceOptions, site } from "@/lib/content";
 import { eventId, track } from "@/lib/track";
 
 type Status = "idle" | "sending" | "done" | "error";
@@ -19,8 +19,16 @@ export function LeadForm() {
   const params = useSearchParams();
   const plan = params.get("plan") ?? "";
   const [status, setStatus] = useState<Status>("idle");
-  const [service, setService] = useState<string>(plan ? "Stratégie complète" : "");
+  const [services, setServices] = useState<string[]>(plan ? ["Stratégie complète"] : []);
+  const service = services.join(", ");
+  const toggleService = (s: string) =>
+    setServices((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
   const [budget, setBudget] = useState<string>("");
+  const [selectedPlan, setSelectedPlan] = useState<string>(
+    plans.find((p) => p.name.toLowerCase() === plan.toLowerCase())?.name ??
+      (plan === "devis" || plan === "simulation" ? "Sur mesure" : ""),
+  );
+  const chosenPlan = selectedPlan || plan;
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -36,10 +44,10 @@ export function LeadForm() {
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, service, budget, plan, eventId: id, page: window.location.href, utm }),
+        body: JSON.stringify({ ...data, service, budget, plan: chosenPlan, eventId: id, page: window.location.href, utm }),
       });
       if (!res.ok) throw new Error(String(res.status));
-      track("generate_lead", { event_id: id, service, budget, plan, form: "audit" });
+      track("generate_lead", { event_id: id, service, budget, plan: chosenPlan, form: "audit" });
       setStatus("done");
       form.reset();
     } catch {
@@ -87,13 +95,28 @@ export function LeadForm() {
             </div>
 
             <fieldset>
-              <legend className="label mb-4 text-muted">Service souhaité</legend>
+              <legend className="label mb-4 text-muted">Services souhaités (plusieurs choix possibles)</legend>
               <div className="flex flex-wrap gap-2">
                 {serviceOptions.map((s) => (
-                  <Chip key={s} active={service === s} onClick={() => setService(service === s ? "" : s)}>
+                  <Chip key={s} active={services.includes(s)} onClick={() => toggleService(s)}>
                     {s}
                   </Chip>
                 ))}
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend className="label mb-4 text-muted">Formule qui vous intéresse</legend>
+              <div className="flex flex-wrap gap-2">
+                {[...plans.map((p) => p.name), "Sur mesure", "Je ne sais pas encore"].map((name) => {
+                  const p = plans.find((x) => x.name === name);
+                  return (
+                    <Chip key={name} active={selectedPlan === name} onClick={() => setSelectedPlan(selectedPlan === name ? "" : name)}>
+                      {name}
+                      {p && <span className="opacity-60"> · {formatDh(p.monthly)} DH / mois</span>}
+                    </Chip>
+                  );
+                })}
               </div>
             </fieldset>
 
@@ -108,10 +131,15 @@ export function LeadForm() {
               </div>
             </fieldset>
 
-            <label className="relative block">
-              <textarea name="message" rows={3} placeholder="Message" className={`${field} resize-none`} />
-              <span className={floating}>Décrivez votre situation en quelques mots</span>
-            </label>
+            <div>
+              <label className="relative block">
+                <textarea name="message" rows={4} required minLength={20} placeholder="Message" className={`${field} resize-none`} />
+                <span className={floating}>Votre projet et vos objectifs *</span>
+              </label>
+              <p className="mt-3 text-sm text-faint">
+                Activité, situation actuelle (publicité, site, leads) et objectifs pour les 3 à 6 prochains mois.
+              </p>
+            </div>
 
             <div className="flex flex-col gap-5 pt-2 sm:flex-row sm:items-center">
               <Button type="submit" cursor="Go">
@@ -131,6 +159,8 @@ export function LeadForm() {
     </div>
   );
 }
+
+const formatDh = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
