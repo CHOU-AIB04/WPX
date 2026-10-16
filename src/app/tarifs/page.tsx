@@ -12,14 +12,16 @@ import { PlansGrid } from "@/components/pricing/PlansGrid";
 import { QuoteCta } from "@/components/pricing/QuoteCta";
 import { ServiceRatesList, UnitCostsTable } from "@/components/pricing/Rates";
 import { showPrices } from "@/lib/geo";
-import { oneShots } from "@/lib/content";
+import { oneShots, plans } from "@/lib/content";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { ORG_ID, abs, breadcrumbLd, faqLd, pageMeta, webPageLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Tarifs : forfaits agence, CRM all-in-one, agents IA et simulateur de coût",
-  description:
-    "Le prix de chaque service, les paliers du CRM all-in-one WePushX, les trois packs d'agents IA, les projets one-shot et le coût réel de la consommation — WhatsApp, emails, chatbot, agent vocal, minutes d'appel. Avec un simulateur pour estimer votre budget mensuel.",
-  alternates: { canonical: "/tarifs" },
-};
+const TITLE = "Tarifs agence marketing digital au Maroc : forfaits, CRM et agents IA";
+const DESCRIPTION =
+  "Forfaits agence dès 3.900 DH/mois, paliers du CRM all-in-one WePushX, packs d'agents IA, projets one-shot et coût réel de la consommation. Avec un simulateur de budget mensuel.";
+
+export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/tarifs" });
+
 
 const tarifsFaq = [
   {
@@ -52,23 +54,40 @@ const tarifsFaq = [
   },
 ];
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: tarifsFaq.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
-
 export default async function TarifsPage() {
   /** Géolocalisation : hors Maroc, les offres restent, les montants partent. */
   const priced = await showPrices();
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <JsonLd
+        data={[
+          webPageLd({ path: "/tarifs", name: TITLE, description: DESCRIPTION }),
+          breadcrumbLd([{ name: "Tarifs", path: "/tarifs" }]),
+          faqLd(tarifsFaq),
+          // Montants seulement quand la page les affiche (règle de src/lib/geo.ts).
+          ...(priced
+            ? [
+                {
+                  "@context": "https://schema.org",
+                  "@type": "OfferCatalog",
+                  name: "Forfaits agence WePushX",
+                  url: abs("/tarifs"),
+                  itemListElement: plans.map((p) => ({
+                    "@type": "Offer",
+                    name: `Forfait ${p.name}`,
+                    description: p.pitch,
+                    price: p.monthly,
+                    priceCurrency: "MAD",
+                    priceSpecification: { "@type": "UnitPriceSpecification", price: p.monthly, priceCurrency: "MAD", unitText: "MONTH" },
+                    seller: { "@id": ORG_ID },
+                    url: abs("/tarifs"),
+                  })),
+                },
+              ]
+            : []),
+        ]}
+      />
       <HashLanding />
 
       {/* ═══════════════════════════════════════════════════════════ hero */}

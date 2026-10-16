@@ -5,13 +5,15 @@ import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { OfferRows } from "@/components/sections/OfferRows";
 import { platformFeatures } from "@/lib/platform";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbLd, faqLd, itemListLd, pageMeta, webPageLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "WePushX CRM : la plateforme tout-en-un pour les PME marocaines",
-  description:
-    "Automatisations, IA conversationnelle, Social Planner, Ad Manager, funnels, calendriers, avis Google, formations, webinaires, hébergement WordPress et AI Studio. Un seul abonnement.",
-  alternates: { canonical: "/plateforme" },
-};
+const TITLE = "WePushX CRM : CRM all-in-one et automatisation WhatsApp pour PME au Maroc";
+const DESCRIPTION =
+  "Automatisations, IA conversationnelle, agents vocaux, Social Planner, Ad Manager, funnels, calendriers, avis Google, formations, webinaires et AI Studio. Un seul abonnement.";
+
+export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/plateforme" });
+
 
 const platformFaq = [
   {
@@ -35,6 +37,14 @@ const platformFaq = [
 export default function PlatformPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          webPageLd({ path: "/plateforme", name: TITLE, description: DESCRIPTION, type: "CollectionPage" }),
+          itemListLd(platformFeatures.map((f) => ({ name: f.name, path: `/plateforme/${f.slug}` }))),
+          breadcrumbLd([{ name: "Plateforme", path: "/plateforme" }]),
+          faqLd(platformFaq),
+        ]}
+      />
       <section className="relative overflow-hidden pb-16 pt-36 md:pt-44">
         <div className="container-x">
           <SectionLabel n="→">La plateforme</SectionLabel>

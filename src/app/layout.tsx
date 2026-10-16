@@ -7,6 +7,8 @@ import { Header } from "@/components/layout/Header";
 import { Preloader } from "@/components/layout/Preloader";
 import { Providers } from "@/components/layout/Providers";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { SITE_URL, keywords, siteGraph } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter_Tight({ subsets: ["latin"], variable: "--font-inter-tight", display: "swap" });
@@ -15,7 +17,9 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", 
 const brand = Montserrat({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-montserrat", display: "swap" });
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://wepushx.com";
+
+const DESCRIPTION =
+  "Agence marketing digital au Maroc : Meta Ads, Google Ads, SEO & GEO, sites web, UGC par IA et CRM WhatsApp pour les PME. Chaque dirham tracé jusqu'au client. Résultats garantis en 60 jours.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -23,18 +27,40 @@ export const metadata: Metadata = {
     default: "WePushX · Agence marketing digital au Maroc | Meta Ads, Google Ads, SEO",
     template: "%s · WePushX",
   },
-  description:
-    "WePushX transforme chaque dirham investi en clients qualifiés : Meta Ads, Google Ads, sites web, SEO, UGC par IA et CRM WhatsApp pour les PME marocaines. Résultats garantis en 60 jours.",
+  description: DESCRIPTION,
+  applicationName: "WePushX",
+  keywords,
+  authors: [{ name: "WePushX", url: SITE_URL }],
+  creator: "WePushX",
+  publisher: "WePushX",
+  category: "Marketing digital",
+  formatDetection: { telephone: false, email: false, address: false },
   openGraph: {
     type: "website",
     locale: "fr_MA",
     siteName: "WePushX",
+    url: "/",
     title: "WePushX · Chaque dirham investi devient un client qualifié",
-    description: "Agence de performance pour les PME marocaines. Garantie résultats 60 jours.",
+    description: "Agence marketing digital de performance pour les PME marocaines : Meta Ads, Google Ads, SEO, sites web, CRM. Garantie résultats 60 jours.",
   },
-  alternates: { canonical: "/" },
+  twitter: {
+    card: "summary_large_image",
+    title: "WePushX · Chaque dirham investi devient un client qualifié",
+    description: "Agence marketing digital de performance pour les PME marocaines. Garantie résultats 60 jours.",
+  },
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": [{ url: "/feed.xml", title: "WePushX · Offres et nouveautés" }] },
+  },
   // version de recette : jamais indexée (NOINDEX=1 sur le projet Vercel de test)
-  robots: process.env.NOINDEX === "1" ? { index: false, follow: false } : undefined,
+  robots:
+    process.env.NOINDEX === "1"
+      ? { index: false, follow: false }
+      : { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } : undefined,
+  },
 };
 
 export const viewport: Viewport = {
@@ -47,16 +73,6 @@ export const viewport: Viewport = {
 // Appliqué avant le premier rendu (pas de flash) : ?theme=light|dark > choix mémorisé > sombre
 const themeScript = `(function(){var d=document.documentElement;try{var q=new URLSearchParams(location.search).get('theme');if(q==='light'||q==='dark'){localStorage.setItem('wpx-theme',q)}var t=(q==='light'||q==='dark')?q:localStorage.getItem('wpx-theme');d.dataset.theme=t==='light'?'light':'dark'}catch(e){d.dataset.theme='dark'}})();`;
 
-const orgJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "WePushX",
-  url: SITE_URL,
-  email: "contact@wepushx.com",
-  areaServed: { "@type": "Country", name: "Maroc" },
-  description: "Agence marketing digital : Meta Ads, Google Ads, SEO, sites web, CRM et automation.",
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" data-theme="dark" suppressHydrationWarning className={`${inter.variable} ${serif.variable} ${mono.variable} ${brand.variable}`}>
@@ -67,7 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`}
           </Script>
         )}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
+        <JsonLd data={siteGraph()} />
       </head>
       <body className="grain">
         {GTM_ID && (

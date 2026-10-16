@@ -17,7 +17,7 @@ import type { NextRequest } from "next/server";
  *  les tarifs. Googlebot crawle depuis les USA ; sans cette exception, la page
  *  /tarifs serait indexée vide de tout montant. */
 const CRAWLERS =
-  /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|applebot|facebookexternalhit|twitterbot|linkedinbot|ahrefsbot|semrushbot|petalbot|gptbot|claudebot|perplexitybot/i;
+  /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|applebot|facebookexternalhit|twitterbot|linkedinbot|ahrefsbot|semrushbot|petalbot|gptbot|oai-searchbot|chatgpt-user|claudebot|claude-searchbot|claude-user|perplexitybot|perplexity-user|amazonbot|meta-externalagent|duckassistbot|mistralai-user|ccbot/i;
 
 export function proxy(request: NextRequest) {
   const ua = request.headers.get("user-agent") ?? "";
@@ -42,6 +42,6 @@ export function proxy(request: NextRequest) {
 export const config = {
   // On exclut les assets : inutile de faire tourner le proxy sur un .svg.
   matcher: [
-    "/((?!api/|_next/static/|_next/image/|favicon\\.ico|robots\\.txt|sitemap\\.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff2?)$).*)",
+    "/((?!api/|_next/static/|_next/image/|favicon\\.ico|robots\\.txt|sitemap\\.xml|llms(?:-full)?\\.txt|feed\\.xml|manifest\\.webmanifest|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff2?)$).*)",
   ],
 };

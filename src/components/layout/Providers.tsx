@@ -18,7 +18,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const l = new Lenis({ autoRaf: true, lerp: 0.11, anchors: { offset: -80 } });
+    // Défilement natif à la molette et au toucher : pas d'inertie, pas de
+    // retard. Lenis reste pour stop/start (préchargeur, menu) et les ancres.
+    const l = new Lenis({ autoRaf: true, smoothWheel: false, syncTouch: false, anchors: { offset: -80 } });
     // instance créée côté client uniquement, exposée au reste de l'app
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLenis(l);

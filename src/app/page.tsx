@@ -13,12 +13,8 @@ import { Services } from "@/components/sections/Services";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { faqs } from "@/lib/content";
 import { showPrices } from "@/lib/geo";
-
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-};
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqLd, tagline, webPageLd } from "@/lib/seo";
 
 export default async function Home() {
   /** Hors Maroc, la section tarifs garde les forfaits mais pas les montants. */
@@ -26,7 +22,12 @@ export default async function Home() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <JsonLd
+        data={[
+          webPageLd({ path: "/", name: "WePushX · Agence marketing digital au Maroc", description: tagline }),
+          faqLd(faqs),
+        ]}
+      />
       <Hero />
       <Marquees />
       <Manifesto />

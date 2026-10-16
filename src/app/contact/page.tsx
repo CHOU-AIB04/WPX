@@ -4,12 +4,14 @@ import { SectionLabel } from "@/components/ui/Button";
 import { Lines, Reveal } from "@/components/ui/motion";
 import { LeadForm } from "@/components/sections/LeadForm";
 import { site } from "@/lib/content";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbLd, pageMeta, webPageLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact & audit gratuit",
-  description: "Réservez un audit gratuit de 30 minutes avec WePushX. Réponse sous 24h, sans engagement.",
-  alternates: { canonical: "/contact" },
-};
+const TITLE = "Contact : audit marketing digital gratuit de 30 minutes";
+const DESCRIPTION =
+  "Réservez un audit gratuit de 30 minutes avec WePushX, agence marketing digital au Maroc : publicité, site, SEO et suivi commercial. Réponse sous 24h, sans engagement.";
+
+export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/contact" });
 
 const steps = ["Vous envoyez votre demande", "On vous répond sous 24h", "Appel d'audit de 30 min", "Proposition personnalisée avec ROI"];
 const promises = ["Remboursement 100% si 0 lead en 60 jours", "Réponse sous 24h ouvrées", "Audit gratuit, sans engagement", "Contrat transparent, sans clause abusive"];
@@ -17,6 +19,12 @@ const promises = ["Remboursement 100% si 0 lead en 60 jours", "Réponse sous 24h
 export default function ContactPage() {
   return (
     <section className="relative overflow-hidden pb-28 pt-36 md:pt-44">
+      <JsonLd
+        data={[
+          webPageLd({ path: "/contact", name: TITLE, description: DESCRIPTION, type: "ContactPage" }),
+          breadcrumbLd([{ name: "Contact", path: "/contact" }]),
+        ]}
+      />
       <div aria-hidden className="pointer-events-none absolute -left-[20vw] top-0 -z-10 h-[60vw] w-[60vw] rounded-full bg-[radial-gradient(closest-side,rgba(122,28,140,0.35),transparent)] blur-2xl" />
       <div className="container-x">
         <SectionLabel n="→">Démarrons</SectionLabel>

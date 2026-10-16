@@ -6,15 +6,17 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { HashLanding } from "@/components/layout/HashLanding";
 import { OfferSection } from "@/components/sections/OfferSection";
 import { OffersRail } from "@/components/sections/OffersRail";
-import { offersOf } from "@/lib/catalog";
+import { offerHref, offersOf } from "@/lib/catalog";
 import { showPrices } from "@/lib/geo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbLd, itemListLd, pageMeta, webPageLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Toutes nos offres : services d'agence et CRM all-in-one WePushX",
-  description:
-    "Le catalogue complet sur une page : Meta Ads, Google Ads, sites web, SEO & GEO, UGC par IA, réseaux sociaux, et les douze briques du CRM all-in-one WePushX — automatisations, IA conversationnelle, agents vocaux, Social Planner, Ad Manager.",
-  alternates: { canonical: "/offres" },
-};
+const TITLE = "Toutes nos offres : services d'agence marketing digital et CRM all-in-one";
+const DESCRIPTION =
+  "Le catalogue complet : Meta Ads, Google Ads, sites web, SEO & GEO, UGC par IA, réseaux sociaux et les douze briques du CRM all-in-one WePushX (automatisations, IA conversationnelle, agents vocaux).";
+
+export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/offres" });
+
 
 const services = offersOf("service");
 const platform = offersOf("platform");
@@ -72,6 +74,13 @@ export default async function OffresPage() {
 
   return (
     <>
+      <JsonLd
+        data={[
+          webPageLd({ path: "/offres", name: TITLE, description: DESCRIPTION, type: "CollectionPage" }),
+          itemListLd([...services, ...platform].map((o) => ({ name: o.name, path: offerHref(o) }))),
+          breadcrumbLd([{ name: "Offres", path: "/offres" }]),
+        ]}
+      />
       <HashLanding />
 
       {/* ═══════════════════════════════════════════════════════════ hero */}

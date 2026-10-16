@@ -1,15 +1,13 @@
-export const metadata = {
-  title: 'CGV | WePushX — Agence Marketing Digital au Maroc',
+import { pageMeta } from '@/lib/seo'
+
+// Canonique relative : l'ancienne pointait vers www.wepushx.com, qui redirige
+// en 301 vers wepushx.com — signal contradictoire pour Google.
+export const metadata = pageMeta({
+  title: 'Conditions générales de vente (CGV)',
   description:
-    'Découvrez WePushX, agence de marketing digital au Maroc : notre expertise, nos services, notre approche et notre vision pour accompagner les marques dans leur croissance digitale.',
-  alternates: {
-    canonical: 'https://www.wepushx.com/cgv',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-}
+    'Conditions générales de vente de WePushX, agence marketing digital au Maroc, applicables à toutes nos prestations.',
+  path: '/cgv',
+})
 
 
 export default function CGVPAGE() {

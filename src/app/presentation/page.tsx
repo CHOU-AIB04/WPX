@@ -11,19 +11,20 @@ import { showPrices } from "@/lib/geo";
 import { oneShots, site } from "@/lib/content";
 import { AdProof } from "@/components/sections/AdProof";
 import { CostSimulator } from "@/components/pricing/CostSimulator";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbLd, pageMeta, webPageLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Présentation WePushX : l'agence, la méthode, le CRM all-in-one et les agents IA",
-  description:
-    "Notre présentation complète : le CRM all-in-one qui remplace huit outils, les trois piliers de notre système de croissance, les résultats obtenus pour nos clients, les captures de campagnes réelles, la méthode en cinq étapes, les forfaits et les trois agents IA.",
-  alternates: { canonical: "/presentation" },
-  openGraph: {
-    title: "Présentation WePushX — agence marketing digital, Maroc",
-    description:
-      "Sites, landing pages, campagnes publicitaires, UGC par IA, CRM all-in-one et agents IA. Une équipe d'experts vérifiés, un seul objectif : faire croître votre business.",
-    type: "website",
-  },
-};
+const TITLE = "Présentation WePushX : agence marketing digital, méthode, CRM et agents IA";
+const DESCRIPTION =
+  "L'agence en détail : le CRM all-in-one qui remplace huit outils, notre système de croissance, les résultats clients, des campagnes réelles, la méthode en cinq étapes, les forfaits et les agents IA.";
+
+export const metadata: Metadata = pageMeta({
+  title: TITLE,
+  description: DESCRIPTION,
+  path: "/presentation",
+  socialTitle: "Présentation WePushX — agence marketing digital, Maroc",
+});
+
 
 /* ─────────────────────────────────────────────────────────── le contenu */
 
@@ -150,6 +151,12 @@ export default async function PresentationPage() {
 
   return (
     <>
+      <JsonLd
+        data={[
+          webPageLd({ path: "/presentation", name: TITLE, description: DESCRIPTION, type: "AboutPage" }),
+          breadcrumbLd([{ name: "Présentation", path: "/presentation" }]),
+        ]}
+      />
       <HashLanding />
 
       {/* ═════════════════════════════════════════════════ ouverture */}

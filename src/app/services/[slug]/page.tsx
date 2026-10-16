@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { OfferPage } from "@/components/sections/OfferPage";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { findOffer, slugsOf } from "@/lib/catalog";
-import { site } from "@/lib/content";
 import { showPrices } from "@/lib/geo";
+import { ORG_ID, abs, breadcrumbLd, cities, faqLd, pageMeta, webPageLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -17,12 +18,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const offer = findOffer("service", slug);
   if (!offer) return {};
-  return {
-    title: offer.seo.title,
-    description: offer.seo.description,
-    alternates: { canonical: `/services/${offer.slug}` },
-    openGraph: { title: offer.seo.title, description: offer.seo.description, type: "website" },
-  };
+  return pageMeta({
+    title: offer.seo.title, description: offer.seo.description, path: `/services/${offer.slug}`,
+    image: { url: `/services/${offer.slug}/opengraph-image`, alt: offer.seo.title },
+  });
 }
 
 export default async function ServiceDetailPage({ params }: Props) {
@@ -34,19 +33,39 @@ export default async function ServiceDetailPage({ params }: Props) {
   // devient donc dynamique pour pouvoir lire le pays du visiteur.
   const priced = await showPrices();
 
-  const jsonLd = {
+  const path = `/services/${offer.slug}`;
+
+  const service = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${abs(path)}#service`,
     name: offer.name,
     serviceType: offer.kicker,
-    description: offer.seo.description,
-    areaServed: { "@type": "Country", name: "Maroc" },
-    provider: { "@type": "Organization", name: site.name, email: site.email },
+    description: offer.body,
+    url: abs(path),
+    image: abs(`${path}/opengraph-image`),
+    provider: { "@id": ORG_ID },
+    areaServed: [{ "@type": "Country", name: "Maroc" }, ...cities.map((c) => ({ "@type": "City", name: c }))],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: offer.name,
+      itemListElement: offer.bullets.map((b) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: b } })),
+    },
   };
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd
+        data={[
+          webPageLd({ path, name: offer.seo.title, description: offer.seo.description }),
+          service,
+          breadcrumbLd([
+            { name: "Services", path: "/services" },
+            { name: offer.name, path },
+          ]),
+          faqLd(offer.faq),
+        ]}
+      />
       <OfferPage offer={offer} showPrices={priced} />
     </>
   );

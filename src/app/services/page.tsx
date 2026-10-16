@@ -6,13 +6,15 @@ import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { OfferRows } from "@/components/sections/OfferRows";
 import { oneShots, services } from "@/lib/content";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbLd, faqLd, itemListLd, pageMeta, webPageLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Services : Meta Ads, Google Ads, sites web, SEO, UGC IA, réseaux sociaux",
-  description:
-    "Six leviers exécutés par l'agence pour les PME marocaines : Meta Ads, Google Ads, création de sites, SEO & GEO, UGC par IA et gestion des réseaux sociaux.",
-  alternates: { canonical: "/services" },
-};
+const TITLE = "Services marketing digital au Maroc : Meta Ads, Google Ads, SEO, sites web";
+const DESCRIPTION =
+  "Six leviers exécutés par notre agence pour les PME marocaines : Meta Ads, Google Ads, création de sites web, SEO & GEO, UGC par IA et gestion des réseaux sociaux.";
+
+export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/services" });
+
 
 const servicesFaq = [
   { q: "Est-ce que vous créez les créatifs publicitaires ?", a: "Oui. Chaque forfait inclut un volume de créas ads par mois (5, 8 ou 10), et les vidéos UGC par IA sont disponibles en option ou en pack." },
@@ -24,6 +26,14 @@ const servicesFaq = [
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          webPageLd({ path: "/services", name: TITLE, description: DESCRIPTION, type: "CollectionPage" }),
+          itemListLd(services.map((s) => ({ name: s.name, path: `/services/${s.slug}` }))),
+          breadcrumbLd([{ name: "Services", path: "/services" }]),
+          faqLd(servicesFaq),
+        ]}
+      />
       <section className="relative overflow-hidden pb-16 pt-36 md:pt-44">
         <div className="container-x">
           <SectionLabel n="→">Nos services</SectionLabel>

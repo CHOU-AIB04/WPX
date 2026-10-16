@@ -64,7 +64,7 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-bright opacity-70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-violet-bright" />
             </span>
-            Agence de performance · Maroc
+            Agence marketing digital · Maroc
           </span>
           <span className="hidden text-faint sm:inline">/</span>
           <span className="hidden sm:inline">Meta · Google · Web · SEO · CRM</span>
