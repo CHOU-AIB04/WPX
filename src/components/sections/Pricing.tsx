@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Arrow } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/motion";
 import { PlansGrid } from "@/components/pricing/PlansGrid";
+import { PriceDisclaimer } from "@/components/ui/Price";
 
 /**
  * Section tarifs de la page d'accueil.
@@ -30,6 +31,7 @@ export function Pricing({ showPrices = true }: { showPrices?: boolean }) {
               : "Engagement minimum 3 mois · Garantie résultats 60 jours · Budget publicitaire séparé · Devis sous 48 h"
           }
         />
+        {showPrices && <PriceDisclaimer className="mx-auto mt-6 text-center" />}
 
         <Reveal delay={0.1}>
           <div className="mt-14 flex justify-center">

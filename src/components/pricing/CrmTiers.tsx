@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/motion";
-import { crmPlans, dh, ON_REQUEST } from "@/lib/pricing";
+import { Price } from "@/components/ui/Price";
+import { crmPlans, ON_REQUEST } from "@/lib/pricing";
 
 /**
  * Les paliers d'abonnement à la plateforme.
@@ -34,10 +35,16 @@ export function CrmTiers({ showPrices = true }: { showPrices?: boolean }) {
           <div className="mt-8 border-t border-line pt-8">
             {showPrices ? (
               <>
-                <p className="display text-[clamp(2.6rem,3.6vw,3.6rem)] leading-none tabular-nums">{dh(p.monthly)}</p>
-                <p className="mt-2 text-muted">MAD HT / mois · {p.seats}</p>
+                <Price
+                  id={p.priceId}
+                  variant="stack"
+                  fromClassName="text-faint"
+                  amountClassName="display text-[clamp(2.6rem,3.6vw,3.6rem)] leading-none"
+                  unitClassName="text-muted"
+                  suffix={` · ${p.seats}`}
+                />
                 <p className="mt-4 text-[0.88rem] text-fg/65">
-                  Mise en place <span className="tabular-nums text-fg">{dh(p.setup)} DH</span>, une seule fois
+                  Mise en place <Price id={p.setupId} currency="DH" lower className="text-fg" />
                 </p>
               </>
             ) : (

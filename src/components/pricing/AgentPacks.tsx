@@ -1,7 +1,8 @@
 import { Arrow } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/motion";
 import Link from "next/link";
-import { agentPacks, dh, ON_REQUEST } from "@/lib/pricing";
+import { Price } from "@/components/ui/Price";
+import { agentPacks, ON_REQUEST } from "@/lib/pricing";
 
 /**
  * Les trois agents conversationnels, en escalier.
@@ -44,7 +45,7 @@ export function AgentPacks({ showPrices = true }: { showPrices?: boolean }) {
               </p>
 
               <div className={`mt-7 border-t pt-7 ${flag ? "border-line-ink" : "border-line"}`}>
-                {p.monthly === 0 ? (
+                {!p.priceId ? (
                   <>
                     <p className={`serif-accent text-[2.4rem] leading-none ${flag ? "text-accent-paper" : "text-lilac"}`}>
                       Offert
@@ -55,8 +56,14 @@ export function AgentPacks({ showPrices = true }: { showPrices?: boolean }) {
                   </>
                 ) : showPrices ? (
                   <>
-                    <p className="display text-[2.6rem] leading-none tabular-nums">{dh(p.monthly)}</p>
-                    <p className={`mt-2 text-sm ${flag ? "text-ink/60" : "text-muted"}`}>MAD HT / mois · par agent</p>
+                    <Price
+                      id={p.priceId}
+                      variant="stack"
+                      fromClassName={flag ? "text-ink/60" : "text-faint"}
+                      amountClassName="display text-[2.6rem] leading-none"
+                      unitClassName={`text-sm ${flag ? "text-ink/60" : "text-muted"}`}
+                      suffix=" · par agent"
+                    />
                   </>
                 ) : (
                   <>
@@ -90,7 +97,7 @@ export function AgentPacks({ showPrices = true }: { showPrices?: boolean }) {
                   className={`group inline-flex items-center gap-3 text-[0.95rem] ${flag ? "text-ink" : "text-fg"}`}
                 >
                   <span className="link-underline">
-                    {p.monthly === 0 ? "Activer cet agent" : "Parler de cet agent"}
+                    {!p.priceId ? "Activer cet agent" : "Parler de cet agent"}
                   </span>
                   <span
                     className={`flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-500 group-hover:rotate-[-45deg] ${

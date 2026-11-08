@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { MARK_DARK, MARK_LIGHT, MARK_TRANSFORM } from "./mark-paths";
+import { MarkStatic } from "./MarkStatic";
 
 type Props = {
   className?: string;
@@ -28,6 +29,7 @@ export function Mark({
 }: Props) {
   const reduce = useReducedMotion();
   const play = animate && !reduce;
+  if (!play) return <MarkStatic className={className} light={light} dark={dark} title={title} />;
 
   const layer = (fill: string, d: string, extraDelay: number, fade: boolean) => (
     <motion.svg

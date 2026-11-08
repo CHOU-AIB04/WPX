@@ -1,9 +1,7 @@
-"use client";
-
-import { motion } from "motion/react";
-import { Mark } from "@/components/brand/Mark";
+import type { CSSProperties } from "react";
+import { MarkStatic } from "@/components/brand/MarkStatic";
 import { SectionLabel } from "@/components/ui/Button";
-import { EASE, Lines } from "@/components/ui/motion";
+import { Lines } from "@/components/ui/motion";
 import { comparison, type Mark as M } from "@/lib/content";
 
 function Cell({ v, strong = false }: { v: M; strong?: boolean }) {
@@ -27,57 +25,45 @@ export function Comparison() {
           <span key="2" className="serif-accent text-lilac">parle d&apos;elle-même.</span>
         </Lines>
 
-        <div className="mt-12 md:hidden">
-          <div className="grid grid-cols-[1fr_4.5rem_4.5rem] items-end gap-2 pb-3">
-            <span />
-            <span className="label text-center !text-[0.58rem] text-faint">Agence classique</span>
-            <span className="label rounded-t-2xl bg-violet pb-2 pt-3 text-center !text-[0.62rem] text-snow">WePushX</span>
-          </div>
-          {comparison.map((row, i) => (
-            <div key={row.feature} className="grid grid-cols-[1fr_4.5rem_4.5rem] items-center gap-2 border-t border-line">
-              <span className="py-4 text-sm text-fg/85">{row.feature}</span>
-              <span className="text-center"><Cell v={row.classic} /></span>
-              <span className={`flex h-full items-center justify-center bg-violet ${i === comparison.length - 1 ? "rounded-b-2xl" : ""}`}><Cell v={row.wpx} strong /></span>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-16 hidden overflow-x-auto md:block">
-          <table className="w-full min-w-[640px] border-collapse text-left">
+        {/* Un seul tableau pour tous les écrans : sur mobile, la colonne DIY
+            disparaît et les cellules se resserrent (avant : deux rendus
+            complets, mobile et desktop, dans le DOM). */}
+        <div className="mt-12 md:mt-16 md:overflow-x-auto">
+          <table className="w-full border-collapse text-left md:min-w-[640px]">
             <thead>
               <tr>
-                <th className="w-[40%] py-6" />
-                <th className="py-6 text-center font-normal">
+                <th className="py-3 md:w-[40%] md:py-6" />
+                <th className="hidden py-6 text-center font-normal md:table-cell">
                   <span className="block font-medium">DIY</span>
                   <span className="label text-faint">Vous tout seul</span>
                 </th>
-                <th className="py-6 text-center font-normal">
-                  <span className="block font-medium">Agence classique</span>
-                  <span className="label text-faint">Prestataire standard</span>
+                <th className="w-[4.5rem] px-1 pb-3 text-center align-bottom font-normal md:w-auto md:px-0 md:py-6 md:align-middle">
+                  <span className="label block !text-[0.58rem] text-faint md:hidden">Agence classique</span>
+                  <span className="hidden font-medium md:block">Agence classique</span>
+                  <span className="label hidden text-faint md:block">Prestataire standard</span>
                 </th>
-                <th className="relative rounded-t-3xl bg-violet py-6 text-center font-normal text-snow">
-                  <span className="flex items-center justify-center gap-2 font-semibold">
-                    <Mark className="h-4" light="#f5f0f8" dark="#d8b6ea" /> WePushX
+                <th className="relative w-[4.5rem] rounded-t-2xl bg-violet pb-2 pt-3 text-center font-normal text-snow md:w-auto md:rounded-t-3xl md:py-6">
+                  <span className="label !text-[0.62rem] md:hidden">WePushX</span>
+                  <span className="hidden items-center justify-center gap-2 font-semibold md:flex">
+                    <MarkStatic className="h-4 w-auto" light="#f5f0f8" dark="#d8b6ea" /> WePushX
                   </span>
-                  <span className="label text-snow/70">Recommandé</span>
+                  <span className="label hidden text-snow/70 md:block">Recommandé</span>
                 </th>
               </tr>
             </thead>
             <tbody>
               {comparison.map((row, i) => (
-                <motion.tr
+                <tr
                   key={row.feature}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "0px 0px -8% 0px" }}
-                  transition={{ duration: 0.7, delay: i * 0.05, ease: EASE }}
+                  data-reveal=""
+                  style={{ "--rv-d": `${i * 0.05}s`, "--rv-y": "0px" } as CSSProperties}
                   className="border-t border-line"
                 >
-                  <td className="py-5 pr-4 text-fg/85">{row.feature}</td>
-                  <td className="py-5 text-center"><Cell v={row.diy} /></td>
-                  <td className="py-5 text-center"><Cell v={row.classic} /></td>
-                  <td className={`bg-violet py-5 text-center ${i === comparison.length - 1 ? "rounded-b-3xl" : ""}`}><Cell v={row.wpx} strong /></td>
-                </motion.tr>
+                  <td className="py-4 pr-2 text-sm text-fg/85 md:py-5 md:pr-4 md:text-base">{row.feature}</td>
+                  <td className="hidden py-5 text-center md:table-cell"><Cell v={row.diy} /></td>
+                  <td className="py-4 text-center md:py-5"><Cell v={row.classic} /></td>
+                  <td className={`bg-violet py-4 text-center md:py-5 ${i === comparison.length - 1 ? "rounded-b-2xl md:rounded-b-3xl" : ""}`}><Cell v={row.wpx} strong /></td>
+                </tr>
               ))}
             </tbody>
           </table>

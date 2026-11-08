@@ -1,3 +1,4 @@
+import { priceText } from "@/lib/pricing";
 import type { Metadata } from "next";
 import { Button, SectionLabel } from "@/components/ui/Button";
 import { Lines, Reveal } from "@/components/ui/motion";
@@ -8,11 +9,11 @@ import { platformFeatures } from "@/lib/platform";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbLd, faqLd, itemListLd, pageMeta, webPageLd } from "@/lib/seo";
 
-const TITLE = "WePushX CRM : CRM all-in-one et automatisation WhatsApp pour PME au Maroc";
+const TITLE = "CRM au Maroc avec WhatsApp et IA · WePushX CRM";
 const DESCRIPTION =
-  "Automatisations, IA conversationnelle, agents vocaux, Social Planner, Ad Manager, funnels, calendriers, avis Google, formations, webinaires et AI Studio. Un seul abonnement.";
+  "CRM au Maroc avec WhatsApp et IA : automatisations, chatbot en darija, agents vocaux, réseaux sociaux, rendez-vous et avis Google. Un seul abonnement.";
 
-export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/plateforme" });
+export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/plateforme", image: { url: "/plateforme/opengraph-image", alt: TITLE } });
 
 
 const platformFaq = [
@@ -30,7 +31,7 @@ const platformFaq = [
   },
   {
     q: "Qui configure tout ça ?",
-    a: "Nous. Le setup est inclus dans le forfait Scale, et proposé à partir de 700 DH par mois sur les autres forfaits. Vous n'installez rien vous-même.",
+    a: `Nous. La mise en place est incluse dans le forfait Scale. Sinon, l'abonnement CRM démarre ${priceText("crmEssentiel", { lower: true, currency: "DH" })}, avec une mise en place ${priceText("crmSetup", { lower: true, currency: "DH" })}. Vous n'installez rien vous-même.`,
   },
 ];
 
@@ -47,8 +48,7 @@ export default function PlatformPage() {
       />
       <section className="relative overflow-hidden pb-16 pt-36 md:pt-44">
         <div className="container-x">
-          <SectionLabel n="→">La plateforme</SectionLabel>
-          <Lines as="h1" className="display mt-8 text-[clamp(2.8rem,8.5vw,8.5rem)]">
+          <Lines as="h1" intro eyebrow="CRM au Maroc avec WhatsApp et IA" className="display text-[clamp(2.8rem,8.5vw,8.5rem)]">
             <span key="1">Douze briques.</span>
             <span key="2">
               Un seul <span className="serif-accent text-gradient">abonnement.</span>

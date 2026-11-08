@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Arrow } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/motion";
-import { dh, serviceRates, unitPrices } from "@/lib/pricing";
+import { Price } from "@/components/ui/Price";
+import { PRICES, serviceRates, unitCards, unitValueText, type PriceId } from "@/lib/pricing";
 import { offerHref } from "@/lib/catalog";
 import { services } from "@/lib/content";
 
@@ -54,13 +55,13 @@ export function ServiceRatesList({ showPrices = true }: { showPrices?: boolean }
                 <>
                   <div className="col-span-4 md:col-span-2 md:text-right">
                     <span className="label block text-faint md:hidden">Mise en place</span>
-                    <span className="tabular-nums text-fg/85">{r.setup ? `${dh(r.setup)} DH` : "—"}</span>
+                    <RateCell id={r.setupId} />
                   </div>
 
                   <div className="col-span-4 md:col-span-2 md:text-right">
                     <span className="label block text-faint md:hidden">Récurrent</span>
-                    <span className="tabular-nums text-fg/85">{r.monthly ? `${dh(r.monthly)} DH` : "—"}</span>
-                    <span className="block text-[0.74rem] text-faint">{r.unit}</span>
+                    <RateCell id={r.monthlyId} />
+                    {r.monthlyId && <span className="block text-[0.74rem] text-faint">{PRICES[r.monthlyId].unit}</span>}
                   </div>
                 </>
               )}
@@ -81,18 +82,26 @@ export function ServiceRatesList({ showPrices = true }: { showPrices?: boolean }
   );
 }
 
+/** Un montant de la grille : « à partir de » en petit, le chiffre en dessous. */
+function RateCell({ id }: { id: PriceId | null }) {
+  if (!id) return <span className="tabular-nums text-fg/85">—</span>;
+  return (
+    <Price id={id} currency="DH" showUnit={false} className="tabular-nums text-fg/85" />
+  );
+}
+
 /**
  * Ce que coûte la consommation, par unité.
  *
- * Les chiffres viennent de `unitPrices()` : coût fournisseur × marge × taux
- * de change. Personne ne voit le coût d'achat. Hors Maroc, on garde la liste
+ * Les montants viennent du registre `PRICES` (via `unitCards`), les mêmes
+ * que ceux du simulateur. Hors Maroc, on garde la liste
  * des postes facturés à l'usage — l'information structurante — et on retire
  * les montants.
  */
 export function UnitCostsTable({ showPrices = true }: { showPrices?: boolean }) {
   return (
     <div className="grid gap-px overflow-hidden rounded-[1.8rem] border border-line bg-line md:grid-cols-2 xl:grid-cols-3">
-      {unitPrices().map((u, i) => (
+      {unitCards.map((u, i) => (
         <Reveal key={u.id} delay={(i % 3) * 0.06} className="flex flex-col bg-ink-2 p-8 transition-colors duration-500 hover:bg-ink-3">
           <p className="label text-faint">{String(i + 1).padStart(2, "0")}</p>
           <h3 className="display mt-8 text-2xl">{u.label}</h3>
@@ -103,7 +112,7 @@ export function UnitCostsTable({ showPrices = true }: { showPrices?: boolean }) 
               <div key={v.k} className="flex items-baseline justify-between gap-4">
                 <span className="text-[0.88rem] text-fg/70">{v.k}</span>
                 {showPrices ? (
-                  <span className="tabular-nums text-fg">{v.v}</span>
+                  <span className="text-right tabular-nums text-fg">{unitValueText(v)}</span>
                 ) : (
                   <span aria-hidden className="h-px w-8 shrink-0 bg-line" />
                 )}

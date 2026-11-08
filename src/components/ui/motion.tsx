@@ -1,18 +1,21 @@
-"use client";
+import { Children, isValidElement, type CSSProperties, type ReactNode } from "react";
 
-import {
-  animate,
-  motion,
-  useInView,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-  type HTMLMotionProps,
-} from "motion/react";
-import { Children, isValidElement, useEffect, useRef, useState } from "react";
-import { useApp } from "@/components/layout/Providers";
+/**
+ * Révélations au scroll, sans JavaScript côté React.
+ *
+ * Le HTML serveur est lisible tel quel : sans JS, tout est visible. Un petit
+ * script inline (`revealScript`, posé dans le layout) ajoute la classe `rv`
+ * sur <html> puis un IntersectionObserver pose `data-rv-in` sur chaque bloc
+ * qui entre dans l'écran. Les transitions vivent dans globals.css.
+ *
+ * Avant : chaque <Reveal> était un composant motion hydraté, invisible
+ * (`opacity: 0`) jusqu'à l'exécution du JS — c'est ce qui retardait le LCP.
+ */
 
-export const EASE = [0.16, 1, 0.3, 1] as const;
+export { EASE } from "./ease";
+export { Counter, Magnetic } from "./motion-client";
+
+type Vars = CSSProperties & Record<`--${string}`, string>;
 
 /** Apparition douce au scroll. */
 export function Reveal({
@@ -20,25 +23,30 @@ export function Reveal({
   delay = 0,
   y = 28,
   className,
-  ...rest
-}: { children: React.ReactNode; delay?: number; y?: number } & HTMLMotionProps<"div">) {
+  style,
+  id,
+}: {
+  children?: ReactNode;
+  delay?: number;
+  y?: number;
+  className?: string;
+  style?: CSSProperties;
+  id?: string;
+}) {
+  const vars: Vars = { "--rv-d": `${delay}s`, "--rv-y": `${y}px`, ...style };
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 0.9, delay, ease: EASE }}
-      {...rest}
-    >
+    <div data-reveal="" className={className} style={vars} id={id} suppressHydrationWarning>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 /**
  * Titre révélé ligne par ligne (masque). Chaque enfant direct = une ligne.
- * `intro` attend la fin du preloader (hero).
+ *
+ * `intro` (titre du hero) : jamais masqué. Le titre est peint dès le premier
+ * rendu du HTML serveur — c'est l'élément LCP — avec une montée en CSS pur
+ * qui part déjà partiellement visible.
  */
 export function Lines({
   children,
@@ -47,102 +55,60 @@ export function Lines({
   delay = 0,
   stagger = 0.09,
   intro = false,
+  eyebrow,
+  eyebrowRaw,
   as: Tag = "h2",
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   lineClassName?: string;
   delay?: number;
   stagger?: number;
   intro?: boolean;
+  /**
+   * Sur-titre au style « label », rendu DANS le titre. Sert à placer le
+   * mot-clé principal dans le <h1> sans changer le visuel (il remplace le
+   * <SectionLabel> qui était posé au-dessus).
+   */
+  eyebrow?: ReactNode;
+  /** Variante : sur-titre déjà mis en forme par l'appelant (hero de la home). */
+  eyebrowRaw?: ReactNode;
   as?: "h1" | "h2" | "h3" | "p" | "div";
 }) {
-  const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
-  const { introDone } = useApp();
-  const go = inView && (!intro || introDone);
   const lines = Children.toArray(children).filter((c) => c !== null && c !== undefined && c !== "");
+  const attrs = intro ? { className: `lines-intro ${className ?? ""}` } : { className, "data-lines": "" };
 
   return (
-    <Tag ref={ref as never} className={className}>
+    <Tag {...attrs} suppressHydrationWarning>
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      {eyebrowRaw}
       {lines.map((line, i) => (
         <span key={isValidElement(line) && line.key ? line.key : i} className={`block overflow-hidden pb-[0.08em] -mb-[0.08em] ${lineClassName}`}>
-          <motion.span
-            className="block will-change-transform"
-            initial={{ y: "110%", rotate: 2.5 }}
-            animate={go ? { y: "0%", rotate: 0 } : undefined}
-            transition={{ duration: 1.1, delay: delay + i * stagger, ease: EASE }}
-          >
+          <span className="rv-line block" style={{ "--rv-d": `${delay + i * stagger}s` } as Vars}>
             {line}
-          </motion.span>
+          </span>
         </span>
       ))}
     </Tag>
   );
 }
 
-/** Élément magnétique (suit le pointeur quand survolé). */
-export function Magnetic({ children, strength = 0.35, className = "" }: { children: React.ReactNode; strength?: number; className?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const reduce = useReducedMotion();
-  const x = useSpring(useMotionValue(0), { stiffness: 220, damping: 18, mass: 0.4 });
-  const y = useSpring(useMotionValue(0), { stiffness: 220, damping: 18, mass: 0.4 });
-
-  const onMove = (e: React.PointerEvent) => {
-    if (reduce || e.pointerType !== "mouse" || !ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    x.set((e.clientX - (r.left + r.width / 2)) * strength);
-    y.set((e.clientY - (r.top + r.height / 2)) * strength);
-  };
-  const reset = () => {
-    x.set(0);
-    y.set(0);
-  };
-
+/** Même rendu que <SectionLabel>, mais en <span> pour vivre dans un titre. */
+function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <motion.span ref={ref} onPointerMove={onMove} onPointerLeave={reset} style={{ x, y }} className={`inline-block ${className}`}>
-      {children}
-    </motion.span>
-  );
-}
-
-/** Compteur animé à l'entrée dans le viewport. */
-export function Counter({
-  value,
-  decimals = 0,
-  prefix = "",
-  suffix = "",
-  duration = 2,
-  className,
-  locale = "fr-FR",
-  intro = false,
-}: {
-  value: number;
-  decimals?: number;
-  prefix?: string;
-  suffix?: string;
-  duration?: number;
-  className?: string;
-  locale?: string;
-  intro?: boolean;
-}) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
-  const { introDone } = useApp();
-  const [n, setN] = useState(0);
-
-  useEffect(() => {
-    if (!inView || (intro && !introDone)) return;
-    const c = animate(0, value, { duration, ease: [0.16, 1, 0.3, 1], onUpdate: setN });
-    return () => c.stop();
-  }, [inView, intro, introDone, value, duration]);
-
-  const fmt = n.toLocaleString(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).replace(/ | /g, ".");
-  return (
-    <span ref={ref} className={`tabular-nums ${className ?? ""}`}>
-      {prefix}
-      {fmt}
-      {suffix}
+    <span className="label mb-8 flex items-center gap-3 leading-normal text-muted">
+      {/* La flèche est un pseudo-élément : elle ne fait pas partie du texte du titre. */}
+      <span aria-hidden className="text-violet-bright before:content-['(→)']" />
+      <span aria-hidden className="h-px w-10 bg-line" />
+      <span>{children}</span>
     </span>
   );
 }
+
+/**
+ * Script inline du layout : active les révélations et observe les blocs, y
+ * compris ceux ajoutés par une navigation client (MutationObserver).
+ * Mouvement réduit ou navigateur sans IntersectionObserver : rien n'est
+ * masqué, rien n'est animé.
+ */
+export const revealScript = `(function(){try{if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;var d=document.documentElement;d.classList.add('rv');var io=new IntersectionObserver(function(es){for(var i=0;i<es.length;i++){if(es[i].isIntersecting){es[i].target.setAttribute('data-rv-in','');io.unobserve(es[i].target)}}},{rootMargin:'0px 0px -10% 0px'});var seen=new WeakSet();var scan=function(){var els=document.querySelectorAll('[data-reveal]:not([data-rv-in]),[data-lines]:not([data-rv-in])');for(var i=0;i<els.length;i++){if(!seen.has(els[i])){seen.add(els[i]);io.observe(els[i])}}};new MutationObserver(scan).observe(d,{childList:true,subtree:true});scan()}catch(e){document.documentElement.classList.remove('rv')}})();`;

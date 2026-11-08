@@ -8,20 +8,21 @@ import { AgentPacks } from "@/components/pricing/AgentPacks";
 import { PlansGrid } from "@/components/pricing/PlansGrid";
 import { QuoteCta } from "@/components/pricing/QuoteCta";
 import { showPrices } from "@/lib/geo";
-import { oneShots, site } from "@/lib/content";
+import { oneShotPriceText, oneShots, site } from "@/lib/content";
+import { PriceDisclaimer } from "@/components/ui/Price";
 import { AdProof } from "@/components/sections/AdProof";
 import { CostSimulator } from "@/components/pricing/CostSimulator";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbLd, pageMeta, webPageLd } from "@/lib/seo";
 
-const TITLE = "Présentation WePushX : agence marketing digital, méthode, CRM et agents IA";
+const TITLE = "Présentation de l'agence marketing digital";
 const DESCRIPTION =
-  "L'agence en détail : le CRM all-in-one qui remplace huit outils, notre système de croissance, les résultats clients, des campagnes réelles, la méthode en cinq étapes, les forfaits et les agents IA.";
+  "Agence marketing digital au Maroc : notre système de croissance, le CRM qui remplace 8 outils, nos résultats clients et notre méthode en 5 étapes.";
 
 export const metadata: Metadata = pageMeta({
   title: TITLE,
   description: DESCRIPTION,
-  path: "/presentation",
+  path: "/presentation", image: { url: "/presentation/opengraph-image", alt: TITLE },
   socialTitle: "Présentation WePushX — agence marketing digital, Maroc",
 });
 
@@ -166,9 +167,7 @@ export default async function PresentationPage() {
           className="pointer-events-none absolute inset-x-0 top-0 h-[70%] bg-[radial-gradient(55%_55%_at_70%_0%,rgba(122,28,140,0.28),transparent)]"
         />
         <div className="container-x relative">
-          <SectionLabel n="→">Agence marketing digital · Maroc</SectionLabel>
-
-          <Lines as="h1" className="display mt-8 text-[clamp(2.8rem,8vw,8rem)]">
+          <Lines as="h1" intro eyebrow="Présentation · Agence marketing digital au Maroc" className="display text-[clamp(2.8rem,8vw,8rem)]">
             <span key="1">On transforme votre</span>
             <span key="2">présence digitale en</span>
             <span key="3" className="serif-accent text-gradient">
@@ -441,10 +440,12 @@ export default async function PresentationPage() {
                   <p className="label text-faint">{String(i + 1).padStart(2, "0")}</p>
                   <h3 className="display mt-10 text-2xl">{o.name}</h3>
                   <p className="mt-3 text-[0.92rem] text-fg/60">{o.body}</p>
-                  <p className="serif-accent mt-7 text-xl text-lilac">{priced ? o.price : "Sur devis"}</p>
+                  <p className="serif-accent mt-7 text-xl text-lilac">{priced ? oneShotPriceText(o) : "Sur devis"}</p>
                 </Reveal>
               ))}
             </div>
+
+            {priced && <PriceDisclaimer className="mt-8" />}
 
             <Reveal delay={0.1}>
               <div className="mt-12 flex flex-wrap items-center gap-6">
@@ -482,6 +483,7 @@ export default async function PresentationPage() {
           <div className="mt-16">
             <AgentPacks showPrices={priced} />
           </div>
+          {priced && <PriceDisclaimer className="mt-8" />}
         </div>
       </section>
 

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { EASE } from "@/components/ui/motion";
 import { budgetOptions, plans, serviceOptions, site } from "@/lib/content";
+import { priceText } from "@/lib/pricing";
 import { eventId, track } from "@/lib/track";
 
 type Status = "idle" | "sending" | "done" | "error";
@@ -113,7 +114,7 @@ export function LeadForm() {
                   return (
                     <Chip key={name} active={selectedPlan === name} onClick={() => setSelectedPlan(selectedPlan === name ? "" : name)}>
                       {name}
-                      {p && <span className="opacity-60"> · {formatDh(p.monthly)} DH / mois</span>}
+                      {p && <span className="opacity-60"> · {priceText(p.priceId, { currency: "DH", lower: true })}</span>}
                     </Chip>
                   );
                 })}
@@ -160,7 +161,6 @@ export function LeadForm() {
   );
 }
 
-const formatDh = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (

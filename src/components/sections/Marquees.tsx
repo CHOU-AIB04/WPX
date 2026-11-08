@@ -1,6 +1,4 @@
-"use client";
-
-import { Mark } from "@/components/brand/Mark";
+import { MarkStatic } from "@/components/brand/MarkStatic";
 import { Marquee } from "@/components/ui/Marquee";
 import { marqueePlatforms, marqueeSectors } from "@/lib/content";
 
@@ -11,7 +9,7 @@ export function Marquees() {
         {marqueeSectors.map((s) => (
           <span key={s} className="flex items-center gap-8 pr-8">
             <span className="display text-[clamp(2.4rem,6vw,5.5rem)]">{s}</span>
-            <Mark className="h-[clamp(1.6rem,3.6vw,3.2rem)]" />
+            <MarkStatic className="h-[clamp(1.6rem,3.6vw,3.2rem)] w-auto" />
           </span>
         ))}
       </Marquee>

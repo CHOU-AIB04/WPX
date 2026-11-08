@@ -6,7 +6,10 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { OfferDemo } from "@/components/demos/OfferDemo";
 import { isInteractive } from "@/components/demos/keys";
 import { offerHref, relatedOffers, type Offer } from "@/lib/catalog";
-import { hasAmount } from "@/lib/pricing";
+import { citiesForService } from "@/lib/cities";
+import { casesForService } from "@/lib/cases";
+import { postsForOffer } from "@/lib/blog";
+import { offerPriceText } from "@/lib/pricing";
 
 /**
  * Gabarit unique des pages /plateforme/<slug> et /services/<slug>.
@@ -21,9 +24,16 @@ import { hasAmount } from "@/lib/pricing";
  * « À partir de 3.500 DH » disparaît.
  */
 export function OfferPage({ offer, showPrices = true }: { offer: Offer; showPrices?: boolean }) {
-  const priceVisible = Boolean(offer.price) && (showPrices || !hasAmount(offer.price as string));
+  const priceLabel = offerPriceText(offer, showPrices);
   const live = isInteractive(offer.demo);
   const related = relatedOffers(offer);
+  /** Maillage interne : pages villes et cas clients liés à ce service. */
+  const further = [
+    ...postsForOffer(offer.id).map((p) => ({ href: `/blog/${p.slug}`, label: p.title, kind: "Guide" })),
+    ...(offer.kind === "service" ? citiesForService(offer.id) : []).map((c) => ({ href: `/${c.slug}`, label: c.eyebrow, kind: "Près de chez vous" })),
+    ...casesForService(offer.id).map((c) => ({ href: `/cas-clients/${c.slug}`, label: c.title, kind: "Cas client" })),
+    { href: "/tarifs", label: "Tarifs détaillés et simulateur", kind: "Tarifs" },
+  ];
   const backHref = offer.kind === "platform" ? "/plateforme" : "/services";
   const backLabel = offer.kind === "platform" ? "Plateforme" : "Services";
 
@@ -37,11 +47,7 @@ export function OfferPage({ offer, showPrices = true }: { offer: Offer; showPric
             {backLabel}
           </Link>
 
-          <div className="mt-7">
-            <SectionLabel n="→">{offer.kicker}</SectionLabel>
-          </div>
-
-          <Lines as="h1" className="display mt-8 text-[clamp(2.8rem,8vw,7.5rem)]">
+          <Lines as="h1" intro eyebrow={`${offer.seo.keyword} · ${offer.kicker}`} className="display mt-7 text-[clamp(2.8rem,8vw,7.5rem)]">
             {offer.hero.lines.map((l, i) => (
               <span key={l}>
                 {i === offer.hero.lines.length - 1 ? <span className="serif-accent text-gradient">{l}</span> : l}
@@ -60,7 +66,7 @@ export function OfferPage({ offer, showPrices = true }: { offer: Offer; showPric
             </div>
             <div className="mt-10 flex flex-wrap items-center gap-5">
               <Button href="/contact" trackAs={`offer_${offer.id}_hero`}>Réserver mon audit</Button>
-              {priceVisible && <span className="serif-accent text-2xl text-lilac">{offer.price}</span>}
+              {priceLabel && <span className="serif-accent text-2xl text-lilac">{priceLabel}</span>}
             </div>
           </Reveal>
         </div>
@@ -180,6 +186,26 @@ export function OfferPage({ offer, showPrices = true }: { offer: Offer; showPric
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ═════════════════════════════════════════════ pour aller plus loin */}
+      <section className="border-t border-line py-16">
+        <div className="container-x">
+          <p className="label text-faint">Pour aller plus loin</p>
+          <ul className="mt-6 grid gap-px overflow-hidden rounded-[1.4rem] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+            {further.map((l) => (
+              <li key={l.href} className="bg-ink">
+                <Link href={l.href} className="group flex h-full items-start justify-between gap-4 p-6 transition-colors duration-500 hover:bg-ink-2">
+                  <span>
+                    <span className="label block text-violet-bright">{l.kind}</span>
+                    <span className="mt-2 block text-fg/85">{l.label}</span>
+                  </span>
+                  <Arrow className="mt-1 h-4 w-4 shrink-0 text-faint transition-all duration-500 group-hover:translate-x-1 group-hover:text-violet-bright" />
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

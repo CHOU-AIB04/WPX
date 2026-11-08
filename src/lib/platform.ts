@@ -20,10 +20,12 @@ export const platformFeatures: Offer[] = [
       "Historique d'exécution pas à pas",
     ],
     tags: ["Workflows", "WhatsApp", "Email", "Sans code"],
-    price: "Inclus dans WePushX CRM",
+    priceLabel: "Inclus dans WePushX CRM",
     demo: "automations",
     seo: {
       title: "Automatisations CRM : relances WhatsApp et email automatiques",
+      metaTitle: "Automatisation CRM WhatsApp et email au Maroc | WePushX",
+      keyword: "Automatisation CRM au Maroc",
       description:
         "Créez vos scénarios de relance en glisser-déposer : déclencheurs, conditions, attentes, WhatsApp et email. Zéro lead oublié, 24h/24.",
     },
@@ -63,10 +65,12 @@ export const platformFeatures: Offer[] = [
       "Passage à un humain quand c'est nécessaire",
     ],
     tags: ["IA", "Darija", "Voix", "Qualification"],
-    price: "Inclus dans WePushX CRM",
+    priceLabel: "Inclus dans WePushX CRM",
     demo: "conversation",
     seo: {
       title: "Chatbot IA et agent vocal : qualifiez vos leads en darija et français",
+      metaTitle: "Chatbot IA WhatsApp et agent vocal en darija | WePushX",
+      keyword: "Chatbot IA WhatsApp au Maroc",
       description:
         "Une IA qui répond, qualifie et prend le rendez-vous — sur WhatsApp, sur votre site et au téléphone. Français, anglais, darija.",
     },
@@ -106,10 +110,12 @@ export const platformFeatures: Offer[] = [
       "Statistiques de portée et d'engagement",
     ],
     tags: ["Instagram", "TikTok", "LinkedIn", "Planification"],
-    price: "Inclus dans WePushX CRM",
+    priceLabel: "Inclus dans WePushX CRM",
     demo: "social-planner",
     seo: {
       title: "Social Planner : planifiez Instagram, TikTok, LinkedIn et GMB",
+      metaTitle: "Social Planner : Instagram, TikTok, LinkedIn | WePushX",
+      keyword: "Planification réseaux sociaux",
       description:
         "Un seul calendrier pour Facebook, Instagram, Threads, LinkedIn, TikTok, YouTube, Pinterest et Google Business Profile.",
     },
@@ -149,10 +155,12 @@ export const platformFeatures: Offer[] = [
       "Alertes quand une campagne dérive",
     ],
     tags: ["Meta", "Google", "LinkedIn", "ROAS"],
-    price: "Inclus dans WePushX CRM",
+    priceLabel: "Inclus dans WePushX CRM",
     demo: "ad-manager",
     seo: {
       title: "Ad Manager : gérez Facebook, Google et LinkedIn Ads au même endroit",
+      metaTitle: "Ad Manager : Meta, Google et LinkedIn Ads | WePushX",
+      keyword: "Gestion publicitaire multi-plateforme",
       description:
         "Lancez et pilotez vos campagnes sur trois régies depuis une seule interface, avec le coût par lead réel remonté du CRM.",
     },
@@ -192,10 +200,12 @@ export const platformFeatures: Offer[] = [
       "Chaque formulaire alimente le CRM",
     ],
     tags: ["Funnels", "E-commerce", "Blog", "Sans code"],
-    price: "Inclus dans WePushX CRM",
+    priceLabel: "Inclus dans WePushX CRM",
     demo: "funnels",
     seo: {
       title: "Funnels, sites et boutiques connectés à votre CRM",
+      metaTitle: "Funnels, sites et boutiques reliés au CRM | WePushX",
+      keyword: "Tunnels de vente et sites reliés au CRM",
       description:
         "Créez tunnels de vente, sites, boutiques et blogs dans un éditeur sans code, reliés au CRM et aux automatisations dès la publication.",
     },
@@ -235,10 +245,12 @@ export const platformFeatures: Offer[] = [
       "Synchronisation Google Calendar",
     ],
     tags: ["RDV", "Location", "Rappels", "Paiement"],
-    price: "Inclus dans WePushX CRM",
+    priceLabel: "Inclus dans WePushX CRM",
     demo: "calendars",
     seo: {
       title: "Calendriers de rendez-vous et moteur de location en ligne",
+      metaTitle: "Prise de rendez-vous en ligne au Maroc | WePushX",
+      keyword: "Prise de rendez-vous en ligne",
       description:
         "Deux moteurs de réservation : rendez-vous classiques et location par période avec stock et caution. Rappels automatiques et paiement intégré.",
     },
@@ -278,10 +290,12 @@ export const platformFeatures: Offer[] = [
       "Suivi de la note moyenne dans le temps",
     ],
     tags: ["Google", "Avis", "IA", "Local"],
-    price: "Inclus dans WePushX CRM",
+    priceLabel: "Inclus dans WePushX CRM",
     demo: "reputation",
     seo: {
       title: "Gestion des avis Google par IA : collecte et réponses automatiques",
+      metaTitle: "Avis Google gérés par l'IA : collecte, réponses | WePushX",
+      keyword: "Gestion des avis Google",
       description:
         "Connectez votre fiche Google Business Profile : demande d'avis automatique après prestation, réponses proposées par l'IA, alertes sur les avis négatifs.",
     },
@@ -321,10 +335,12 @@ export const platformFeatures: Offer[] = [
       "Historique complet dans le CRM",
     ],
     tags: ["Chat", "WhatsApp", "IA", "Conversion"],
-    price: "Inclus dans WePushX CRM",
+    priceLabel: "Inclus dans WePushX CRM",
     demo: "chat-widget",
     seo: {
       title: "Chat widget IA pour site web, connecté à WhatsApp",
+      metaTitle: "Chat widget IA pour site web + WhatsApp | WePushX",
+      keyword: "Chat widget IA pour site web",
       description:
         "Un widget qui répond avec l'IA, capture le numéro et bascule sur WhatsApp. Chaque conversation atterrit dans le CRM.",
     },
@@ -364,10 +380,12 @@ export const platformFeatures: Offer[] = [
       "Environnement de préproduction",
     ],
     tags: ["WordPress", "Sécurité", "Backup", "Vitesse"],
-    price: "Inclus dans WePushX CRM",
+    priceLabel: "Inclus dans WePushX CRM",
     demo: "wordpress",
     seo: {
       title: "Hébergement WordPress géré : sécurité, sauvegarde et vitesse",
+      metaTitle: "Hébergement WordPress géré au Maroc | WePushX",
+      keyword: "Hébergement WordPress au Maroc",
       description:
         "WordPress hébergé, sauvegardé chaque jour, protégé et optimisé. Mises à jour surveillées et restauration en un clic.",
     },
@@ -407,10 +425,12 @@ export const platformFeatures: Offer[] = [
       "Certificats de fin de parcours",
     ],
     tags: ["Formation", "Communauté", "Abonnement", "Membres"],
-    price: "Inclus dans WePushX CRM",
+    priceLabel: "Inclus dans WePushX CRM",
     demo: "courses",
     seo: {
       title: "Créez et vendez vos formations et communautés en ligne",
+      metaTitle: "Vendre vos formations et communautés en ligne | WePushX",
+      keyword: "Plateforme de formation en ligne",
       description:
         "Modules, vidéos, progression, communauté et paiement intégré — le tout relié au CRM et aux automatisations.",
     },
@@ -450,10 +470,12 @@ export const platformFeatures: Offer[] = [
       "Replay envoyé automatiquement",
     ],
     tags: ["Webinaire", "Direct", "Replay", "Inscriptions"],
-    price: "Inclus dans WePushX CRM",
+    priceLabel: "Inclus dans WePushX CRM",
     demo: "webinars",
     seo: {
       title: "Webinaires automatisés : inscriptions, rappels et relances",
+      metaTitle: "Webinaires automatisés : inscriptions, relances | WePushX",
+      keyword: "Webinaires automatisés",
       description:
         "Tout le cycle du webinaire automatisé — page d'inscription, rappels, diffusion, replay et relance différenciée des absents.",
     },
@@ -493,10 +515,12 @@ export const platformFeatures: Offer[] = [
       "Publication en un clic",
     ],
     tags: ["IA", "No-code", "Générateur", "Agents"],
-    price: "Inclus dans WePushX CRM",
+    priceLabel: "Inclus dans WePushX CRM",
     demo: "ai-studio",
     seo: {
       title: "AI Studio : créez sites, landing pages et applications avec l'IA",
+      metaTitle: "AI Studio : sites et applications créés par l'IA | WePushX",
+      keyword: "Création de sites par l'IA",
       description:
         "Décrivez votre besoin, l'IA construit le site, la landing page ou l'application complète. Édition visuelle et publication en un clic.",
     },

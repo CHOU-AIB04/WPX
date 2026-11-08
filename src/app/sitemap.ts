@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next";
 import { allOffers, offerHref } from "@/lib/catalog";
+import { MIN_POSTS_TO_INDEX_CATEGORY, blogCategories, blogPosts, postsInCategory } from "@/lib/blog";
+import { publishedCases } from "@/lib/cases";
+import { cityPages } from "@/lib/cities";
 import { CONTENT_UPDATED, abs } from "@/lib/seo";
 
 /**
@@ -31,5 +34,41 @@ export default function sitemap(): MetadataRoute.Sitemap {
     images: [abs(`${offerHref(o)}/opengraph-image`)],
   }));
 
-  return [...statics, ...offers];
+  const cities: MetadataRoute.Sitemap = cityPages.map((c) => ({
+    url: abs(`/${c.slug}`),
+    lastModified,
+    changeFrequency: "monthly",
+    priority: 0.8,
+    images: [abs(`/${c.slug}/opengraph-image`)],
+  }));
+
+  // La liste des cas n'entre dans le sitemap qu'à partir du premier cas publié.
+  const cases: MetadataRoute.Sitemap = publishedCases.length
+    ? [
+        { url: abs("/cas-clients"), lastModified, changeFrequency: "monthly", priority: 0.7 },
+        ...publishedCases.map((c) => ({
+          url: abs(`/cas-clients/${c.slug}`),
+          lastModified: c.date,
+          changeFrequency: "yearly" as const,
+          priority: 0.7,
+        })),
+      ]
+    : [];
+
+  const blog: MetadataRoute.Sitemap = [
+    { url: abs("/blog"), lastModified: blogPosts.map((p) => p.updated ?? p.date).sort().at(-1), changeFrequency: "weekly", priority: 0.8 },
+    ...blogPosts.map((p) => ({
+      url: abs(`/blog/${p.slug}`),
+      lastModified: p.updated ?? p.date,
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+      images: [abs(`/blog/${p.slug}/opengraph-image`)],
+    })),
+    // Catégories : seulement celles qui sont indexées (3 articles et plus).
+    ...blogCategories
+      .filter((c) => postsInCategory(c.id).length >= MIN_POSTS_TO_INDEX_CATEGORY)
+      .map((c) => ({ url: abs(`/blog/categorie/${c.id}`), lastModified, changeFrequency: "weekly" as const, priority: 0.5 })),
+  ];
+
+  return [...statics, ...offers, ...cities, ...blog, ...cases];
 }

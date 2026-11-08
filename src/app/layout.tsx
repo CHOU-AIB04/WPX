@@ -1,31 +1,38 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter_Tight, JetBrains_Mono, Montserrat } from "next/font/google";
+import { Instrument_Serif, Inter_Tight, Montserrat } from "next/font/google";
 import Script from "next/script";
 import { Cursor } from "@/components/layout/Cursor";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { Preloader } from "@/components/layout/Preloader";
 import { Providers } from "@/components/layout/Providers";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { revealScript } from "@/components/ui/motion";
 import { SITE_URL, keywords, siteGraph } from "@/lib/seo";
 import "./globals.css";
 
+/*
+ * Polices : 3 fichiers au lieu de 5.
+ * - Inter Tight (variable) : texte et titres. Préchargée (titre du hero).
+ * - Instrument Serif, italique seulement : l'accent `serif-accent`, présent
+ *   dans le titre du hero. Préchargée.
+ * - Montserrat 800 : le seul logotype « WePushX ». Non préchargée.
+ * JetBrains Mono est retirée : les labels utilisent la mono du système.
+ */
 const inter = Inter_Tight({ subsets: ["latin"], variable: "--font-inter-tight", display: "swap" });
-const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-instrument-serif", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap" });
-const brand = Montserrat({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-montserrat", display: "swap" });
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: "italic", variable: "--font-instrument-serif", display: "swap" });
+const brand = Montserrat({ subsets: ["latin"], weight: "800", variable: "--font-montserrat", display: "swap", preload: false });
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
 const DESCRIPTION =
-  "Agence marketing digital au Maroc : Meta Ads, Google Ads, SEO & GEO, sites web, UGC par IA et CRM WhatsApp pour les PME. Chaque dirham tracé jusqu'au client. Résultats garantis en 60 jours.";
+  "Agence marketing digital à Casablanca pour les PME du Maroc : Meta Ads, Google Ads, SEO, sites web et CRM WhatsApp. Résultats garantis en 60 jours.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "WePushX · Agence marketing digital au Maroc | Meta Ads, Google Ads, SEO",
-    template: "%s · WePushX",
+    default: "Agence marketing digital au Maroc · Casablanca | WePushX",
+    template: "%s | WePushX",
   },
   description: DESCRIPTION,
   applicationName: "WePushX",
@@ -75,9 +82,10 @@ const themeScript = `(function(){var d=document.documentElement;try{var q=new UR
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" data-theme="dark" suppressHydrationWarning className={`${inter.variable} ${serif.variable} ${mono.variable} ${brand.variable}`}>
+    <html lang="fr" data-theme="dark" suppressHydrationWarning className={`${inter.variable} ${serif.variable} ${brand.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: revealScript }} />
         {GTM_ID && (
           <Script id="gtm" strategy="afterInteractive">
             {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`}
@@ -92,7 +100,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </noscript>
         )}
         <Providers>
-          <Preloader />
           <Cursor />
           <Header />
           <main>{children}</main>

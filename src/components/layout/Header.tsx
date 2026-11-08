@@ -9,12 +9,10 @@ import { EASE } from "@/components/ui/motion";
 import { nav, site } from "@/lib/content";
 import { offerAnchor, offersOf, type OfferKind } from "@/lib/catalog";
 import { MegaPanel } from "./MegaMenu";
-import { useApp } from "./Providers";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
   const { scrollY } = useScroll();
-  const { introDone, lenis } = useApp();
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -30,10 +28,13 @@ export function Header() {
     if (goingDown) setMega(null);
   });
 
+  // Menu mobile ouvert : la page dessous ne défile plus.
   useEffect(() => {
-    if (open) lenis?.stop();
-    else lenis?.start();
-  }, [open, lenis]);
+    document.documentElement.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.documentElement.style.overflow = "";
+    };
+  }, [open]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -60,9 +61,9 @@ export function Header() {
     <>
       <motion.header
         className="fixed inset-x-0 top-0 z-50"
-        initial={{ y: -100 }}
-        animate={{ y: introDone && !hidden ? 0 : -110 }}
-        transition={{ duration: 0.8, ease: EASE, delay: introDone && !scrolled ? 0.6 : 0 }}
+        initial={false}
+        animate={{ y: hidden ? -110 : 0 }}
+        transition={{ duration: 0.8, ease: EASE }}
         onMouseLeave={scheduleClose}
       >
         <div

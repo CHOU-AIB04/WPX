@@ -33,13 +33,28 @@ export default async function Home() {
       <Manifesto />
       <Problems />
       <Services />
-      <Process />
-      <Results />
-      <Comparison />
-      <Testimonials />
-      <Pricing showPrices={priced} />
-      <Guarantee />
-      <Faq />
+      {/* Loin sous la ligne de flottaison : rendu différé par le navigateur (content-visibility). */}
+      <div className="cv-auto">
+        <Process />
+      </div>
+      <div className="cv-auto">
+        <Results />
+      </div>
+      <div className="cv-auto">
+        <Comparison />
+      </div>
+      <div className="cv-auto">
+        <Testimonials />
+      </div>
+      <div className="cv-auto">
+        <Pricing showPrices={priced} />
+      </div>
+      <div className="cv-auto">
+        <Guarantee />
+      </div>
+      <div className="cv-auto">
+        <Faq />
+      </div>
       <FinalCta />
     </>
   );

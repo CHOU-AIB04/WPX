@@ -1,13 +1,8 @@
-"use client";
-
-import { AnimatePresence, motion } from "motion/react";
-import { useState } from "react";
 import { SectionLabel } from "@/components/ui/Button";
-import { EASE, Lines, Reveal } from "@/components/ui/motion";
+import { Lines, Reveal } from "@/components/ui/motion";
 import { faqs } from "@/lib/content";
 
 export function Faq({ items = faqs, n = "09" }: { items?: typeof faqs; n?: string }) {
-  const [open, setOpen] = useState<number | null>(0);
   return (
     <section className="relative py-24 md:py-32">
       <div className="container-x grid gap-12 md:grid-cols-12">
@@ -22,39 +17,25 @@ export function Faq({ items = faqs, n = "09" }: { items?: typeof faqs; n?: strin
           </Reveal>
         </div>
         <div className="md:col-span-8">
-          {items.map((f, i) => {
-            const isOpen = open === i;
-            return (
-              <Reveal key={f.q} delay={i * 0.04} y={16}>
-                <div className="border-t border-line last:border-b">
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between gap-6 py-7 text-left"
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    aria-expanded={isOpen}
+          {/* <details> natif : toutes les réponses sont dans le HTML (lues par
+              Google et les IA, conformes au FAQPage), une seule ouverte à la
+              fois grâce à `name`, et aucun JavaScript. */}
+          {items.map((f, i) => (
+            <Reveal key={f.q} delay={i * 0.04} y={16}>
+              <details name={`faq-${n}`} open={i === 0} className="faq-item group border-t border-line last:border-b">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-7 text-left [&::-webkit-details-marker]:hidden">
+                  <span className="text-[clamp(1.15rem,1.8vw,1.5rem)] text-fg/75 transition-colors group-open:text-fg">{f.q}</span>
+                  <span
+                    aria-hidden
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line transition-all duration-500 group-open:rotate-45 group-open:border-violet-bright group-open:bg-violet-bright group-open:text-snow"
                   >
-                    <span className={`text-[clamp(1.15rem,1.8vw,1.5rem)] transition-colors ${isOpen ? "text-fg" : "text-fg/75"}`}>{f.q}</span>
-                    <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ${isOpen ? "rotate-45 border-violet-bright bg-violet-bright text-snow" : "border-line"}`}>
-                      +
-                    </span>
-                  </button>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.55, ease: EASE }}
-                        className="overflow-hidden"
-                      >
-                        <p className="max-w-2xl pb-8 text-fg/65">{f.a}</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </Reveal>
-            );
-          })}
+                    +
+                  </span>
+                </summary>
+                <p className="max-w-2xl pb-8 text-fg/65">{f.a}</p>
+              </details>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

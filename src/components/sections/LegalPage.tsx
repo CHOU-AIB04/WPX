@@ -1,4 +1,6 @@
 import legal from "@/lib/legal.json";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbLd } from "@/lib/seo";
 
 type Block = [string, string];
 
@@ -9,6 +11,7 @@ export function LegalPage({ slug }: { slug: keyof typeof legal }) {
 
   return (
     <article className="container-x pb-28 pt-36 md:pt-44">
+      <JsonLd data={breadcrumbLd([{ name: title, path: `/${slug}` }])} />
       <p className="label text-violet-bright">Légal</p>
       <h1 className="display mt-6 max-w-4xl text-[clamp(2.6rem,6vw,5.4rem)]">{title}</h1>
       <div className="mt-16 max-w-3xl">

@@ -12,18 +12,21 @@ import { PlansGrid } from "@/components/pricing/PlansGrid";
 import { QuoteCta } from "@/components/pricing/QuoteCta";
 import { ServiceRatesList, UnitCostsTable } from "@/components/pricing/Rates";
 import { showPrices } from "@/lib/geo";
-import { oneShots, plans } from "@/lib/content";
+import { fromPricesFaq, oneShotPriceText, oneShots, plans } from "@/lib/content";
+import { PriceDisclaimer } from "@/components/ui/Price";
+import { WHATSAPP_NOTE, agentPacks, crmPlans, offerLd, priceText } from "@/lib/pricing";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ORG_ID, abs, breadcrumbLd, faqLd, pageMeta, webPageLd } from "@/lib/seo";
 
-const TITLE = "Tarifs agence marketing digital au Maroc : forfaits, CRM et agents IA";
+const TITLE = "Tarifs marketing digital et CRM au Maroc";
 const DESCRIPTION =
-  "Forfaits agence dès 3.900 DH/mois, paliers du CRM all-in-one WePushX, packs d'agents IA, projets one-shot et coût réel de la consommation. Avec un simulateur de budget mensuel.";
+  `Tarifs agence marketing digital au Maroc : forfaits ${priceText("planStarter", { lower: true, currency: "DH" })}, CRM WhatsApp + IA ${priceText("crmEssentiel", { lower: true, currency: "DH" })} et simulateur.`;
 
-export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/tarifs" });
+export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/tarifs", image: { url: "/tarifs/opengraph-image", alt: TITLE } });
 
 
 const tarifsFaq = [
+  fromPricesFaq,
   {
     q: "Quelle est la différence entre le forfait agence et l'abonnement CRM ?",
     a: "Le forfait agence, ce sont nos honoraires : la stratégie, la production des créas, la gestion quotidienne de vos campagnes. L'abonnement WePushX CRM, c'est la licence du CRM all-in-one qui héberge vos contacts, vos scénarios et votre IA. On peut prendre l'un sans l'autre, mais c'est la combinaison qui fait la machine : sans CRM derrière, les leads que nous générons finissent dans une boîte mail.",
@@ -33,8 +36,8 @@ const tarifsFaq = [
     a: "Le premier agent — celui qui répond, qualifie et prend les rendez-vous — est offert avec la mise en place du CRM. Les deux paliers suivants s'ajoutent à l'abonnement, par agent déployé, et chacun inclut le précédent. Vous ne montez d'un cran que le jour où vous en avez besoin.",
   },
   {
-    q: "Pourquoi la consommation est-elle affichée en fourchette ?",
-    a: "Parce qu'un message de chatbot qui répond « nous ouvrons à 9h » ne coûte pas la même chose qu'un message qui interroge votre agenda, vérifie un stock, écrit dans le CRM et rédige une réponse sur mesure. La fourchette couvre ces deux extrêmes. Après l'audit, nous connaissons vos scénarios réels et nous figeons un montant au devis.",
+    q: "Pourquoi le prix du chatbot dépend-il de la complexité ?",
+    a: "Parce qu'un message de chatbot qui répond « nous ouvrons à 9h » ne coûte pas la même chose qu'un message qui interroge votre agenda, vérifie un stock, écrit dans le CRM et rédige une réponse sur mesure. Chaque niveau de complexité a son prix plancher. Après l'audit, nous connaissons vos scénarios réels et nous figeons un montant au devis.",
   },
   {
     q: "Le budget publicitaire est-il inclus ?",
@@ -71,18 +74,14 @@ export default async function TarifsPage() {
                 {
                   "@context": "https://schema.org",
                   "@type": "OfferCatalog",
-                  name: "Forfaits agence WePushX",
+                  name: "Tarifs WePushX : forfaits agence, CRM et agents IA",
                   url: abs("/tarifs"),
-                  itemListElement: plans.map((p) => ({
-                    "@type": "Offer",
-                    name: `Forfait ${p.name}`,
-                    description: p.pitch,
-                    price: p.monthly,
-                    priceCurrency: "MAD",
-                    priceSpecification: { "@type": "UnitPriceSpecification", price: p.monthly, priceCurrency: "MAD", unitText: "MONTH" },
-                    seller: { "@id": ORG_ID },
-                    url: abs("/tarifs"),
-                  })),
+                  itemListElement: [
+                    ...plans.map((p) => offerLd(p.priceId, { description: p.pitch })),
+                    ...crmPlans.map((p) => offerLd(p.priceId, { description: p.pitch })),
+                    offerLd("crmSetup"),
+                    ...agentPacks.flatMap((a) => (a.priceId ? [offerLd(a.priceId, { description: a.pitch })] : [])),
+                  ].map((o) => ({ ...o, seller: { "@id": ORG_ID }, url: abs("/tarifs") })),
                 },
               ]
             : []),
@@ -93,8 +92,7 @@ export default async function TarifsPage() {
       {/* ═══════════════════════════════════════════════════════════ hero */}
       <section className="relative overflow-hidden pb-16 pt-36 md:pt-44">
         <div className="container-x">
-          <SectionLabel n="→">Tarifs</SectionLabel>
-          <Lines as="h1" className="display mt-8 text-[clamp(2.8rem,8.5vw,8.5rem)]">
+          <Lines as="h1" intro eyebrow="Tarifs marketing digital et CRM au Maroc" className="display text-[clamp(2.8rem,8.5vw,8.5rem)]">
             <span key="1">Tout est écrit.</span>
             <span key="2">
               Rien n&apos;est <span className="serif-accent text-gradient">caché.</span>
@@ -136,6 +134,7 @@ export default async function TarifsPage() {
                 : "Engagement minimum 3 mois · Garantie résultats 60 jours · Budget publicitaire séparé · Devis sous 48 h"
             }
           />
+          {priced && <PriceDisclaimer className="mx-auto mt-6 text-center" />}
         </div>
       </section>
 
@@ -168,6 +167,7 @@ export default async function TarifsPage() {
           <div className="mt-16">
             <CrmTiers showPrices={priced} />
           </div>
+          {priced && <PriceDisclaimer className="mt-8" />}
         </div>
       </section>
 
@@ -195,6 +195,7 @@ export default async function TarifsPage() {
           <div className="mt-16">
             <AgentPacks showPrices={priced} />
           </div>
+          {priced && <PriceDisclaimer className="mt-8" />}
         </div>
       </section>
 
@@ -226,7 +227,7 @@ export default async function TarifsPage() {
             <Lines className="display mt-8 text-[clamp(2rem,4.6vw,3.6rem)]">
               <span key="1">Sans abonnement,</span>
               <span key="2" className="serif-accent text-lilac">
-                {priced ? "à prix fixe." : "livré clé en main."}
+                {priced ? "prix de départ clair." : "livré clé en main."}
               </span>
             </Lines>
             <div className="mt-12 grid gap-px overflow-hidden rounded-[1.8rem] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
@@ -239,10 +240,11 @@ export default async function TarifsPage() {
                   <p className="label text-faint">{String(i + 1).padStart(2, "0")}</p>
                   <h3 className="display mt-10 text-2xl">{o.name}</h3>
                   <p className="mt-3 text-[0.92rem] text-fg/60">{o.body}</p>
-                  <p className="serif-accent mt-7 text-xl text-lilac">{priced ? o.price : "Sur devis"}</p>
+                  <p className="serif-accent mt-7 text-xl text-lilac">{priced ? oneShotPriceText(o) : "Sur devis"}</p>
                 </Reveal>
               ))}
             </div>
+            {priced && <PriceDisclaimer className="mt-8" />}
           </div>
         </div>
       </section>
@@ -275,10 +277,10 @@ export default async function TarifsPage() {
           <Reveal delay={0.1}>
             <p className="mt-10 max-w-3xl text-[0.85rem] leading-relaxed text-muted">
               Facturé à l&apos;usage, sur relevé mensuel détaillé par canal. Vous pouvez fixer un plafond : au-delà, les
-              envois automatiques s&apos;arrêtent et nous vous prévenons. Les réponses entrantes de vos contacts dans la
-              fenêtre WhatsApp de 24 heures ne sont pas facturées.
+              envois automatiques s&apos;arrêtent et nous vous prévenons. {WHATSAPP_NOTE}
               {!priced && " Les tarifs unitaires dépendent de votre pays : ils vous sont communiqués au devis."}
             </p>
+            {priced && <PriceDisclaimer className="mt-4" />}
           </Reveal>
         </div>
       </section>

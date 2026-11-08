@@ -18,7 +18,7 @@ export const abs = (path: string) => (path.startsWith("http") ? path : `${SITE_U
  * RSS et llms.txt. À avancer quand le contenu change vraiment : Google ignore
  * les `lastmod` qui bougent à chaque build sans que la page ne change.
  */
-export const CONTENT_UPDATED = "2026-10-09";
+export const CONTENT_UPDATED = "2026-11-08";
 
 /** Identifiants stables : chaque page renvoie vers la même entité. */
 export const ORG_ID = `${SITE_URL}/#organization`;
@@ -81,11 +81,14 @@ const defaultImage = { url: "/opengraph-image", width: 1200, height: 630, alt: "
  * sans profondeur : une page qui n'en redonne qu'une partie perd `siteName`,
  * `locale` et `url`. D'où cette fabrique.
  */
+/** Balise <title> : la marque en suffixe, sauf si le titre la contient déjà. */
+export const fullTitle = (title: string) => (title.includes("WePushX") ? title : `${title} | WePushX`);
+
 export function pageMeta({ title, description, path, socialTitle, image, noindex }: PageMeta): Metadata {
-  const shared = socialTitle ?? title;
+  const shared = socialTitle ?? fullTitle(title);
   const img = image ? { ...image, width: 1200, height: 630 } : defaultImage;
   return {
-    title,
+    title: { absolute: fullTitle(title) },
     description,
     alternates: { canonical: path },
     openGraph: {

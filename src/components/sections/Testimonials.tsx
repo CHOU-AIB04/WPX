@@ -1,5 +1,3 @@
-"use client";
-
 import { SectionLabel } from "@/components/ui/Button";
 import { Marquee } from "@/components/ui/Marquee";
 import { Lines } from "@/components/ui/motion";

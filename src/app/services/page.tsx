@@ -5,15 +5,17 @@ import { Lines, Reveal } from "@/components/ui/motion";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { OfferRows } from "@/components/sections/OfferRows";
-import { oneShots, services } from "@/lib/content";
+import { oneShotPriceText, oneShots, services } from "@/lib/content";
+import { PriceDisclaimer } from "@/components/ui/Price";
+import { showPrices } from "@/lib/geo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbLd, faqLd, itemListLd, pageMeta, webPageLd } from "@/lib/seo";
 
-const TITLE = "Services marketing digital au Maroc : Meta Ads, Google Ads, SEO, sites web";
+const TITLE = "Services de marketing digital au Maroc";
 const DESCRIPTION =
-  "Six leviers exécutés par notre agence pour les PME marocaines : Meta Ads, Google Ads, création de sites web, SEO & GEO, UGC par IA et gestion des réseaux sociaux.";
+  "Services de marketing digital au Maroc pour les PME : Meta Ads, Google Ads, création de sites web, SEO & GEO, UGC par IA et gestion des réseaux sociaux.";
 
-export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/services" });
+export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/services", image: { url: "/services/opengraph-image", alt: TITLE } });
 
 
 const servicesFaq = [
@@ -23,7 +25,10 @@ const servicesFaq = [
   { q: "Quel est l'engagement minimum pour les forfaits ?", a: "3 mois, le temps d'installer le tracking, de sortir de la phase d'apprentissage et d'optimiser sur des données fiables." },
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  /** Géolocalisation : hors Maroc, les projets restent, les montants partent. */
+  const priced = await showPrices();
+
   return (
     <>
       <JsonLd
@@ -36,8 +41,7 @@ export default function ServicesPage() {
       />
       <section className="relative overflow-hidden pb-16 pt-36 md:pt-44">
         <div className="container-x">
-          <SectionLabel n="→">Nos services</SectionLabel>
-          <Lines as="h1" className="display mt-8 text-[clamp(3rem,9vw,9rem)]">
+          <Lines as="h1" intro eyebrow="Services de marketing digital au Maroc" className="display text-[clamp(3rem,9vw,9rem)]">
             <span key="1">Six leviers.</span>
             <span key="2">
               Une seule <span className="serif-accent text-gradient">machine.</span>
@@ -95,17 +99,18 @@ export default function ServicesPage() {
             <span key="1">Besoin d&apos;un projet</span>
             <span key="2" className="serif-accent text-lilac">ponctuel ?</span>
           </Lines>
-          <p className="mt-6 max-w-md text-fg/60">Pas d&apos;abonnement. Des livrables précis, à prix fixe.</p>
+          <p className="mt-6 max-w-md text-fg/60">Pas d&apos;abonnement. Des livrables précis, avec un prix de départ clair.</p>
           <div className="mt-14 grid gap-px overflow-hidden rounded-[1.8rem] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
             {oneShots.map((o, i) => (
               <Reveal key={o.name} delay={(i % 3) * 0.06} className="group relative bg-ink-2 p-8 transition-colors duration-500 hover:bg-ink-3">
                 <p className="label text-faint">0{i + 1}</p>
                 <h3 className="display mt-10 text-3xl">{o.name}</h3>
                 <p className="mt-3 text-fg/60">{o.body}</p>
-                <p className="serif-accent mt-8 text-2xl text-lilac">{o.price}</p>
+                <p className="serif-accent mt-8 text-2xl text-lilac">{priced ? oneShotPriceText(o) : "Sur devis"}</p>
               </Reveal>
             ))}
           </div>
+          {priced && <PriceDisclaimer className="mt-8" />}
         </div>
       </section>
 

@@ -1,7 +1,9 @@
 import { offerHref, offersOf } from "./catalog";
-import { crmPlans, agentPacks, dh } from "./pricing";
-import { faqs, oneShots, plans, results, site, steps } from "./content";
+import { PRICE_DISCLAIMER, WHATSAPP_NOTE, agentPacks, crmPlans, offerPriceText, priceText, unitCards, unitValueText } from "./pricing";
+import { faqs, oneShotPriceText, oneShots, plans, results, site, steps } from "./content";
 import type { Offer } from "./offer";
+import { blogPosts } from "./blog";
+import { cityPages } from "./cities";
 import { CONTENT_UPDATED, SITE_URL, abs, cities, tagline } from "./seo";
 
 /**
@@ -50,12 +52,21 @@ ${services.map(link).join("\n")}
 
 ${platform.map(link).join("\n")}
 
+## Guides (blog)
+
+${blogPosts.map((p) => `- [${p.title}](${abs(`/blog/${p.slug}`)}): ${p.description}`).join("\n")}
+
+## Pages villes
+
+${cityPages.map((c) => `- [${c.eyebrow}](${abs(`/${c.slug}`)}): ${c.description}`).join("\n")}
+
 ## Pages principales
 
 - [Accueil](${abs("/")}): présentation de l'agence, méthode, résultats clients, garantie et FAQ
 - [Tarifs](${abs("/tarifs")}): forfaits agence (Starter, Growth, Scale), abonnements CRM, agents IA, projets one-shot et simulateur de coût
 - [Toutes les offres](${abs("/offres")}): catalogue complet des services et des briques du CRM
 - [Présentation](${abs("/presentation")}): l'agence, la méthode en cinq étapes, campagnes réelles
+- [Blog](${abs("/blog")}): guides chiffrés pour les PME au Maroc (prix d'un site web, CRM, SEO et GEO, publicité)
 - [Contact et audit gratuit](${abs("/contact")}): demande d'audit de 30 minutes
 
 ## Optional
@@ -75,7 +86,7 @@ URL : ${abs(offerHref(o))}
 ${o.kicker}. ${o.body}
 
 ${o.bullets.map((b) => `- ${b}`).join("\n")}
-${o.price ? `\nPrix : ${o.price}\n` : ""}
+${offerPriceText(o) ? `\nPrix : ${offerPriceText(o)}\n` : ""}
 Résultats observés :
 ${o.proof.map((p) => `- ${p.prefix ?? ""}${String(p.value).replace(".", ",")}${p.suffix ?? ""} ${p.label} (${p.detail})`).join("\n")}
 
@@ -91,7 +102,7 @@ export function llmsFullTxt() {
 
 > ${tagline}
 
-Source : ${SITE_URL}. Dernière mise à jour : ${CONTENT_UPDATED}. Les tarifs sont en dirhams marocains (MAD/DH), hors taxes, hors budget publicitaire (payé directement à Meta ou Google). Ils s'appliquent au marché marocain ; hors Maroc, WePushX établit un devis au cas par cas.
+Source : ${SITE_URL}. Dernière mise à jour : ${CONTENT_UPDATED}. Les tarifs sont en dirhams marocains (MAD/DH), hors taxes, hors budget publicitaire (payé directement à Meta ou Google). Ils s'appliquent au marché marocain ; hors Maroc, WePushX établit un devis au cas par cas. Tous les prix sont des prix de départ (« à partir de ») : ${PRICE_DISCLAIMER.replace("Tarifs indicatifs à partir de. ", "")}
 
 ## Faits clés
 
@@ -107,20 +118,26 @@ ${results.map((r) => `- ${r.sector} : ${r.prefix}${String(r.value).replace(".", 
 
 ## Forfaits agence (honoraires mensuels)
 
-${plans.map((p) => `- **${p.name}** : ${dh(p.monthly)} DH / mois. ${p.pitch} Inclus : ${p.features.join(", ")}.`).join("\n")}
+${plans.map((p) => `- **${p.name}** : ${priceText(p.priceId, { lower: true })}. ${p.pitch} Inclus : ${p.features.join(", ")}.`).join("\n")}
 
 Projets ponctuels :
-${oneShots.map((o) => `- **${o.name}** : ${o.price}. ${o.body}`).join("\n")}
+${oneShots.map((o) => `- **${o.name}** : ${oneShotPriceText(o)}. ${o.body}`).join("\n")}
 
 ## WePushX CRM : abonnements
 
-${crmPlans.map((p) => `- **${p.name}** (${p.seats}) : ${p.pitch} ${p.features.join(", ")}.`).join("\n")}
+${crmPlans.map((p) => `- **${p.name}** (${p.seats}) : ${priceText(p.priceId, { lower: true })}, mise en place ${priceText(p.setupId, { lower: true, unit: false })}. ${p.pitch} ${p.features.join(", ")}.`).join("\n")}
 
 Tarifs à jour des abonnements CRM : ${abs("/tarifs")}.
 
+## Consommation (facturée à l'usage)
+
+${unitCards.map((u) => `- **${u.label}** (${u.unit}) : ${u.values.map((v) => `${v.k} ${unitValueText(v).replace(/^À/, "à")}`).join(" ; ")}.`).join("\n")}
+
+${WHATSAPP_NOTE}
+
 ## Agents IA conversationnels
 
-${agentPacks.map((a) => `- **${a.name}**${a.monthly === 0 ? " (offert)" : ""} : ${a.pitch} ${a.features.join(", ")}.`).join("\n")}
+${agentPacks.map((a) => `- **${a.name}** (${a.priceId ? `${priceText(a.priceId, { lower: true })}, par agent` : "offert avec la mise en place du CRM"}) : ${a.pitch} ${a.features.join(", ")}.`).join("\n")}
 
 ## Services de l'agence
 

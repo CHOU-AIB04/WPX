@@ -1,4 +1,5 @@
 import { allOffers, offerHref } from "@/lib/catalog";
+import { blogPosts, categoryById } from "@/lib/blog";
 import { site } from "@/lib/content";
 import { CONTENT_UPDATED, SITE_URL, abs, tagline } from "@/lib/seo";
 
@@ -13,6 +14,22 @@ const esc = (s: string) =>
 
 export function GET() {
   const date = new Date(`${CONTENT_UPDATED}T09:00:00Z`).toUTCString();
+
+  // Articles du blog en tête, avec leur vraie date de publication.
+  const posts = [...blogPosts]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .map((p) => {
+      const url = abs(`/blog/${p.slug}`);
+      return `    <item>
+      <title>${esc(p.title)}</title>
+      <link>${url}</link>
+      <guid isPermaLink="true">${url}</guid>
+      <description>${esc(p.description)}</description>
+      <category>${esc(categoryById(p.category)?.name ?? "Blog")}</category>
+      <pubDate>${new Date(`${p.date}T09:00:00Z`).toUTCString()}</pubDate>
+    </item>`;
+    })
+    .join("\n");
 
   const items = allOffers
     .map((o) => {
@@ -37,6 +54,7 @@ export function GET() {
     <language>fr-MA</language>
     <lastBuildDate>${date}</lastBuildDate>
     <atom:link href="${abs("/feed.xml")}" rel="self" type="application/rss+xml" />
+${posts}
 ${items}
   </channel>
 </rss>

@@ -9,8 +9,13 @@ import {
   SLIDERS,
   VOICE_REGIONS,
   complexityLabels,
+  FROM,
+  PRICES,
+  WHATSAPP_NOTE,
   crmPlans,
   dh,
+  formatAmount,
+  priceText,
   regionLabels,
   simulate,
   type Complexity,
@@ -153,13 +158,9 @@ export function CostSimulator({ n = "06" }: { n?: string }) {
   const plan = plans.find((p) => p.name === planId);
   const crm = crmPlans.find((p) => p.id === crmId);
 
-  const fixed = (plan?.monthly ?? 0) + (crm?.monthly ?? 0);
-  const setup = crm?.setup ?? 0;
-  const totalMin = fixed + usage.min;
-  const totalMax = fixed + usage.max;
-
-  const aMin = useCountTo(totalMin);
-  const aMax = useCountTo(totalMax);
+  const fixed = (plan ? PRICES[plan.priceId].amount : 0) + (crm ? PRICES[crm.priceId].amount : 0);
+  const total = fixed + usage.total;
+  const animated = useCountTo(total);
 
   return (
     <section id="simulateur" className="scroll-mt-24 border-t border-line bg-ink-2 py-24 md:py-32">
@@ -220,8 +221,8 @@ export function CostSimulator({ n = "06" }: { n?: string }) {
                   unit="msg / mois"
                   hint={
                     region === "ma"
-                      ? "Templates validés par Meta. Les réponses entrantes sous 24h ne sont pas facturées."
-                      : "Hors Maroc, le message template coûte plus cher côté Meta."
+                      ? `${priceText("whatsappMa", { currency: "DH" })}. ${WHATSAPP_NOTE}`
+                      : `${priceText("whatsappIntl", { currency: "DH" })}, ${PRICES.whatsappIntl.note}. ${WHATSAPP_NOTE}`
                   }
                   value={whatsapp}
                   onChange={setWhatsapp}
@@ -317,21 +318,19 @@ export function CostSimulator({ n = "06" }: { n?: string }) {
                     aria-hidden
                     className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-[radial-gradient(70%_100%_at_50%_0%,rgba(122,28,140,0.35),transparent)]"
                   />
-                  <p className="label relative text-faint">Estimation mensuelle</p>
+                  <p className="label relative text-faint">Estimation {FROM.toLowerCase()}</p>
                   <p className="display relative mt-5 text-[clamp(2.2rem,4.4vw,3.4rem)] leading-none tabular-nums">
-                    {dh(aMin)}
-                    {totalMax !== totalMin && (
-                      <>
-                        <span className="text-faint"> – </span>
-                        {dh(aMax)}
-                      </>
-                    )}
+                    {dh(animated)}
                   </p>
                   <p className="relative mt-3 text-muted">MAD HT / mois</p>
+                  {/* Lecture d'écran : la phrase entière, sans l'animation. */}
+                  <p className="sr-only" aria-live="polite">
+                    Estimation {FROM.toLowerCase()} {dh(total)} MAD HT / mois
+                  </p>
 
-                  {setup > 0 && (
+                  {crm && (
                     <p className="relative mt-5 text-[0.88rem] text-fg/65">
-                      + <span className="tabular-nums text-fg">{dh(setup)} DH</span> de mise en place, une seule fois.
+                      + mise en place {priceText(crm.setupId, { currency: "DH", lower: true })}.
                     </p>
                   )}
                 </div>
@@ -343,10 +342,10 @@ export function CostSimulator({ n = "06" }: { n?: string }) {
                       <p className="label text-faint">Abonnements — fixe</p>
                       <div className="mt-3">
                         {plan && (
-                          <Row label={`Forfait ${plan.name}`} detail="honoraires agence" value={`${dh(plan.monthly)} DH`} />
+                          <Row label={`Forfait ${plan.name}`} detail="honoraires agence" value={money(PRICES[plan.priceId].amount)} />
                         )}
                         {crm && (
-                          <Row label={`WePushX CRM ${crm.name}`} detail={crm.seats} value={`${dh(crm.monthly)} DH`} />
+                          <Row label={`WePushX CRM ${crm.name}`} detail={crm.seats} value={money(PRICES[crm.priceId].amount)} />
                         )}
                       </div>
                     </div>
@@ -365,11 +364,7 @@ export function CostSimulator({ n = "06" }: { n?: string }) {
                             key={l.id}
                             label={l.label}
                             detail={l.detail}
-                            value={
-                              Math.round(l.min) === Math.round(l.max)
-                                ? `${dh(l.min)} DH`
-                                : `${dh(l.min)} – ${dh(l.max)} DH`
-                            }
+                            value={money(l.amount)}
                           />
                         ))}
                       </div>
@@ -381,8 +376,7 @@ export function CostSimulator({ n = "06" }: { n?: string }) {
                   <div className="flex items-baseline justify-between gap-4">
                     <span className="text-fg/70">Sur douze mois</span>
                     <span className="display text-lg tabular-nums">
-                      {dh(totalMin * 12)}
-                      {totalMax !== totalMin && ` – ${dh(totalMax * 12)}`} DH
+                      {money(total * 12)}
                     </span>
                   </div>
                 </div>
@@ -392,14 +386,15 @@ export function CostSimulator({ n = "06" }: { n?: string }) {
                     href="/contact?plan=simulation"
                     className="group flex h-14 w-full items-center justify-between rounded-full bg-violet pl-7 pr-2 text-[0.95rem] font-medium text-snow transition-colors duration-500 hover:bg-violet-bright"
                   >
-                    <span>Valider cette estimation</span>
+                    <span>Recevoir mon devis personnalisé</span>
                     <span className="flex h-10 w-10 items-center justify-center rounded-full bg-snow text-violet transition-transform duration-500 ease-[var(--ease-expo)] group-hover:rotate-[-45deg]">
                       <Arrow />
                     </span>
                   </Link>
                   <p className="mt-5 text-[0.8rem] leading-relaxed text-muted">
-                    Estimation indicative, hors budget publicitaire Meta / Google. La fourchette vient de la complexité
-                    des tâches confiées à l&apos;IA : nous la figeons au devis, après l&apos;audit.
+                    Estimation indicative, hors budget publicitaire Meta / Google. Le prix final dépend de votre
+                    configuration (utilisateurs, canaux, volumes, agents IA) et est confirmé dans votre devis
+                    personnalisé, après l&apos;audit.
                   </p>
                 </div>
               </div>
@@ -410,6 +405,9 @@ export function CostSimulator({ n = "06" }: { n?: string }) {
     </section>
   );
 }
+
+/** « À partir de 1.290 DH » : les montants du détail suivent la même règle. */
+const money = (n: number) => `${FROM} ${n > 0 && n < 10 ? formatAmount(Math.round(n * 100) / 100) : dh(n)} DH`;
 
 function Row({ label, detail, value }: { label: string; detail: string; value: string }) {
   return (

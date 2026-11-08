@@ -1,0 +1,2 @@
+/** Courbe maison (expo out), partagée par motion et par le CSS (--ease-expo). */
+export const EASE = [0.16, 1, 0.3, 1] as const;

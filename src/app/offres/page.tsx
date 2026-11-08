@@ -11,11 +11,11 @@ import { showPrices } from "@/lib/geo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbLd, itemListLd, pageMeta, webPageLd } from "@/lib/seo";
 
-const TITLE = "Toutes nos offres : services d'agence marketing digital et CRM all-in-one";
+const TITLE = "Offres marketing digital et CRM au Maroc";
 const DESCRIPTION =
-  "Le catalogue complet : Meta Ads, Google Ads, sites web, SEO & GEO, UGC par IA, réseaux sociaux et les douze briques du CRM all-in-one WePushX (automatisations, IA conversationnelle, agents vocaux).";
+  "Offres marketing digital au Maroc : Meta Ads, Google Ads, sites web, SEO & GEO, UGC par IA, réseaux sociaux et les douze briques du CRM WePushX.";
 
-export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/offres" });
+export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/offres", image: { url: "/offres/opengraph-image", alt: TITLE } });
 
 
 const services = offersOf("service");
@@ -86,8 +86,7 @@ export default async function OffresPage() {
       {/* ═══════════════════════════════════════════════════════════ hero */}
       <section className="relative overflow-hidden pb-16 pt-36 md:pt-44">
         <div className="container-x">
-          <SectionLabel n="→">Le catalogue</SectionLabel>
-          <Lines as="h1" className="display mt-8 text-[clamp(2.8rem,8.5vw,8.5rem)]">
+          <Lines as="h1" intro eyebrow="Offres marketing digital et CRM au Maroc" className="display text-[clamp(2.8rem,8.5vw,8.5rem)]">
             <span key="1">Dix-huit briques.</span>
             <span key="2">
               Une seule <span className="serif-accent text-gradient">machine.</span>

@@ -1,4 +1,5 @@
 import type { Offer, OfferKind } from "./offer";
+import { PRICES, RECOMMENDED_MEDIA_BUDGET, dh, hasDisplayUnit, priceText, type PriceId } from "./pricing";
 
 export const site = {
   name: "WePushX",
@@ -23,6 +24,7 @@ export const nav: NavItem[] = [
   { href: "/#process", label: "Méthode" },
   // { href: "/presentation", label: "Présentation" },
   { href: "/tarifs", label: "Tarifs" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -100,10 +102,12 @@ export const services: Offer[] = [
       "Rapports ROAS détaillés",
     ],
     tags: ["Facebook", "Instagram", "Retargeting", "ROAS"],
-    price: "Inclus dès Starter",
+    priceLabel: "Inclus dès Starter",
     demo: "meta",
     seo: {
       title: "Agence Meta Ads au Maroc : Facebook et Instagram qui rapportent",
+      metaTitle: "Agence Meta Ads au Maroc · Facebook & Instagram | WePushX",
+      keyword: "Agence Meta Ads au Maroc",
       description:
         "Campagnes Facebook et Instagram ciblées Maroc, créatifs testés en continu, Pixel et API de conversions. Chaque dirham tracé jusqu'au lead.",
     },
@@ -123,7 +127,7 @@ export const services: Offer[] = [
       { title: "Scale progressif", body: "Montée en budget par paliers, sans casser la phase d'apprentissage." },
     ],
     faq: [
-      { q: "Quel budget publicitaire minimum ?", a: "Nous recommandons 3.000 DH par mois de budget média pour sortir de la phase d'apprentissage. En dessous, l'algorithme n'a pas assez de signal." },
+      { q: "Quel budget publicitaire minimum ?", a: `Nous recommandons au moins ${dh(RECOMMENDED_MEDIA_BUDGET)} DH par mois de budget média pour sortir de la phase d'apprentissage. En dessous, l'algorithme n'a pas assez de signal.` },
       { q: "Qui crée les visuels ?", a: "Nous. Chaque forfait inclut 5 à 10 créas par mois, et les vidéos UGC par IA sont disponibles en complément." },
       { q: "Le budget passe-t-il par vous ?", a: "Non, vous payez Meta directement avec votre propre carte. Nous ne prenons aucune marge sur le média." },
     ],
@@ -143,12 +147,14 @@ export const services: Offer[] = [
       "Négatifs et enchères pilotés",
     ],
     tags: ["Search", "PMax", "YouTube", "Display"],
-    price: "Inclus dès Growth",
+    priceLabel: "Inclus dès Growth",
     demo: "google",
     seo: {
       title: "Agence Google Ads au Maroc : Search, PMax et YouTube pilotés",
+      metaTitle: "Agence Google Ads au Maroc · Campagnes rentables | WePushX",
+      keyword: "Agence Google Ads au Maroc",
       description:
-        "Campagnes Google Ads construites sur les mots-clés réellement tapés au Maroc. Quality Score optimisé, négatifs pilotés, conversions mesurées.",
+        "Agence Google Ads au Maroc : Search, Performance Max et YouTube pilotés sur vos conversions. Premiers leads en 7 à 14 jours, chaque dirham tracé.",
     },
     hero: {
       lines: ["Là où vos clients", "cherchent déjà."],
@@ -186,10 +192,12 @@ export const services: Offer[] = [
       "Hébergement et maintenance",
     ],
     tags: ["Next.js", "Shopify", "WordPress", "Landing pages"],
-    price: "À partir de 3.500 DH",
+    priceId: "siteVitrine",
     demo: "web",
     seo: {
       title: "Création de site web et landing page au Maroc en 7 à 14 jours",
+      metaTitle: "Création site web au Maroc : vitrine, e-commerce | WePushX",
+      keyword: "Création de site web au Maroc",
       description:
         "Sites vitrines, e-commerce et landing pages rapides et mobile-first, avec formulaires et tracking branchés au CRM.",
     },
@@ -232,8 +240,10 @@ export const services: Offer[] = [
     demo: "seo",
     seo: {
       title: "SEO local Maroc et GEO : être cité par Google et par les IA",
+      metaTitle: "Agence SEO au Maroc · Google & visibilité IA | WePushX",
+      keyword: "Agence SEO au Maroc",
       description:
-        "Référencement local Casablanca, Rabat, Marrakech et optimisation pour les réponses des IA. Premiers résultats en 90 jours.",
+        "Agence SEO au Maroc : référencement local à Casablanca, Rabat et Marrakech, et visibilité dans les réponses des IA (GEO). Premiers résultats en 90 jours.",
     },
     hero: {
       lines: ["Sortir premier.", "Sur Google", "et dans l'IA."],
@@ -271,10 +281,12 @@ export const services: Offer[] = [
       "Droits d'utilisation illimités",
     ],
     tags: ["Vidéo IA", "Reels", "Darija", "Créatif"],
-    price: "À partir de 2.500 DH",
+    priceId: "ugcPack",
     demo: "ugc",
     seo: {
       title: "Vidéos UGC par IA en français et darija : 20 par mois",
+      metaTitle: "Vidéos UGC par IA au Maroc, en darija | WePushX",
+      keyword: "Vidéos UGC par IA au Maroc",
       description:
         "Scripts de vente, avatars IA et voix-off en français et darija. Format Reels et Stories, droits illimités, dix fois moins cher qu'un tournage.",
     },
@@ -314,10 +326,12 @@ export const services: Offer[] = [
       "Rapport mensuel de performance",
     ],
     tags: ["Instagram", "TikTok", "LinkedIn", "Community"],
-    price: "À partir de 2.900 DH/mois",
+    priceId: "socialMonthly",
     demo: "social",
     seo: {
       title: "Gestion des réseaux sociaux au Maroc : contenu et community management",
+      metaTitle: "Gestion des réseaux sociaux au Maroc | WePushX",
+      keyword: "Gestion des réseaux sociaux au Maroc",
       description:
         "Ligne éditoriale, production, publication sur huit réseaux et réponse aux messages. Une présence sociale tenue, pas improvisée.",
     },
@@ -386,14 +400,16 @@ export const testimonials = [
 export const plans = [
   {
     name: "Starter",
-    monthly: 3900,
+    priceId: "planStarter" as PriceId,
+    monthly: PRICES.planStarter.amount,
     pitch: "Pour lancer votre présence publicitaire et générer vos premiers leads qualifiés.",
     features: ["5 créas ads / mois", "1 canal : Meta ou Google", "Rapport mensuel", "Support WhatsApp"],
     cta: "Démarrer",
   },
   {
     name: "Growth",
-    monthly: 6900,
+    priceId: "planGrowth" as PriceId,
+    monthly: PRICES.planGrowth.amount,
     popular: true,
     pitch: "Meta + Google en simultané pour scaler votre acquisition client.",
     features: ["8 créas ads / mois", "2 canaux : Meta + Google Ads", "Rapport + stratégie mensuelle", "Réunion d'ajustement mensuelle"],
@@ -401,27 +417,50 @@ export const plans = [
   },
   {
     name: "Scale",
-    monthly: 14900,
+    priceId: "planScale" as PriceId,
+    monthly: PRICES.planScale.amount,
     pitch: "La stratégie digitale complète pour dominer votre marché.",
     features: ["Stratégie digitale complète", "10 créas ads / mois", "Ads management multi-plateforme", "Setup + gestion CRM inclus", "Reporting bi-mensuel + dashboard", "Support WhatsApp prioritaire"],
     cta: "Dominer le marché",
   },
 ];
 
-export const oneShots = [
-  { name: "Setup CRM + Agent d’accueil OFFERT", price: "800 DH / mois", body: "Pipeline, relances automatiques, scoring des leads. Agent d'accueil IA offert." },
-  { name: "Landing page", price: "À partir de 2.000 DH", body: "Page de capture par campagne, formulaire et tracking inclus." },
-  { name: "Site vitrine", price: "À partir de 3.500 DH", body: "3 à 4 pages, optimisé mobile et conversion." },
-  { name: "Logo + charte", price: "À partir de 4.000 DH", body: "Identité visuelle complète adaptée à votre secteur." },
-  { name: "Site e-commerce", price: "À partir de 10.000 DH", body: "WordPress ou Shopify prêt à vendre, catalogue et stock." },
-  { name: "Pack UGC IA", price: "5 vidéos", body: "Scripts qui convertissent + 5 vidéos IA format Reels." }
+export type OneShot = {
+  name: string;
+  /** Prix principal. */
+  priceId: PriceId;
+  /** Mise en place ajoutée au prix principal (« + mise en place à partir de… »). */
+  setupId?: PriceId;
+  body: string;
+};
+
+/** Même entrée que le palier CRM Essentiel : un seul prix d'entrée partout. */
+export const oneShots: OneShot[] = [
+  { name: "Setup CRM + Agent d’accueil OFFERT", priceId: "crmEssentiel", setupId: "crmSetup", body: "Pipeline, relances automatiques, scoring des leads. Agent d'accueil IA offert." },
+  { name: "Landing page", priceId: "landingPage", body: "Page de capture par campagne, formulaire et tracking inclus." },
+  { name: "Site vitrine", priceId: "siteVitrine", body: "3 à 4 pages, optimisé mobile et conversion." },
+  { name: "Logo + charte", priceId: "logoCharte", body: "Identité visuelle complète adaptée à votre secteur." },
+  { name: "Site e-commerce", priceId: "siteEcommerce", body: "WordPress ou Shopify prêt à vendre, catalogue et stock." },
+  { name: "Pack UGC IA", priceId: "ugcPack", body: "Scripts qui convertissent + 5 vidéos IA format Reels." },
 ];
+
+/** « À partir de 800 DH / mois + mise en place à partir de 1.000 DH ». */
+export const oneShotPriceText = (o: OneShot) =>
+  priceText(o.priceId, { currency: "DH", unit: hasDisplayUnit(o.priceId) }) +
+  (o.setupId ? ` + mise en place ${priceText(o.setupId, { currency: "DH", unit: false, lower: true })}` : "");
+
+/** La question que pose toute grille « à partir de ». Réutilisée sur la home et /tarifs. */
+export const fromPricesFaq = {
+  q: "Pourquoi vos prix sont-ils indiqués « à partir de » ?",
+  a: "Parce que chaque entreprise a des volumes, des utilisateurs et des canaux différents. Nous configurons le CRM et les agents IA selon vos besoins réels, puis le commercial vous confirme le prix final dans un devis personnalisé, après l'audit gratuit. Le prix affiché est un plancher : vous savez d'où vous partez.",
+};
 
 export const faqs = [
   { q: "Combien de temps pour voir les premiers résultats ?", a: "Sur Meta et Google Ads, les premiers leads arrivent généralement dans les 7 à 14 jours qui suivent le lancement. Le SEO est un levier plus long : comptez environ 90 jours pour des positions solides." },
   { q: "Quelle est votre garantie ?", a: "Si nous ne générons aucun lead qualifié en 60 jours, nous vous remboursons 100% de nos honoraires. Le contrat est transparent, sans clause abusive." },
   { q: "Travaillez-vous avec tous les secteurs ?", a: "Nous accompagnons surtout les PME : restaurants, cliniques, e-commerce, automobile, rénovation, traitement de l'eau, mode. Si l'audit montre que nous ne pouvons pas vous faire gagner d'argent, nous vous le disons." },
   { q: "Faut-il un budget publicitaire en plus ?", a: "Oui. Nos forfaits couvrent la stratégie, la production et la gestion. Le budget média est payé directement à Meta ou Google, et nous vous recommandons un montant adapté à vos objectifs pendant l'audit." },
+  fromPricesFaq,
   { q: "Quel est l'engagement minimum ?", a: "3 mois. C'est le temps nécessaire pour installer le tracking, sortir de la phase d'apprentissage des algorithmes et optimiser sur des données fiables." },
   { q: "Comment se passe l'audit de 30 minutes ?", a: "Un appel en visio ou par téléphone. Nous analysons vos publicités, votre site, votre SEO et votre suivi commercial, puis vous repartez avec un plan d'action concret. Gratuit et sans engagement." },
 ];

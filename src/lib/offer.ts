@@ -6,6 +6,8 @@
  * `platform.ts` sans créer de dépendance circulaire.
  */
 
+import type { PriceId } from "./pricing";
+
 export type OfferKind = "platform" | "service";
 
 export type Offer = {
@@ -21,9 +23,21 @@ export type Offer = {
   body: string;
   bullets: string[];
   tags: string[];
-  price?: string;
+  /** Montant « à partir de », lu dans le registre de src/lib/pricing.ts. */
+  priceId?: PriceId;
+  /** Mention sans montant, ex. « Inclus dans WePushX CRM ». */
+  priceLabel?: string;
 
-  seo: { title: string; description: string };
+  seo: {
+    /** Titre éditorial (image de partage, données structurées). */
+    title: string;
+    /** Balise <title> complète, marque incluse : 60 caractères maximum. */
+    metaTitle: string;
+    /** Mot-clé principal, repris dans le <h1>. */
+    keyword: string;
+    /** Meta description : 155 caractères maximum, mot-clé en tête. */
+    description: string;
+  };
 
   /** Chaque entrée de `lines` = une ligne révélée par <Lines>. */
   hero: { lines: string[]; sub: string };

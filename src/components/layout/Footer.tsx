@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRef } from "react";
 import { Mark } from "@/components/brand/Mark";
 import { nav, services, site } from "@/lib/content";
-import { offerAnchor, offersOf } from "@/lib/catalog";
+import { offerHref, offersOf } from "@/lib/catalog";
+import { cityPages } from "@/lib/cities";
 
 export function Footer() {
   const ref = useRef<HTMLElement>(null);
@@ -39,14 +40,14 @@ export function Footer() {
           </ul>
         </div>
 
-        {/* Les deux colonnes pointent vers le catalogue fusionné, où chaque
-            offre a sa section. Avant, /services#<id> ne menait nulle part. */}
+        {/* Liens directs vers les pages dédiées : c'est le maillage le plus
+            fort pour le SEO (présent sur chaque page du site). */}
         <div className="md:col-span-3">
           <p className="label mb-5 text-faint">Services</p>
           <ul className="space-y-3">
             {services.map((s) => (
               <li key={s.id}>
-                <Link href={offerAnchor(s)} className="link-underline text-fg/80 hover:text-fg">
+                <Link href={offerHref(s)} className="link-underline text-fg/80 hover:text-fg">
                   {s.name}
                 </Link>
               </li>
@@ -59,7 +60,7 @@ export function Footer() {
           <ul className="space-y-3">
             {offersOf("platform").map((p) => (
               <li key={p.id}>
-                <Link href={offerAnchor(p)} className="link-underline text-fg/80 hover:text-fg">
+                <Link href={offerHref(p)} className="link-underline text-fg/80 hover:text-fg">
                   {p.name}
                 </Link>
               </li>
@@ -80,7 +81,16 @@ export function Footer() {
         </motion.div>
       </div>
 
-      <div className="container-x mt-10 flex flex-col gap-3 border-t border-line py-6 text-sm text-faint lg:flex-row lg:items-center lg:justify-between">
+      <nav aria-label="Nos villes" className="container-x mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line py-6 text-sm">
+        <span className="label text-faint">Nos villes</span>
+        {cityPages.map((c) => (
+          <Link key={c.slug} href={`/${c.slug}`} className="link-underline text-fg/70 hover:text-fg">
+            {c.eyebrow}
+          </Link>
+        ))}
+      </nav>
+
+      <div className="container-x flex flex-col gap-3 border-t border-line py-6 text-sm text-faint lg:flex-row lg:items-center lg:justify-between">
         <span>© {new Date().getFullYear()} WePushX. Agence marketing digital, Maroc.</span>
         <span>Bureau : {site.office} · Siège : {site.legalAddress}</span>
         <div className="flex flex-wrap gap-x-6 gap-y-2">

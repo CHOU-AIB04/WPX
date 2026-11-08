@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const offer = findOffer("platform", slug);
   if (!offer) return {};
   return pageMeta({
-    title: offer.seo.title, description: offer.seo.description, path: `/plateforme/${offer.slug}`,
+    title: offer.seo.metaTitle, description: offer.seo.description, path: `/plateforme/${offer.slug}`,
     image: { url: `/plateforme/${offer.slug}/opengraph-image`, alt: offer.seo.title },
   });
 }

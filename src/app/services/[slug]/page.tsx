@@ -4,6 +4,7 @@ import { OfferPage } from "@/components/sections/OfferPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { findOffer, slugsOf } from "@/lib/catalog";
 import { showPrices } from "@/lib/geo";
+import { offerLd, serviceRates, type PriceId } from "@/lib/pricing";
 import { ORG_ID, abs, breadcrumbLd, cities, faqLd, pageMeta, webPageLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const offer = findOffer("service", slug);
   if (!offer) return {};
   return pageMeta({
-    title: offer.seo.title, description: offer.seo.description, path: `/services/${offer.slug}`,
+    title: offer.seo.metaTitle, description: offer.seo.description, path: `/services/${offer.slug}`,
     image: { url: `/services/${offer.slug}/opengraph-image`, alt: offer.seo.title },
   });
 }
@@ -35,6 +36,15 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   const path = `/services/${offer.slug}`;
 
+  // Prix planchers du service (« à partir de ») → Offer + minPrice.
+  const rate = serviceRates.find((r) => r.id === offer.id);
+  const priceIds = [rate?.setupId, rate?.monthlyId, offer.priceId].filter(
+    (id, i, all): id is PriceId => Boolean(id) && all.indexOf(id) === i,
+  );
+  const offers = priced
+    ? priceIds.map((id) => offerLd(id, { url: abs(path), seller: { "@id": ORG_ID }, areaServed: "MA" }))
+    : [];
+
   const service = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -46,6 +56,7 @@ export default async function ServiceDetailPage({ params }: Props) {
     image: abs(`${path}/opengraph-image`),
     provider: { "@id": ORG_ID },
     areaServed: [{ "@type": "Country", name: "Maroc" }, ...cities.map((c) => ({ "@type": "City", name: c }))],
+    ...(offers.length ? { offers } : {}),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: offer.name,

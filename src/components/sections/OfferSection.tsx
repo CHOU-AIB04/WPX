@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/motion";
 import { ServiceVisual } from "@/components/sections/ServiceVisual";
 import { isInteractive } from "@/components/demos/keys";
 import { offerHref, type Offer } from "@/lib/catalog";
-import { hasAmount } from "@/lib/pricing";
+import { offerPriceText } from "@/lib/pricing";
 
 /**
  * Un bloc d'offre sur la page catalogue (/offres).
@@ -29,7 +29,7 @@ export function OfferSection({
 }) {
   const live = isInteractive(offer.demo);
   // Seules les étiquettes chiffrées sont masquées hors Maroc.
-  const priceVisible = Boolean(offer.price) && (showPrices || !hasAmount(offer.price as string));
+  const priceLabel = offerPriceText(offer, showPrices);
   const href = offerHref(offer);
 
   return (
@@ -84,7 +84,7 @@ export function OfferSection({
                 </span>
               )}
 
-              {priceVisible && <span className="serif-accent text-xl text-lilac">{offer.price}</span>}
+              {priceLabel && <span className="serif-accent text-xl text-lilac">{priceLabel}</span>}
             </div>
 
             <div className="mt-7 flex flex-wrap gap-2">

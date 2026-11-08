@@ -4,7 +4,8 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { Button, SectionLabel } from "@/components/ui/Button";
 import { EASE, Lines, Reveal } from "@/components/ui/motion";
-import { dh, ON_REQUEST } from "@/lib/pricing";
+import { Price } from "@/components/ui/Price";
+import { ANNUAL_DISCOUNT, ON_REQUEST, annualAmount } from "@/lib/pricing";
 import { plans } from "@/lib/content";
 
 /**
@@ -52,7 +53,7 @@ export function PlansGrid({
             <div className="relative inline-flex rounded-full border border-line p-1.5" role="group" aria-label="Période de facturation">
               {[
                 { k: false, l: "Mensuel" },
-                { k: true, l: "Annuel -15%" },
+                { k: true, l: `Annuel -${Math.round(ANNUAL_DISCOUNT * 100)}%` },
               ].map((o) => (
                 <button
                   key={o.l}
@@ -78,7 +79,7 @@ export function PlansGrid({
 
       <div className="mt-16 grid gap-5 lg:grid-cols-3">
         {plans.map((p, i) => {
-          const price = annual ? Math.round(p.monthly * 0.85) : p.monthly;
+          const price = annual ? annualAmount(p.priceId) : p.monthly;
           return (
             <Reveal key={p.name} delay={i * 0.1} className="h-full">
               <motion.div
@@ -96,8 +97,14 @@ export function PlansGrid({
 
                 <div className="mt-8">
                   {showPrices ? (
-                    <>
-                      <span className="display relative block overflow-hidden text-[clamp(3rem,4.2vw,4.4rem)] leading-none">
+                    <Price
+                      id={p.priceId}
+                      amount={price}
+                      variant="stack"
+                      fromClassName={p.popular ? "text-snow/80" : "text-faint"}
+                      amountClassName="display relative overflow-hidden text-[clamp(3rem,4.2vw,4.4rem)] leading-none"
+                      unitClassName={p.popular ? "text-snow/80" : "text-muted"}
+                      renderAmount={(text) => (
                         <AnimatePresence mode="popLayout" initial={false}>
                           <motion.span
                             key={price}
@@ -107,12 +114,11 @@ export function PlansGrid({
                             exit={{ y: "-100%", opacity: 0 }}
                             transition={{ duration: 0.5, ease: EASE }}
                           >
-                            {dh(price)}
+                            {text}
                           </motion.span>
                         </AnimatePresence>
-                      </span>
-                      <span className={`mt-2 block ${p.popular ? "text-snow/80" : "text-muted"}`}>MAD HT / mois</span>
-                    </>
+                      )}
+                    />
                   ) : (
                     <>
                       <span className={`serif-accent block text-[clamp(2.2rem,3.2vw,3rem)] leading-none ${p.popular ? "text-snow" : "text-lilac"}`}>

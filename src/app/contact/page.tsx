@@ -7,11 +7,11 @@ import { site } from "@/lib/content";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbLd, pageMeta, webPageLd } from "@/lib/seo";
 
-const TITLE = "Contact : audit marketing digital gratuit de 30 minutes";
+const TITLE = "Audit marketing digital gratuit · Contact";
 const DESCRIPTION =
-  "Réservez un audit gratuit de 30 minutes avec WePushX, agence marketing digital au Maroc : publicité, site, SEO et suivi commercial. Réponse sous 24h, sans engagement.";
+  "Audit marketing digital gratuit de 30 minutes avec WePushX, agence au Maroc : publicité, site, SEO et suivi commercial. Réponse sous 24h, sans engagement.";
 
-export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/contact" });
+export const metadata: Metadata = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/contact", image: { url: "/contact/opengraph-image", alt: TITLE } });
 
 const steps = ["Vous envoyez votre demande", "On vous répond sous 24h", "Appel d'audit de 30 min", "Proposition personnalisée avec ROI"];
 const promises = ["Remboursement 100% si 0 lead en 60 jours", "Réponse sous 24h ouvrées", "Audit gratuit, sans engagement", "Contrat transparent, sans clause abusive"];
@@ -27,8 +27,7 @@ export default function ContactPage() {
       />
       <div aria-hidden className="pointer-events-none absolute -left-[20vw] top-0 -z-10 h-[60vw] w-[60vw] rounded-full bg-[radial-gradient(closest-side,rgba(122,28,140,0.35),transparent)] blur-2xl" />
       <div className="container-x">
-        <SectionLabel n="→">Démarrons</SectionLabel>
-        <Lines as="h1" className="display mt-8 text-[clamp(3rem,9vw,9rem)]">
+        <Lines as="h1" intro eyebrow="Contact · Audit marketing digital gratuit" className="display text-[clamp(3rem,9vw,9rem)]">
           <span key="1">Démarrons votre</span>
           <span key="2" className="serif-accent text-gradient">croissance.</span>
         </Lines>

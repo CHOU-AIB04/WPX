@@ -1,4 +1,5 @@
-import { pageMeta } from '@/lib/seo'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { breadcrumbLd, pageMeta } from '@/lib/seo'
 
 // Canonique relative : l'ancienne pointait vers www.wepushx.com, qui redirige
 // en 301 vers wepushx.com — signal contradictoire pour Google.
@@ -13,6 +14,9 @@ export const metadata = pageMeta({
 export default function CGVPAGE() {
   return (
     <>
+      <JsonLd data={breadcrumbLd([{ name: 'Conditions générales de vente', path: '/cgv' }])} />
+      {/* Titre de la page pour Google et les lecteurs d'écran ; le PDF occupe l'écran. */}
+      <h1 className="sr-only">Conditions générales de vente de WePushX</h1>
       {/* Hide every layout chrome on this page */}
       <style>{`
         body { overflow: hidden !important; }
